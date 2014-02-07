@@ -1,0 +1,1 @@
+This mandatory directory contains third party libraries that are not delivered as NuGet packages.

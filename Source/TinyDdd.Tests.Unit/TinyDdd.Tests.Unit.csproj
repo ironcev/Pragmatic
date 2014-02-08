@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}</ProjectGuid>
+    <ProjectGuid>{24561E22-62B9-492A-999F-EAA7D6112A32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TinyDdd</RootNamespace>
-    <AssemblyName>TinyDdd</AssemblyName>
+    <RootNamespace>TinyDdd.Tests.Unit</RootNamespace>
+    <AssemblyName>TinyDdd.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SwissKnife">
-      <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.1.0\SwissKnife.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,17 +48,17 @@
     <Compile Include="..\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="Entity.cs" />
-    <Compile Include="IAggregateRoot.cs" />
-    <Compile Include="Interaction\ICommand.cs" />
-    <Compile Include="Interaction\CommandExecutor.cs" />
-    <Compile Include="Interaction\ICommandHandler.cs" />
-    <Compile Include="Interaction\Response.cs" />
-    <Compile Include="Interaction\ResponseMessage.cs" />
-    <Compile Include="IReadOnlyRepository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Interaction\CommandExecutorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TinyDdd\TinyDdd.csproj">
+      <Project>{e56289ef-f2e9-4a5b-8fb5-abcad1d658e2}</Project>
+      <Name>TinyDdd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

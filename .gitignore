@@ -1,3 +1,6 @@
+# NuGet Packages Directory
+Source/packages/
+
 # Raven embedded database
 Source/Ui/Web/Data/
 

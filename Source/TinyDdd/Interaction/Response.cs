@@ -19,51 +19,14 @@ namespace TinyDdd.Interaction
     {
         private readonly IList<ResponseMessage> _responseMessages = new List<ResponseMessage>();
 
-        public bool HasInformations
-        {
-            get
-            {
-                return HasMessagesOfType( MessageType.Information );
-            }
-        }
+        public bool HasInformations { get { return HasMessagesOfType( MessageType.Information ); } }
+        public bool HasWarnings { get { return HasMessagesOfType( MessageType.Warning ); } }
+        public bool HasErrors { get { return HasMessagesOfType( MessageType.Error ); } }
 
-        public bool HasWarnings
-        {
-            get
-            {
-                return HasMessagesOfType( MessageType.Warning );
-            }
-        }
-
-        public bool HasErrors
-        {
-            get
-            {
-                return HasMessagesOfType( MessageType.Error );
-            }
-        }
-
-        public IEnumerable<ResponseMessage> Informations
-        {
-            get
-            {
-                return GetMessagesOfType( MessageType.Information );
-            }
-        }
-        public IEnumerable<ResponseMessage> Warnings
-        {
-            get
-            {
-                return GetMessagesOfType( MessageType.Warning );
-            }
-        }
-        public IEnumerable<ResponseMessage> Errors
-        {
-            get
-            {
-                return GetMessagesOfType( MessageType.Error );
-            }
-        }
+        public IEnumerable<ResponseMessage> Informations { get { return GetMessagesOfType( MessageType.Information ); } }
+        public IEnumerable<ResponseMessage> Warnings { get { return GetMessagesOfType( MessageType.Warning ); } }
+        public IEnumerable<ResponseMessage> Errors { get { return GetMessagesOfType( MessageType.Error ); } }
+        public IEnumerable<ResponseMessage> TechnicalErrors { get { return GetMessagesOfType(MessageType.TechnicalError); } }
 
         public void Add(ResponseMessage responseMessage)
         {
@@ -112,6 +75,11 @@ namespace TinyDdd.Interaction
         public void AddError(string key, string message)
         {
             _responseMessages.Add( new ResponseMessage( MessageType.Error, key, message ) );
+        }
+
+        public void AddTechnicalError(string key, string message)
+        {
+            _responseMessages.Add(new ResponseMessage(MessageType.TechnicalError, key, message));
         }
 
         public void AddErrors(IEnumerable<string> errors)

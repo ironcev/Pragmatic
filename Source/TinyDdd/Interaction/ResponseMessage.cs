@@ -6,7 +6,8 @@ namespace TinyDdd.Interaction
     {
         Information,
         Warning,
-        Error
+        Error,
+        TechnicalError
     }
 
     public class ResponseMessage

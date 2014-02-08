@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyDdd", "TinyDdd\TinyDdd.csproj", "{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyDdd.Tests.Unit", "TinyDdd.Tests.Unit\TinyDdd.Tests.Unit.csproj", "{24561E22-62B9-492A-999F-EAA7D6112A32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyDdd.StructureMap", "TinyDdd.StructureMap\TinyDdd.StructureMap.csproj", "{32788E01-C373-4D56-B620-B13799A47AB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

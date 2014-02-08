@@ -18,6 +18,20 @@ namespace TinyDdd.Interaction
         {
             Result = default(T);
         }
+
+        public static Response<T> From(Response response)
+        {
+            return From(response, default(T));
+        }
+
+        public static Response<T> From(Response response, T result)
+        {
+            Argument.IsNotNull(response, "response");
+
+            Response<T> newResponse = new Response<T>(result);
+            newResponse.Add(response);
+            return newResponse;
+        }
     }
 
     public class Response

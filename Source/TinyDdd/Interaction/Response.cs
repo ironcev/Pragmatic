@@ -13,6 +13,11 @@ namespace TinyDdd.Interaction
         {
             Result = result;
         }
+
+        public Response()
+        {
+            Result = default(T);
+        }
     }
 
     public class Response

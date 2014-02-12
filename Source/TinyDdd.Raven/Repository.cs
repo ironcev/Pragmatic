@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Raven.Client;
 using SwissKnife;
+using SwissKnife.Diagnostics.Contracts;
 
 namespace TinyDdd.Raven
 {
@@ -17,22 +19,32 @@ namespace TinyDdd.Raven
 
         public void AddOrUpdate(T entity)
         {
-            throw new NotImplementedException();
+            Argument.IsNotNull(entity, "entity");
+
+            _documentSession.Store(entity);
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            Argument.IsNotNull(entity, "entity");
+
+            _documentSession.Delete( entity );
         }
 
         public void AddOrUpdate(IAggregateRoot entity)
         {
-            throw new NotImplementedException();
+            Argument.IsNotNull(entity, "entity");
+            Argument.Is<T>((object)entity, "entity");
+
+            AddOrUpdate((T)entity);
         }
 
         public void Delete(IAggregateRoot entity)
         {
-            throw new NotImplementedException();
+            Argument.IsNotNull(entity, "entity");
+            Argument.Is<T>((object)entity, "entity");
+
+            Delete((T)entity);
         }
         
         public Option<T> GetById(Guid id)
@@ -40,7 +52,7 @@ namespace TinyDdd.Raven
             return _documentSession.Load<T>(id);
         }
 
-        public Option<T> GetOne(System.Linq.Expressions.Expression<Func<T, bool>> criteria)
+        public Option<T> GetOne(Expression<Func<T, bool>> criteria)
         {
             return _documentSession.Query<T>().FirstOrDefault(criteria);
         }
@@ -50,7 +62,7 @@ namespace TinyDdd.Raven
             return _documentSession.Query<T>();
         }
 
-        public IEnumerable<T> GetAll(System.Linq.Expressions.Expression<Func<T, bool>> criteria)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> criteria)
         {
             return _documentSession.Query<T>().Where(criteria);
         }

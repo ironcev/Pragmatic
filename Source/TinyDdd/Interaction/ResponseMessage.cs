@@ -22,10 +22,8 @@ namespace TinyDdd.Interaction
 
         public ResponseMessage(MessageType messageType, string key, string message)
         {
-            #region Preconditions
             Argument.IsNotNull(key, "key");
             Argument.IsNotNullOrWhitespace(message, "message");
-            #endregion
 
             MessageType = messageType;
             Key = key;

@@ -49,19 +49,15 @@ namespace TinyDdd.Interaction
 
         public void Add(ResponseMessage responseMessage)
         {
-            #region Preconditions
             Argument.IsNotNull( responseMessage, "responseMessage" );
-            #endregion
 
             _responseMessages.Add( responseMessage );
         }
 
         public void Add(Response response)
         {
-            #region Preconditions
             Argument.IsNotNull( response, "response" );
             Argument.IsValid( response != this, string.Format( "{0} can not be added to itself.", typeof( Response ) ), "response" );
-            #endregion
 
             _responseMessages.AddMany(response._responseMessages);
         }
@@ -103,9 +99,7 @@ namespace TinyDdd.Interaction
 
         public void AddErrors(IEnumerable<string> errors)
         {
-            #region Preconditions
             Argument.IsNotNull( errors, "errors" );
-            #endregion
 
             _responseMessages.AddMany( errors.Select( error => new ResponseMessage( MessageType.Error, string.Empty, error ) ) );
         }

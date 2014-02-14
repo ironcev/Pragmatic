@@ -11,9 +11,7 @@ namespace TinyDdd.Interaction
 
         public TResponse Execute<TCommand, TResponse>(TCommand command) where TCommand : ICommand where TResponse : Response, new()
         {
-            #region Preconditions
             Argument.IsNotNull(command, "command");
-            #endregion
 
             var commandHandlers = GetCommandHandlers<TCommand, TResponse>().ToArray();
 

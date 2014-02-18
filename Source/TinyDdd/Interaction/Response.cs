@@ -54,59 +54,79 @@ namespace TinyDdd.Interaction
             _responseMessages.Add( responseMessage );
         }
 
-        public void Add(Response response)
+        public Response Add(Response response)
         {
             Argument.IsNotNull( response, "response" );
             Argument.IsValid( response != this, string.Format( "{0} can not be added to itself.", typeof( Response ) ), "response" );
 
             _responseMessages.AddMany(response._responseMessages);
+
+            return this;
         }
 
-        public void AddInformation(string message)
+        public Response AddInformation(string message)
         {
             AddInformation(string.Empty, message);
+
+            return this;
         }
 
-        public void AddInformation(string key, string message)
+        public Response AddInformation(string key, string message)
         {
             _responseMessages.Add( new ResponseMessage( MessageType.Information, key, message ) );
+
+            return this;
         }
 
-        public void AddWarning(string message)
+        public Response AddWarning(string message)
         {
             AddWarning(string.Empty, message);
+
+            return this;
         }
 
-        public void AddWarning(string key, string message)
+        public Response AddWarning(string key, string message)
         {
             _responseMessages.Add( new ResponseMessage( MessageType.Warning, key, message ) );
+
+            return this;
         }
 
-        public void AddError(string message)
+        public Response AddError(string message)
         {
             AddError(string.Empty, message);
+
+            return this;
         }
 
-        public void AddError(string key, string message)
+        public Response AddError(string key, string message)
         {
             _responseMessages.Add( new ResponseMessage( MessageType.Error, key, message ) );
+
+            return this;
         }
 
-        public void AddTechnicalError(string key, string message)
+        public Response AddTechnicalError(string key, string message)
         {
             _responseMessages.Add(new ResponseMessage(MessageType.TechnicalError, key, message));
+
+            return this;
         }
 
-        public void AddErrors(IEnumerable<string> errors)
+        public Response AddErrors(IEnumerable<string> errors)
         {
             Argument.IsNotNull( errors, "errors" );
 
             _responseMessages.AddMany( errors.Select( error => new ResponseMessage( MessageType.Error, string.Empty, error ) ) );
+
+            return this;
         }
 
-        public void InsertError(string key, string message)
+        public Response InsertError(string key, string message)
         {
             _responseMessages.Insert( 0, new ResponseMessage( MessageType.Error, key, message ) );
+
+            return this;
         }
 
         private bool HasMessagesOfType(MessageType messageType)

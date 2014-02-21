@@ -52,7 +52,7 @@ namespace TinyDdd.Tests.Unit.Interaction
             protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
             {
                 var mock = new Mock<ICommandHandler<TestResponseCommand>>();
-                mock.Setup(x => x.Execute((ICommand)It.IsAny<TestResponseCommand>())).Returns(new TestResponse());
+                mock.Setup(x => x.Execute(It.IsAny<TestResponseCommand>())).Returns(new TestResponse());
                 yield return mock.Object;
             }
         }
@@ -61,7 +61,7 @@ namespace TinyDdd.Tests.Unit.Interaction
             protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
             {
                 var mock = new Mock<ICommandHandler<TestResponseCommand>>();
-                mock.Setup(x => x.Execute((ICommand)It.IsAny<TestResponseCommand>())).Returns(new Response());
+                mock.Setup(x => x.Execute(It.IsAny<TestResponseCommand>())).Returns(new Response());
                 yield return mock.Object;
             }
         }

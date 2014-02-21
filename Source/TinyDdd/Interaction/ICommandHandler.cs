@@ -1,8 +1,12 @@
-﻿namespace TinyDdd.Interaction
+﻿/*
+ * NOTE: See the architectural decisions at the end of the file "ICommand.cs".
+ */
+namespace TinyDdd.Interaction
 {
+    // ReSharper disable UnusedTypeParameter
     public interface ICommandHandler<in TCommand> : ICommandHandler where TCommand : ICommand
+    // ReSharper restore UnusedTypeParameter
     {
-        Response Execute(TCommand command);
     }
 
     public interface ICommandHandler

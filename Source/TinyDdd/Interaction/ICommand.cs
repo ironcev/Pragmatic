@@ -6,7 +6,7 @@ namespace TinyDdd.Interaction
     public abstract class Command : ICommand<Response> { }
 
     // ReSharper disable UnusedTypeParameter
-    public interface ICommand<in TResponse> : ICommand where TResponse : Response, new()
+    public interface ICommand<in TResponse> : ICommand where TResponse : Response
     // ReSharper restore UnusedTypeParameter
     {
     }

@@ -9,7 +9,7 @@ namespace TinyDdd.Interaction
     {
         public readonly string ExecuteCommandHandlerTechnicalErrorKey = typeof (CommandExecutor).FullName + "ExecuteCommandHandlerTechnicalErrorKey";
 
-        public TResponse Execute<TResponse>(ICommand<TResponse> command) where TResponse : Response, new()
+        public TResponse Execute<TResponse>(ICommand<TResponse> command) where TResponse : Response
         {
             Argument.IsNotNull(command, "command");
 

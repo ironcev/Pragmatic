@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="IAggregateRoot.cs" />
+    <Compile Include="Interaction\CommandExecutionException.cs" />
     <Compile Include="Interaction\ICommand.cs" />
     <Compile Include="Interaction\CommandExecutor.cs" />
     <Compile Include="Interaction\ICommandHandler.cs" />

@@ -36,15 +36,8 @@ namespace TinyDdd.Interaction
                 string additionalMessage = string.Format("An exception occured while executing the command handler of type '{0}'.", commandHandlers[0].GetType().FullName);
                 LogException(additionalMessage, e);
 
-                return CreateTechnicalErroResponse<TResponse>(additionalMessage);
+                throw new CommandExecutionException(additionalMessage, e);
             }
-        }
-
-        private TResponse CreateTechnicalErroResponse<TResponse>(string additionalMessage) where TResponse : Response, new()
-        {
-            TResponse technicalErroResponse = new TResponse();
-            technicalErroResponse.AddTechnicalError(ExecuteCommandHandlerTechnicalErrorKey, additionalMessage);
-            return technicalErroResponse;
         }
 
         protected abstract IEnumerable<ICommandHandler<TCommand, TResponse>> GetCommandHandlers<TCommand, TResponse>() where TCommand : ICommand where TResponse : Response;

@@ -6,6 +6,7 @@ using TinyDdd.Interaction;
 
 namespace TinyDdd.Tests.Unit.Interaction
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class CommandExecutorTests
     {
@@ -28,4 +29,5 @@ namespace TinyDdd.Tests.Unit.Interaction
             }
         }
     }
+    // ReSharper restore InconsistentNaming
 }

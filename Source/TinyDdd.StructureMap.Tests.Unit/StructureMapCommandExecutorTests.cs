@@ -13,7 +13,7 @@ namespace TinyDdd.StructureMap.Tests.Unit
     public class StructureMapCommandExecutorTests
     {
         [Test]
-        public void GetCommandHandlers_CommandHandlerExists_ReturnsCommandHandler()
+        public void GetCommandHandlers_SingleCommandHandlerExists_ReturnsCommandHandler()
         {
             ObjectFactory.Initialize(x => x.AddRegistry(new StructureMapRegistry()));
 
@@ -25,7 +25,6 @@ namespace TinyDdd.StructureMap.Tests.Unit
         public class TestCommand : ICommand<Response> { }
         public class TestCommandHandler : ICommandHandler<TestCommand>
         {
-            public Response Execute(TestCommand command) { return null; }
             public Response Execute(ICommand command) { return null; }
         }
         private class StructureMapCommandExecutorWrapper : StructureMapCommandExecutor

@@ -37,12 +37,12 @@ namespace TinyDdd.Tests.Unit.Interaction
         }
 
         [Test]
-        public void Execute_CommandHandlerWithInvalidResponseType_ResponseReturned()
+        public void Execute_CommandHandlerWithInvalidResponseType_ThrowsException()
         {
             var commandExecutor = new CommandExecutorWithCommandHandlerWithInvalidResponseType();
             var exception = Assert.Throws<CommandExecutionException>(() => commandExecutor.Execute(new TestResponseCommand()));
             Console.WriteLine(exception.Message);
-            Assert.That(exception.Message.StartsWith("An exception occured while converting the response of the command handler of type"));
+            Assert.That(exception.Message.StartsWith("An exception occured while casting the response of the command handler of type"));
         }
 
         private class TestResponse : Response<object> { }

@@ -11,6 +11,7 @@ namespace TinyDdd.StructureMap
         protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
         {
             System.Diagnostics.Debug.Assert(commandType != null);
+            System.Diagnostics.Debug.Assert(typeof(ICommand).IsAssignableFrom(commandType));
 
             try
             {

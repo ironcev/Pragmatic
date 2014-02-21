@@ -54,6 +54,7 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="Interaction\CommandExecutionExceptionTests.cs" />
+    <Compile Include="Interaction\QueryExecutorTests.cs" />
     <Compile Include="Interaction\CommandExecutorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

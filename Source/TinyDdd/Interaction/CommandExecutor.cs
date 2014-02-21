@@ -7,8 +7,6 @@ namespace TinyDdd.Interaction
 {
     public abstract class CommandExecutor
     {
-        public readonly string ExecuteCommandHandlerTechnicalErrorKey = typeof (CommandExecutor).FullName + "ExecuteCommandHandlerTechnicalErrorKey";
-
         public TResponse Execute<TResponse>(ICommand<TResponse> command) where TResponse : Response
         {
             Argument.IsNotNull(command, "command");
@@ -25,7 +23,7 @@ namespace TinyDdd.Interaction
                                                               Environment.NewLine,
                                                               commandHandlers.Length,
                                                               command.GetType(),                                                              
-                                                              commandHandlers.Aggregate(string.Empty, (result, commandHandler) => result + commandHandler.GetType() + Environment.NewLine)));
+                                                              commandHandlers.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + Environment.NewLine)));
 
             Response response;
             try
@@ -46,10 +44,10 @@ namespace TinyDdd.Interaction
             }
             catch (InvalidCastException e)
             {
-                string additionalMessage = string.Format("An exception occured while converting the response of the command handler of type '{1}'.{0}" +
-                                                         "The returned response type cannot be converted into the expected response type.{0}" +
+                string additionalMessage = string.Format("An exception occured while casting the response of the command handler of type '{1}'.{0}" +
+                                                         "The returned response object cannot be converted into the expected response type.{0}" +
                                                          "The expected response type is '{2}'.{0}" +
-                                                         "The returned response type is '{3}'.",
+                                                         "The returned response object type is '{3}'.",
                                                          Environment.NewLine,
                                                          commandHandlers[0].GetType(),
                                                          typeof(TResponse),

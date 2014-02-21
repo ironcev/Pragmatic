@@ -48,10 +48,14 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="IAggregateRoot.cs" />
+    <Compile Include="Interaction\QueryExecutionException.cs" />
     <Compile Include="Interaction\CommandExecutionException.cs" />
+    <Compile Include="Interaction\QueryExecutor.cs" />
     <Compile Include="Interaction\ICommand.cs" />
     <Compile Include="Interaction\CommandExecutor.cs" />
     <Compile Include="Interaction\ICommandHandler.cs" />
+    <Compile Include="Interaction\IQuery.cs" />
+    <Compile Include="Interaction\IQueryHandler.cs" />
     <Compile Include="Interaction\Response.cs" />
     <Compile Include="Interaction\ResponseMessage.cs" />
     <Compile Include="IReadOnlyRepository.cs" />

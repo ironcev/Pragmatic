@@ -7,7 +7,7 @@ namespace TinyDdd.Interaction
         Information,
         Warning,
         Error,
-        TechnicalError
+        TechnicalError // TODO-IG: Do we need this? No.
     }
 
     public class ResponseMessage

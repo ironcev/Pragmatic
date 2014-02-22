@@ -46,6 +46,7 @@ namespace TinyDdd.Interaction
         public IEnumerable<ResponseMessage> Warnings { get { return GetMessagesOfType( MessageType.Warning ); } }
         public IEnumerable<ResponseMessage> Errors { get { return GetMessagesOfType( MessageType.Error ); } }
         public IEnumerable<ResponseMessage> TechnicalErrors { get { return GetMessagesOfType(MessageType.TechnicalError); } }
+        public IEnumerable<ResponseMessage> AllMessages { get { return _responseMessages; } }
 
         public void Add(ResponseMessage responseMessage)
         {

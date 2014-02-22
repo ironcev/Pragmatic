@@ -22,10 +22,10 @@ namespace TinyDdd.Tests.Unit.Interaction
         public class TestCommand : ICommand<Response> { } // This class must be public in order to use it in Moq mocks.
         private class CommandExecutorWithMoreThanOneCommandHandlerDefined : CommandExecutor
         {
-            protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
+            protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)
             {
-                yield return new Mock<ICommandHandler<TestCommand>>().Object;
-                yield return new Mock<ICommandHandler<TestCommand>>().Object;
+                yield return new Mock<ICommandHandler<TestCommand, Response>>().Object;
+                yield return new Mock<ICommandHandler<TestCommand, Response>>().Object;
             }
         }
 
@@ -36,32 +36,14 @@ namespace TinyDdd.Tests.Unit.Interaction
             Assert.That(response, Is.InstanceOf<TestResponse>());
         }
 
-        [Test]
-        public void Execute_CommandHandlerWithInvalidResponseType_ThrowsException()
-        {
-            var commandExecutor = new CommandExecutorWithCommandHandlerWithInvalidResponseType();
-            var exception = Assert.Throws<CommandExecutionException>(() => commandExecutor.Execute(new TestResponseCommand()));
-            Console.WriteLine(exception.Message);
-            Assert.That(exception.Message.StartsWith("An exception occured while casting the response of the command handler of type"));
-        }
-
-        private class TestResponse : Response<object> { }
+        public class TestResponse : Response<object> { }
         public class TestResponseCommand : ICommand<TestResponse> { } // This class must be public in order to use it in Moq mocks.
         private class CommandExecutorWithCommandHandlerWithValidResponseType : CommandExecutor
         {
-            protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
+            protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)
             {
-                var mock = new Mock<ICommandHandler<TestResponseCommand>>();
+                var mock = new Mock<ICommandHandler<TestResponseCommand, TestResponse>>();
                 mock.Setup(x => x.Execute(It.IsAny<TestResponseCommand>())).Returns(new TestResponse());
-                yield return mock.Object;
-            }
-        }
-        private class CommandExecutorWithCommandHandlerWithInvalidResponseType : CommandExecutor
-        {
-            protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
-            {
-                var mock = new Mock<ICommandHandler<TestResponseCommand>>();
-                mock.Setup(x => x.Execute(It.IsAny<TestResponseCommand>())).Returns(new Response());
                 yield return mock.Object;
             }
         }

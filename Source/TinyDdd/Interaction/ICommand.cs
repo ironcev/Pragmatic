@@ -6,12 +6,10 @@ namespace TinyDdd.Interaction
     public abstract class Command : ICommand<Response> { }
 
     // ReSharper disable UnusedTypeParameter
-    public interface ICommand<in TResponse> : ICommand where TResponse : Response
+    public interface ICommand<in TResponse> where TResponse : Response
     // ReSharper restore UnusedTypeParameter
     {
     }
-
-    public interface ICommand { }
 }
 
 /*
@@ -28,7 +26,7 @@ namespace TinyDdd.Interaction
  * Still we would like to have the proper response type at the output of the Execute() method.
  * This could be, of course, done in the following manner:
  *     ConcreteResponse response = executor.Execute<ConcreteResponse>(someCommand);
- * In order to simplify the calling code as much as possible we, introduced the parameterized version of ICommand so that the response type can be inferred by the compiler:
+ * In order to simplify the calling code as much as possible we parameterized the ICommand so that the response type can be inferred by the compiler:
  *     ConcreteResponse response = executor.Execute(someCommand);
  * 
  * Abstract Command class is intended as base class for commands that simply return the plain Response object.

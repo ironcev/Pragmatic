@@ -17,21 +17,21 @@ namespace TinyDdd.StructureMap.Tests.Unit
         {
             ObjectFactory.Initialize(x => x.AddRegistry(new StructureMapRegistry()));
 
-            var commandHandlers = new StructureMapCommandExecutorWrapper().GetCommandHandlersWrapper(typeof(TestCommand)).ToArray();
+            var commandHandlers = new StructureMapCommandExecutorWrapper().GetCommandHandlersWrapper<Response>(typeof(TestCommand)).ToArray();
             Assert.That(commandHandlers.Length, Is.EqualTo(1));
             Assert.That(commandHandlers[0], Is.InstanceOf<TestCommandHandler>());
         }
 
         public class TestCommand : ICommand<Response> { }
-        public class TestCommandHandler : ICommandHandler<TestCommand>
+        public class TestCommandHandler : ICommandHandler<TestCommand, Response>
         {
-            public Response Execute(ICommand command) { return null; }
+            public Response Execute(TestCommand command) { return null; }
         }
         private class StructureMapCommandExecutorWrapper : StructureMapCommandExecutor
         {
-            public IEnumerable<ICommandHandler> GetCommandHandlersWrapper(Type commandType)
+            public IEnumerable<object> GetCommandHandlersWrapper<TResponse>(Type commandType) where TResponse : Response
             {
-                return GetCommandHandlers(commandType);
+                return GetCommandHandlers<TResponse>(commandType);
             }
         }
 
@@ -43,7 +43,7 @@ namespace TinyDdd.StructureMap.Tests.Unit
                 {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-                    scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<>));
+                    scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));
                 });
             }
         }

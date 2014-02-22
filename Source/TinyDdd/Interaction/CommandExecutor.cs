@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace TinyDdd.Interaction
@@ -11,7 +12,7 @@ namespace TinyDdd.Interaction
         {
             Argument.IsNotNull(command, "command");
 
-            var commandHandlers = GetCommandHandlers(command.GetType()).ToArray();
+            var commandHandlers = GetCommandHandlers<TResponse>(command.GetType()).ToArray();
 
             if (commandHandlers.Length <= 0)
                 throw new InvalidOperationException(string.Format("There is no command handler defined for the commands of type '{0}'.", command.GetType()));
@@ -25,10 +26,9 @@ namespace TinyDdd.Interaction
                                                               command.GetType(),                                                              
                                                               commandHandlers.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + Environment.NewLine)));
 
-            Response response;
             try
             {
-                response = commandHandlers[0].Execute(command);
+                return ExecuteCommandHandler(commandHandlers[0], command);
             }
             catch (Exception e)
             {
@@ -37,28 +37,19 @@ namespace TinyDdd.Interaction
 
                 throw new CommandExecutionException(additionalMessage, e);
             }
-
-            try
-            {
-                return (TResponse) response;
-            }
-            catch (InvalidCastException e)
-            {
-                string additionalMessage = string.Format("An exception occured while casting the response of the command handler of type '{1}'.{0}" +
-                                                         "The returned response object cannot be converted into the expected response type.{0}" +
-                                                         "The expected response type is '{2}'.{0}" +
-                                                         "The returned response object type is '{3}'.",
-                                                         Environment.NewLine,
-                                                         commandHandlers[0].GetType(),
-                                                         typeof(TResponse),
-                                                         response.GetType());
-                LogException(additionalMessage, e);
-
-                throw new CommandExecutionException(additionalMessage, e);
-            }
         }
 
-        protected abstract IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType);
+        private static TResponse ExecuteCommandHandler<TResponse>(object commandHandler, ICommand<TResponse> command) where TResponse : Response
+        {
+            var executeMethod = commandHandler.GetType().GetMethod("Execute", // TODO-IG: Replace with labda expressions once when SwissKnife supports that.
+                                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod,
+                                    null, CallingConventions.HasThis,
+                                    new[] { command.GetType() },
+                                    null);
+            return (TResponse)executeMethod.Invoke(commandHandler, new object[] {command});
+        }
+
+        protected abstract IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType) where TResponse : Response;
         protected virtual void LogException(string additionalMessage, Exception exception) { }
     }
 }

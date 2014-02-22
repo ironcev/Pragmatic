@@ -26,7 +26,7 @@ namespace TinyDdd.Examples
                 {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-                    scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<>));
+                    scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));
                     scan.ConnectImplementationsToTypesClosing(typeof(IQueryHandler<,>));
                 });
             }

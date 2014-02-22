@@ -8,21 +8,21 @@ namespace TinyDdd.StructureMap
 {
     public class StructureMapCommandExecutor : CommandExecutor
     {
-        protected override IEnumerable<ICommandHandler> GetCommandHandlers(Type commandType)
+        protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)
         {
             System.Diagnostics.Debug.Assert(commandType != null);
-            System.Diagnostics.Debug.Assert(typeof(ICommand).IsAssignableFrom(commandType));
+            System.Diagnostics.Debug.Assert(typeof(ICommand<TResponse>).IsAssignableFrom(commandType));
 
             try
             {
-                return ObjectFactory.GetAllInstances(typeof(ICommandHandler<>).MakeGenericType(commandType)).Cast<ICommandHandler>();
+                return ObjectFactory.GetAllInstances(typeof(ICommandHandler<,>).MakeGenericType(commandType, typeof(TResponse))).Cast<dynamic>();
             }
             catch (Exception e)
             {
                 string additionalMessage = string.Format("An exception occured while resolving command handlers for the commands of type '{0}'.", commandType);
                 LogException(additionalMessage, e);
 
-                return Enumerable.Empty<ICommandHandler>();
+                return Enumerable.Empty<dynamic>();
             }            
         }
     }

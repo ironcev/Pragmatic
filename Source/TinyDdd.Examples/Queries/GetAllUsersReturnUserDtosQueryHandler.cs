@@ -7,7 +7,7 @@ namespace TinyDdd.Examples.Queries
 {
     public class GetAllUsersReturnUserDtosQueryHandler : IQueryHandler<GetAllUsersQuery, IEnumerable<UserDto>>
     {
-        public object Execute(IQuery query)
+        public IEnumerable<UserDto> Execute(GetAllUsersQuery query)
         {
             return Enumerable.Empty<UserDto>();
         }

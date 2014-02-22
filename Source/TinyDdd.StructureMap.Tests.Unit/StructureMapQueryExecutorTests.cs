@@ -17,7 +17,7 @@ namespace TinyDdd.StructureMap.Tests.Unit
         {
             ObjectFactory.Initialize(x => x.AddRegistry(new StructureMapRegistry()));
 
-            var queryHandlers = new StructureMapQueryExecutorWrapper().GetQueryHandlersWrapper(typeof(TestQuery), typeof(object)).ToArray();
+            var queryHandlers = new StructureMapQueryExecutorWrapper().GetQueryHandlersWrapper<object>(typeof(TestQuery)).ToArray();
             Assert.That(queryHandlers.Length, Is.EqualTo(1));
             Assert.That(queryHandlers[0], Is.InstanceOf<TestQueryHandler>());
         }
@@ -25,13 +25,13 @@ namespace TinyDdd.StructureMap.Tests.Unit
         public class TestQuery : IQuery<object> { }
         public class TestQueryHandler : IQueryHandler<TestQuery, object>
         {
-            public object Execute(IQuery command) { return null; }
+            public object Execute(TestQuery command) { return null; }
         }
         private class StructureMapQueryExecutorWrapper : StructureMapQueryExecutor
         {
-            public IEnumerable<IQueryHandler> GetQueryHandlersWrapper(Type queryType, Type queryResultType)
+            public IEnumerable<object> GetQueryHandlersWrapper<TResult>(Type queryType)
             {
-                return GetQueryHandlers(queryType, queryResultType);
+                return GetQueryHandlers<TResult>(queryType);
             }
         }
 

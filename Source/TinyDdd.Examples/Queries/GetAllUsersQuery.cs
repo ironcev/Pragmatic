@@ -2,7 +2,7 @@
 
 namespace TinyDdd.Examples.Queries
 {
-    class GetAllUsersQuery : IQuery
+    public class GetAllUsersQuery : IQuery
     {
     }
 }

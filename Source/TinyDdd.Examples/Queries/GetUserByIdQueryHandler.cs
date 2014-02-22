@@ -5,7 +5,7 @@ namespace TinyDdd.Examples.Queries
 {
     public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, User>
     {
-        public object Execute(IQuery query)
+        public User Execute(GetUserByIdQuery query)
         {
             return new User();
         }

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using SwissKnife.Diagnostics.Contracts;
 
-namespace TinyDdd.Interaction
+namespace TinyDdd.Interaction // TODO-IG: In general, move from extinsibility by subclassing to dependency injection.
 {
-    public abstract class QueryExecutor
+    public abstract class QueryExecutor // TODO-IG: What if we have hierarchy of queries? What is the expected behavior - polimorphic or not? (Same with the commands.)
     {
         public TResult Execute<TResult>(IQuery<TResult> query)
         {
             return ExecuteCore<TResult>(query);
         }
 
-        public TResult Execute<TQuery, TResult>(TQuery query) where TQuery : IQuery // TODO-IG: What if we have hierarchy of queries? What is the expected behavior - polimorphic or not? (Same with the commands.)
+        public TResult Execute<TQuery, TResult>(TQuery query) where TQuery : IQuery 
         {
             return ExecuteCore<TResult>(query);
         }
@@ -21,7 +22,7 @@ namespace TinyDdd.Interaction
         {
             Argument.IsNotNull(query, "query");
 
-            var queryHandlers = GetQueryHandlers(query.GetType(), typeof(TResult)).ToArray();
+            var queryHandlers = GetQueryHandlers<TResult>(query.GetType()).ToArray();
 
             if (queryHandlers.Length <= 0)
                 throw new InvalidOperationException(string.Format("There is no query handler defined for the queries of type '{0}' and query results of type '{1}'.", query.GetType(), typeof(TResult)));
@@ -36,10 +37,9 @@ namespace TinyDdd.Interaction
                                                               typeof(TResult),
                                                               queryHandlers.Aggregate(string.Empty, (output, queryHandler) => output + queryHandler.GetType() + Environment.NewLine)));
 
-            object result;
             try
             {
-                result = queryHandlers[0].Execute(query);
+                return ExecuteQueryHandler<TResult>(queryHandlers[0], query);
             }
             catch (Exception e)
             {
@@ -48,28 +48,19 @@ namespace TinyDdd.Interaction
 
                 throw new QueryExecutionException(additionalMessage, e);
             }
-
-            try
-            {
-                return (TResult)result;
-            }
-            catch (InvalidCastException e)
-            {
-                string additionalMessage = string.Format("An exception occured while casting the result of the query handler of type '{1}'.{0}" +
-                                                         "The returned result object cannot be cast into the expected result type.{0}" +
-                                                         "The expected result type is '{2}'.{0}" +
-                                                         "The returned result object type is '{3}'.",
-                                                         Environment.NewLine,
-                                                         queryHandlers[0].GetType(),
-                                                         typeof(TResult),
-                                                         result.GetType());
-                LogException(additionalMessage, e);
-
-                throw new QueryExecutionException(additionalMessage, e);
-            }            
         }
 
-        protected abstract IEnumerable<IQueryHandler> GetQueryHandlers(Type queryType, Type queryResultType);
+        private static TResult ExecuteQueryHandler<TResult>(object queryHandler, IQuery query) // TODO-IG: Remove duplicated code from here and from the CommandExecutor class.
+        {
+            var executeMethod = queryHandler.GetType().GetMethod("Execute", // TODO-IG: Replace with labda expressions once when SwissKnife supports that.
+                                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod,
+                                    null, CallingConventions.HasThis,
+                                    new[] { query.GetType() },
+                                    null);
+            return (TResult)executeMethod.Invoke(queryHandler, new object[] { query });
+        }
+
+        protected abstract IEnumerable<object> GetQueryHandlers<TResult>(Type queryType);
         protected virtual void LogException(string additionalMessage, Exception exception) { }
     }
 }

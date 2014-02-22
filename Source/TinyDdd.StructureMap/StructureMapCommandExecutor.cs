@@ -15,14 +15,14 @@ namespace TinyDdd.StructureMap
 
             try
             {
-                return ObjectFactory.GetAllInstances(typeof(ICommandHandler<,>).MakeGenericType(commandType, typeof(TResponse))).Cast<dynamic>();
+                return ObjectFactory.GetAllInstances(typeof(ICommandHandler<,>).MakeGenericType(commandType, typeof(TResponse))).Cast<object>();
             }
             catch (Exception e)
             {
                 string additionalMessage = string.Format("An exception occured while resolving command handlers for the commands of type '{0}'.", commandType);
                 LogException(additionalMessage, e);
 
-                return Enumerable.Empty<dynamic>();
+                return Enumerable.Empty<object>();
             }            
         }
     }

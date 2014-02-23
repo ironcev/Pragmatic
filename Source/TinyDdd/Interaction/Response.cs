@@ -42,10 +42,10 @@ namespace TinyDdd.Interaction
         public bool HasWarnings { get { return HasMessagesOfType( MessageType.Warning ); } }
         public bool HasErrors { get { return HasMessagesOfType( MessageType.Error ); } }
 
+        public IEnumerable<ResponseMessage> Successes { get { return GetMessagesOfType( MessageType.Success ); } }
         public IEnumerable<ResponseMessage> Informations { get { return GetMessagesOfType( MessageType.Information ); } }
         public IEnumerable<ResponseMessage> Warnings { get { return GetMessagesOfType( MessageType.Warning ); } }
         public IEnumerable<ResponseMessage> Errors { get { return GetMessagesOfType( MessageType.Error ); } }
-        public IEnumerable<ResponseMessage> TechnicalErrors { get { return GetMessagesOfType(MessageType.TechnicalError); } }
         public IEnumerable<ResponseMessage> AllMessages { get { return _responseMessages; } }
 
         public void Add(ResponseMessage responseMessage)
@@ -61,6 +61,20 @@ namespace TinyDdd.Interaction
             Argument.IsValid( response != this, string.Format( "{0} can not be added to itself.", typeof( Response ) ), "response" );
 
             _responseMessages.AddMany(response._responseMessages);
+
+            return this;
+        }
+
+        public Response AddSuccess(string message)
+        {
+            AddInformation( string.Empty, message );
+
+            return this;
+        }
+
+        public Response AddSuccess(string key, string message)
+        {
+            _responseMessages.Add( new ResponseMessage( MessageType.Success, key, message ) );
 
             return this;
         }
@@ -103,13 +117,6 @@ namespace TinyDdd.Interaction
         public Response AddError(string key, string message)
         {
             _responseMessages.Add( new ResponseMessage( MessageType.Error, key, message ) );
-
-            return this;
-        }
-
-        public Response AddTechnicalError(string key, string message)
-        {
-            _responseMessages.Add(new ResponseMessage(MessageType.TechnicalError, key, message));
 
             return this;
         }

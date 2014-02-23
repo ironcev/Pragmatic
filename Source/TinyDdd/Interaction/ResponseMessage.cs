@@ -4,10 +4,10 @@ namespace TinyDdd.Interaction
 {
     public enum MessageType
     {
+        Success,
         Information,
         Warning,
-        Error,
-        TechnicalError // TODO-IG: Do we need this? No.
+        Error
     }
 
     public class ResponseMessage

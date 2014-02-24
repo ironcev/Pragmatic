@@ -1,6 +1,6 @@
 ﻿namespace TinyDdd.Interaction
 {
-    interface IResponseMapper
+    public interface IResponseMapper
     {
         Response Map(Response originalResponse);
     }

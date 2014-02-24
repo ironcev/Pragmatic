@@ -48,11 +48,22 @@ namespace TinyDdd.Interaction
         public IEnumerable<ResponseMessage> Errors { get { return GetMessagesOfType( MessageType.Error ); } }
         public IEnumerable<ResponseMessage> AllMessages { get { return _responseMessages; } }
 
-        public void Add(ResponseMessage responseMessage)
+        public Response() { }
+
+        public Response(Response originalResponse)
+        {
+            Argument.IsNotNull(originalResponse, "originalResponse");
+
+            _responseMessages.AddMany(originalResponse._responseMessages);
+        }
+
+        public Response Add(ResponseMessage responseMessage)
         {
             Argument.IsNotNull( responseMessage, "responseMessage" );
 
             _responseMessages.Add( responseMessage );
+
+            return this;
         }
 
         public Response Add(Response response)

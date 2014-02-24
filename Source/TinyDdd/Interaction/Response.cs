@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using SwissKnife.Collections;
 using SwissKnife.Diagnostics.Contracts;
 
@@ -16,20 +18,20 @@ namespace TinyDdd.Interaction
 
         public Response()
         {
-            Result = default(T);
+            Result = default( T );
         }
 
         public static Response<T> From(Response response)
         {
-            return From(response, default(T));
+            return From( response, default( T ) );
         }
 
         public static Response<T> From(Response response, T result)
         {
-            Argument.IsNotNull(response, "response");
+            Argument.IsNotNull( response, "response" );
 
-            Response<T> newResponse = new Response<T>(result);
-            newResponse.Add(response);
+            Response<T> newResponse = new Response<T>( result );
+            newResponse.Add( response );
             return newResponse;
         }
     }
@@ -52,9 +54,9 @@ namespace TinyDdd.Interaction
 
         public Response(Response originalResponse)
         {
-            Argument.IsNotNull(originalResponse, "originalResponse");
+            Argument.IsNotNull( originalResponse, "originalResponse" );
 
-            _responseMessages.AddMany(originalResponse._responseMessages);
+            _responseMessages.AddMany( originalResponse._responseMessages );
         }
 
         public Response Add(ResponseMessage responseMessage)
@@ -71,63 +73,99 @@ namespace TinyDdd.Interaction
             Argument.IsNotNull( response, "response" );
             Argument.IsValid( response != this, string.Format( "{0} can not be added to itself.", typeof( Response ) ), "response" );
 
-            _responseMessages.AddMany(response._responseMessages);
+            _responseMessages.AddMany( response._responseMessages );
 
             return this;
         }
 
         public Response AddSuccess(string message)
         {
-            AddInformation(message, string.Empty);
+            AddInformation( message, string.Empty );
 
             return this;
         }
 
         public Response AddSuccess(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Success, message, key) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Success, message, key ) );
+
+            return this;
+        }
+
+        public Response AddSuccessFromResource(Expression<Func<string>> resourceSelector)
+        {
+            Argument.IsNotNull( resourceSelector, "resourceSelector" );
+
+            AddSuccess( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
 
         public Response AddInformation(string message)
         {
-            AddInformation(message, string.Empty);
+            AddInformation( message, string.Empty );
 
             return this;
         }
 
         public Response AddInformation(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Information, message, key) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Information, message, key ) );
+
+            return this;
+        }
+
+        public Response AddInformationFromResource(Expression<Func<string>> resourceSelector)
+        {
+            Argument.IsNotNull( resourceSelector, "resourceSelector" );
+
+            AddInformation( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
 
         public Response AddWarning(string message)
         {
-            AddWarning(message, string.Empty);
+            AddWarning( message, string.Empty );
 
             return this;
         }
 
         public Response AddWarning(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Warning, message, key) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Warning, message, key ) );
+
+            return this;
+        }
+
+        public Response AddWarningFromResource(Expression<Func<string>> resourceSelector)
+        {
+            Argument.IsNotNull( resourceSelector, "resourceSelector" );
+
+            AddWarning( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
 
         public Response AddError(string message)
         {
-            AddError(message, string.Empty);
+            AddError( message, string.Empty );
 
             return this;
         }
 
         public Response AddError(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Error, message, key) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Error, message, key ) );
+
+            return this;
+        }
+
+        public Response AddErrorFromResource(Expression<Func<string>> resourceSelector)
+        {
+            Argument.IsNotNull( resourceSelector, "resourceSelector" );
+
+            AddError( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
@@ -136,14 +174,14 @@ namespace TinyDdd.Interaction
         {
             Argument.IsNotNull( errors, "errors" );
 
-            _responseMessages.AddMany( errors.Select( error => new ResponseMessage( MessageType.Error, error, string.Empty) ) );
+            _responseMessages.AddMany( errors.Select( error => new ResponseMessage( MessageType.Error, error, string.Empty ) ) );
 
             return this;
         }
 
         public Response InsertError(string message, string key)
         {
-            _responseMessages.Insert( 0, new ResponseMessage( MessageType.Error, message, key) );
+            _responseMessages.Insert( 0, new ResponseMessage( MessageType.Error, message, key ) );
 
             return this;
         }

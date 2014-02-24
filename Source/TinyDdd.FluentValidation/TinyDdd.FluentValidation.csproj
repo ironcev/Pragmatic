@@ -50,12 +50,17 @@
   <ItemGroup>
     <Compile Include="FluentValidationExtensions.cs" />
     <Compile Include="FluentValidationTestExtensions.cs" />
-    <Compile Include="MessageKeyBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.Common.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TinyDdd\TinyDdd.csproj">
+      <Project>{e56289ef-f2e9-4a5b-8fb5-abcad1d658e2}</Project>
+      <Name>TinyDdd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

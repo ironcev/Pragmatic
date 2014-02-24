@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using FluentValidation;
 using FluentValidation.TestHelper;
 using SwissKnife;
+using TinyDdd.Interaction;
 
 namespace TinyDdd.FluentValidation
 {

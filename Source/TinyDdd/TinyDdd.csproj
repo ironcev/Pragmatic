@@ -51,6 +51,7 @@
     <Compile Include="IAggregateRoot.cs" />
     <Compile Include="Interaction\InvariantResponseMapper.cs" />
     <Compile Include="Interaction\IResponseMapper.cs" />
+    <Compile Include="Interaction\MessageKeyBuilder.cs" />
     <Compile Include="Interaction\NamespacedKeyResourceResponseMapper.cs" />
     <Compile Include="Interaction\QueryExecutionException.cs" />
     <Compile Include="Interaction\CommandExecutionException.cs" />

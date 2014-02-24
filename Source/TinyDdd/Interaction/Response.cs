@@ -67,56 +67,56 @@ namespace TinyDdd.Interaction
 
         public Response AddSuccess(string message)
         {
-            AddInformation( string.Empty, message );
+            AddInformation(message, string.Empty);
 
             return this;
         }
 
-        public Response AddSuccess(string key, string message)
+        public Response AddSuccess(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Success, key, message ) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Success, message, key) );
 
             return this;
         }
 
         public Response AddInformation(string message)
         {
-            AddInformation(string.Empty, message);
+            AddInformation(message, string.Empty);
 
             return this;
         }
 
-        public Response AddInformation(string key, string message)
+        public Response AddInformation(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Information, key, message ) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Information, message, key) );
 
             return this;
         }
 
         public Response AddWarning(string message)
         {
-            AddWarning(string.Empty, message);
+            AddWarning(message, string.Empty);
 
             return this;
         }
 
-        public Response AddWarning(string key, string message)
+        public Response AddWarning(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Warning, key, message ) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Warning, message, key) );
 
             return this;
         }
 
         public Response AddError(string message)
         {
-            AddError(string.Empty, message);
+            AddError(message, string.Empty);
 
             return this;
         }
 
-        public Response AddError(string key, string message)
+        public Response AddError(string message, string key)
         {
-            _responseMessages.Add( new ResponseMessage( MessageType.Error, key, message ) );
+            _responseMessages.Add( new ResponseMessage( MessageType.Error, message, key) );
 
             return this;
         }
@@ -125,14 +125,14 @@ namespace TinyDdd.Interaction
         {
             Argument.IsNotNull( errors, "errors" );
 
-            _responseMessages.AddMany( errors.Select( error => new ResponseMessage( MessageType.Error, string.Empty, error ) ) );
+            _responseMessages.AddMany( errors.Select( error => new ResponseMessage( MessageType.Error, error, string.Empty) ) );
 
             return this;
         }
 
-        public Response InsertError(string key, string message)
+        public Response InsertError(string message, string key)
         {
-            _responseMessages.Insert( 0, new ResponseMessage( MessageType.Error, key, message ) );
+            _responseMessages.Insert( 0, new ResponseMessage( MessageType.Error, message, key) );
 
             return this;
         }

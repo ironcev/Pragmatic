@@ -10,7 +10,7 @@ namespace TinyDdd.Interaction
         Error
     }
 
-    public class ResponseMessage
+    public class ResponseMessage // TODO-IG: Mark it as DeepImmutable once when this attribute is available in SwissKnife.
     {
         public MessageType MessageType { get; private set; }
 
@@ -18,16 +18,23 @@ namespace TinyDdd.Interaction
 
         public string Message { get; private set; }
 
-        public ResponseMessage(MessageType messageType, string message) : this(messageType, string.Empty, message) { }
+        public bool HasKey { get { return !string.IsNullOrWhiteSpace(Key); } }
 
-        public ResponseMessage(MessageType messageType, string key, string message)
+        public ResponseMessage(MessageType messageType, string message) : this(messageType, message, string.Empty) { }
+
+        public ResponseMessage(MessageType messageType, string message, string key)
         {
-            Argument.IsNotNull(key, "key");
             Argument.IsNotNullOrWhitespace(message, "message");
+            Argument.IsNotNull(key, "key");
 
             MessageType = messageType;
             Key = key;
             Message = message;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[{0}] {1} [{2}]", MessageType, Message, Key);
         }
     }
 }

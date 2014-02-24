@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SwissKnife">
-      <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.1.0\SwissKnife.dll</HintPath>
+    <Reference Include="SwissKnife, Version=0.1.5145.23375, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.2.0\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,6 +49,8 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="IAggregateRoot.cs" />
+    <Compile Include="Interaction\IResponseMapper.cs" />
+    <Compile Include="Interaction\NamespacedKeyResourceResponseMapper.cs" />
     <Compile Include="Interaction\QueryExecutionException.cs" />
     <Compile Include="Interaction\CommandExecutionException.cs" />
     <Compile Include="Interaction\QueryExecutor.cs" />

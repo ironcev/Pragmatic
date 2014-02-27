@@ -49,6 +49,8 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="IAggregateRoot.cs" />
+    <Compile Include="Interaction\GetOneQuery.cs" />
+    <Compile Include="Interaction\GetByIdQuery.cs" />
     <Compile Include="Interaction\InvariantResponseMapper.cs" />
     <Compile Include="Interaction\IResponseMapper.cs" />
     <Compile Include="Interaction\NamespacedKeyResourceResponseMapper.cs" />

@@ -1,0 +1,48 @@
+﻿<Window x:Class="TinyDdd.Example.Client.Desktop.Dialogs.UserProfileDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit User Profile" Height="300" Width="300"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="Height"
+        ShowInTaskbar="False"
+        >
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="75"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="First Name:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FirstName}"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Last Name:"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LastName}"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Email:"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Email}"/>
+        </Grid>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal"  FlowDirection="RightToLeft">
+            <Button Content="Cancel" IsCancel="True" />
+            <Button x:Name="_btnOk" Content="Ok" />
+        </StackPanel>
+    </Grid>
+</Window>

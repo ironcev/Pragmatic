@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using SwissKnife;
 
-namespace TinyDdd.Interaction
+namespace TinyDdd.Interaction.StandardQueries
 {
     public class GetOneQuery<TEntity> : IQuery<Option<TEntity>> where TEntity : Entity, IAggregateRoot
     {

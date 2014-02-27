@@ -1,7 +1,7 @@
 ﻿using System;
 using SwissKnife;
 
-namespace TinyDdd.Interaction
+namespace TinyDdd.Interaction.StandardQueries
 {
     public class GetByIdQuery<TEntity> : IQuery<Option<TEntity>> where TEntity : Entity, IAggregateRoot
     {

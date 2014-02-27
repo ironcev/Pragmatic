@@ -1,5 +1,4 @@
-﻿using System;
-using FluentValidation;
+﻿using FluentValidation;
 using SwissKnife.Diagnostics.Contracts;
 using TinyDdd.Interaction;
 using TinyDdd.FluentValidation;
@@ -30,8 +29,7 @@ namespace TinyDdd.Example.Model.Users
             if (response.HasErrors) return Response<User>.From(response);
 
             // Check if the user with the same email already exists.
-            var userWithTheSameEmail = QueryExecutor.Execute(new GetOneQuery<User> {Criteria = user => user.Email == newUser.Email});
-            // DISCUSSION: The above line is cumbersome compared to: _userRepository.GetOne(user => user.Email == newUser.Email);
+            var userWithTheSameEmail = QueryExecutor.GetOne<User>(user => user.Email == newUser.Email);
 
             if (userWithTheSameEmail.IsSome)
                 return Response<User>.From(response.AddError("User with the same email already exists.")); // TODO-IG: Switch to the new AddError() method that works with resources once this is merged to the master branch.

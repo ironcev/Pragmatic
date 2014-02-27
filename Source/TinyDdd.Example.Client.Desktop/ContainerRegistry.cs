@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Collections.Generic;
+using FluentValidation;
 using Raven.Client;
 using Raven.Client.Document;
 using StructureMap;
@@ -6,8 +7,9 @@ using StructureMap.Configuration.DSL;
 using SwissKnife;
 using TinyDdd.Example.Model;
 using TinyDdd.Interaction;
+using TinyDdd.Interaction.StandardQueries;
 using TinyDdd.Raven;
-using TinyDdd.Raven.Interaction;
+using TinyDdd.Raven.Interaction.StandardQueries;
 using TinyDdd.StructureMap;
 
 namespace TinyDdd.Example.Client.Desktop
@@ -21,8 +23,8 @@ namespace TinyDdd.Example.Client.Desktop
                 scan.TheCallingAssembly();
                 scan.WithDefaultConventions();
 
-                scan.AssemblyContainingType<Raven.UnitOfWork>();
-                scan.AssemblyContainingType<Model.User>();
+                scan.AssemblyContainingType<UnitOfWork>();
+                scan.AssemblyContainingType<User>();
 
                 scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));
                 scan.ConnectImplementationsToTypesClosing(typeof(IQueryHandler<,>));
@@ -36,6 +38,7 @@ namespace TinyDdd.Example.Client.Desktop
             // TODO-IG: How to tell to StructureMap to do the mapping below automatically?
             For<IQueryHandler<GetByIdQuery<User>, Option<User>>>().Use<GetByIdQueryHandler<User>>();
             For<IQueryHandler<GetOneQuery<User>, Option<User>>>().Use<GetOneQueryHandler<User>>();
+            For<IQueryHandler<GetAllQuery<User>, IEnumerable<User>>>().Use<GetAllQueryHandler<User>>();
 
             IncludeRegistry<RavenContainerRegistry>();
         }

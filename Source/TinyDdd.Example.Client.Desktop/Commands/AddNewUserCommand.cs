@@ -10,7 +10,7 @@ namespace TinyDdd.Example.Client.Desktop.Commands
 {
     class AddNewUserCommand : BaseCommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
     {
-        public AddNewUserCommand(CommandExecutor commandExecutor) : base(commandExecutor)
+        public AddNewUserCommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor) : base(commandExecutor, queryExecutor)
         {
         }
 

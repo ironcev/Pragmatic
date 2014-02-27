@@ -3,8 +3,9 @@ using Raven.Client;
 using SwissKnife;
 using SwissKnife.Diagnostics.Contracts;
 using TinyDdd.Interaction;
+using TinyDdd.Interaction.StandardQueries;
 
-namespace TinyDdd.Raven.Interaction
+namespace TinyDdd.Raven.Interaction.StandardQueries
 {
     public class GetOneQueryHandler<TEntity> : BaseQuery, IQueryHandler<GetOneQuery<TEntity>, Option<TEntity>> where TEntity : Entity, IAggregateRoot
     {

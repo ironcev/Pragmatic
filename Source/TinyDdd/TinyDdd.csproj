@@ -65,8 +65,6 @@
     <Compile Include="Interaction\QueryExecutorExstensions.cs" />
     <Compile Include="Interaction\Response.cs" />
     <Compile Include="Interaction\ResponseMessage.cs" />
-    <Compile Include="IReadOnlyRepository.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

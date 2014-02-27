@@ -61,7 +61,6 @@
     <Compile Include="Interaction\StandardQueries\GetOneQueryHandler.cs" />
     <Compile Include="Interaction\StandardQueries\GetByIdQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

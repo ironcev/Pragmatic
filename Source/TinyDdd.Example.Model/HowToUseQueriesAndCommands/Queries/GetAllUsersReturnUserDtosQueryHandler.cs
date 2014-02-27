@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TinyDdd.Example.Model.Dto;
+using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Dtos;
 using TinyDdd.Interaction;
 
-namespace TinyDdd.Example.Model.Queries
+namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
     public class GetAllUsersReturnUserDtosQueryHandler : IQueryHandler<GetAllUsersQuery, IEnumerable<UserDto>>
     {

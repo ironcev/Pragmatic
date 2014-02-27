@@ -1,7 +1,7 @@
 ﻿using System;
 using TinyDdd.Interaction;
 
-namespace TinyDdd.Example.Model.Queries
+namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
     public class GetUserByIdQuery : IQuery<User>
     {

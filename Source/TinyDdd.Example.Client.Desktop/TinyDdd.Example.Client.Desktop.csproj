@@ -75,7 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\GetAllUsersCommand.cs" />
+    <Compile Include="UICommands\GetAllUsersUICommand.cs" />
     <Compile Include="UserInteraction.cs" />
     <Compile Include="UserViewModel.cs" />
     <Page Include="Dialogs\UserProfileDialog.xaml">
@@ -93,8 +93,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\AddNewUserCommand.cs" />
-    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="UICommands\AddNewUserUICommand.cs" />
+    <Compile Include="UICommands\BaseUICommand.cs" />
     <Compile Include="Dialogs\UserProfileDialog.xaml.cs">
       <DependentUpon>UserProfileDialog.xaml</DependentUpon>
     </Compile>

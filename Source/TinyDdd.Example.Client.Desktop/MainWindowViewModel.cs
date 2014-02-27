@@ -6,7 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using StructureMap;
 using StructureMap.Pipeline;
-using TinyDdd.Example.Client.Desktop.Commands;
+using TinyDdd.Example.Client.Desktop.UICommands;
 using TinyDdd.Example.Model;
 using SwissKnife.Collections;
 
@@ -35,8 +35,8 @@ namespace TinyDdd.Example.Client.Desktop
 
         private void CreateCommands()
         {
-            AddNewUserCommand = ObjectFactory.GetInstance<AddNewUserCommand>();
-            GetAllUsersCommand = ObjectFactory.GetInstance<GetAllUsersCommand>(new ExplicitArguments(new Dictionary<string, object>{ {"mainWindowViewModel", this}}));
+            AddNewUserCommand = ObjectFactory.GetInstance<AddNewUserUICommand>();
+            GetAllUsersCommand = ObjectFactory.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object>{ {"mainWindowViewModel", this}}));
         }
     }
 }

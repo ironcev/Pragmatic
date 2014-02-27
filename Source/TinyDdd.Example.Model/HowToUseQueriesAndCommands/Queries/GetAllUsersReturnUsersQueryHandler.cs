@@ -2,7 +2,7 @@
 using System.Linq;
 using TinyDdd.Interaction;
 
-namespace TinyDdd.Example.Model.Queries
+namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
     public class GetAllUsersReturnUsersQueryHandler : IQueryHandler<GetAllUsersQuery, IEnumerable<User>>
     {

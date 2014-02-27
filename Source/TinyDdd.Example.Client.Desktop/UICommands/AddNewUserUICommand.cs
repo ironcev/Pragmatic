@@ -4,13 +4,12 @@ using System.Windows.Input;
 using TinyDdd.Example.Client.Desktop.Dialogs;
 using TinyDdd.Example.Model;
 using TinyDdd.Interaction;
-using ModelCommand = TinyDdd.Example.Model.Users;
 
-namespace TinyDdd.Example.Client.Desktop.Commands
+namespace TinyDdd.Example.Client.Desktop.UICommands
 {
-    class AddNewUserCommand : BaseCommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
+    class AddNewUserUICommand : BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
     {
-        public AddNewUserCommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor) : base(commandExecutor, queryExecutor)
+        public AddNewUserUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor) : base(commandExecutor, queryExecutor)
         {
         }
 
@@ -24,7 +23,7 @@ namespace TinyDdd.Example.Client.Desktop.Commands
             UserProfileDialog dialog = new UserProfileDialog();
             if (dialog.ShowDialog() != true) return;
 
-            ModelCommand.AddNewUserCommand addNewUserCommand = dialog.UserProfile;
+            Model.Users.AddNewUserCommand addNewUserCommand = dialog.UserProfile;
             Response<User> response = CommandExecutor.Execute(addNewUserCommand);
 
             if (response.HasErrors)

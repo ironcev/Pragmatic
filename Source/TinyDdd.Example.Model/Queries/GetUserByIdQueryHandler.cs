@@ -1,4 +1,5 @@
-﻿using TinyDdd.Interaction;
+﻿using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries;
+using TinyDdd.Interaction;
 
 namespace TinyDdd.Example.Model.Queries
 {

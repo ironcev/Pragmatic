@@ -1,6 +1,6 @@
 ﻿using TinyDdd.Interaction;
 
-namespace TinyDdd.Example.Model.Commands
+namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Commands
 {
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Response<User>>
     {

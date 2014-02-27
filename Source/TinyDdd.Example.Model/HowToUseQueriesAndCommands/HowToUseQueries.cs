@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using TinyDdd.Example.Model.Dto;
-using TinyDdd.Example.Model.Queries;
+using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Dtos;
+using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries;
 using TinyDdd.Interaction;
 using TinyDdd.StructureMap;
 

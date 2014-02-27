@@ -28,7 +28,6 @@ namespace TinyDdd.Example.Model.Users
             response.AddErrors(_userValidator.Validate(newUser));
             if (response.HasErrors) return Response<User>.From(response);
 
-            // Check if the user with the same email already exists.
             var userWithTheSameEmail = QueryExecutor.GetOne<User>(user => user.Email == newUser.Email);
 
             if (userWithTheSameEmail.IsSome)

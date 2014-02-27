@@ -1,4 +1,4 @@
-﻿namespace TinyDdd.Example.Model.Dto
+﻿namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Dtos
 {
     public class UserDto
     {

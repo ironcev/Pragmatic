@@ -59,13 +59,13 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="BaseCommandHandler.cs" />
-    <Compile Include="Commands\CreateUserCommand.cs" />
-    <Compile Include="Commands\CreateUserCommandHandler.cs" />
-    <Compile Include="Commands\SendEmailCommand.cs" />
-    <Compile Include="Commands\SendEmailCommandHandler.cs" />
-    <Compile Include="Dto\UserDto.cs" />
-    <Compile Include="HowToUseQueries.cs" />
-    <Compile Include="HowToUseCommands.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommand.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommandHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\SendEmailCommand.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\SendEmailCommandHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Dtos\UserDto.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\HowToUseQueries.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\HowToUseCommands.cs" />
     <Compile Include="Initialization.cs" />
     <Compile Include="Localization\UserResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -73,14 +73,14 @@
       <DependentUpon>UserResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetUserByIdQueryHandler.cs" />
     <Compile Include="Users\AddNewUserCommand.cs" />
     <Compile Include="Users\AddNewUserCommandHandler.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Queries\GetAllUsersQuery.cs" />
-    <Compile Include="Queries\GetAllUsersReturnUserDtosQueryHandler.cs" />
-    <Compile Include="Queries\GetAllUsersReturnUsersQueryHandler.cs" />
-    <Compile Include="Queries\GetUserByIdQuery.cs" />
-    <Compile Include="Queries\GetUserByIdQueryHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersQuery.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUserDtosQueryHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUsersQueryHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetUserByIdQuery.cs" />
     <Compile Include="Users\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using TinyDdd.Example.Model.Commands;
+using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Commands;
 using TinyDdd.Interaction;
 using TinyDdd.StructureMap;
 

@@ -50,7 +50,7 @@ namespace TinyDdd.Raven
 
         private void CheckUnitOfWorkHasBegun()
         {
-            Operation.IsValid(_counter > 0, string.Format( "Unit of work has not begun. Unit of work must begin before any of its methods are called."));
+            Operation.IsValid(_counter > 0, string.Format( "Unit of work has not begun. Unit of work must begin before any of its methods are called.")); // TODO-IG: Add to the message that the Begin() method has to be called after the Identifier supports method names with brackets.
         }
     }
 }

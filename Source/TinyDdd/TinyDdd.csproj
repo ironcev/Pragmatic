@@ -31,8 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SwissKnife, Version=0.1.5145.23375, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SwissKnife">
       <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.2.0\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -49,6 +48,9 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="IAggregateRoot.cs" />
+    <Compile Include="Interaction\StandardQueries\GetAllQuery.cs" />
+    <Compile Include="Interaction\StandardQueries\GetOneQuery.cs" />
+    <Compile Include="Interaction\StandardQueries\GetByIdQuery.cs" />
     <Compile Include="Interaction\InvariantResponseMapper.cs" />
     <Compile Include="Interaction\IResponseMapper.cs" />
     <Compile Include="Interaction\MessageKeyBuilder.cs" />
@@ -61,10 +63,9 @@
     <Compile Include="Interaction\ICommandHandler.cs" />
     <Compile Include="Interaction\IQuery.cs" />
     <Compile Include="Interaction\IQueryHandler.cs" />
+    <Compile Include="Interaction\QueryExecutorExstensions.cs" />
     <Compile Include="Interaction\Response.cs" />
     <Compile Include="Interaction\ResponseMessage.cs" />
-    <Compile Include="IReadOnlyRepository.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

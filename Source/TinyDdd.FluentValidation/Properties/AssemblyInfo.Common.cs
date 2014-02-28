@@ -22,6 +22,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture(AssemblyDescription.Culture)]
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
+// ReSharper disable CheckNamespace
 internal static partial class AssemblyDescription
 {
     public const string Company = "TinyDDD";
@@ -42,3 +43,4 @@ internal static partial class AssemblyDescription
 #endif
 ;
 }
+// ReSharper restore CheckNamespace

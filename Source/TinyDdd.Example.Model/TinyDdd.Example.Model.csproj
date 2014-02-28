@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}</ProjectGuid>
+    <ProjectGuid>{B8E749A3-CFA4-4B72-B642-BFCFD1435F39}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TinyDdd.Raven</RootNamespace>
-    <AssemblyName>TinyDdd.Raven</AssemblyName>
+    <RootNamespace>TinyDdd.Example.Model</RootNamespace>
+    <AssemblyName>TinyDdd.Example.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,18 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\..\dependencies\packages\RavenDB.Client.2.5.2750\lib\net45\Raven.Abstractions.dll</HintPath>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\dependencies\packages\FluentValidation.5.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\..\dependencies\packages\RavenDB.Client.2.5.2750\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\dependencies\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SwissKnife, Version=0.1.5145.23375, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="StructureMap">
+      <HintPath>..\..\dependencies\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="SwissKnife, Version=0.2.5168.17043, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.2.0\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,20 +56,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Common.cs">
-      <Link>AssemblyInfo.Common.cs</Link>
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="Interaction\BaseQuery.cs" />
-    <Compile Include="Interaction\StandardQueries\GetAllQueryHandler.cs" />
-    <Compile Include="Interaction\StandardQueries\GetOneQueryHandler.cs" />
-    <Compile Include="Interaction\StandardQueries\GetByIdQueryHandler.cs" />
+    <Compile Include="BaseCommandHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommand.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommandHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\SendEmailCommand.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Commands\SendEmailCommandHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Dtos\UserDto.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\HowToUseQueries.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\HowToUseCommands.cs" />
+    <Compile Include="Initialization.cs" />
+    <Compile Include="Localization\UserResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Queries\GetUserByIdQueryHandler.cs" />
+    <Compile Include="Users\AddNewUserCommand.cs" />
+    <Compile Include="Users\AddNewUserCommandHandler.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersQuery.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUserDtosQueryHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUsersQueryHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetUserByIdQuery.cs" />
+    <Compile Include="Users\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TinyDdd.FluentValidation\TinyDdd.FluentValidation.csproj">
+      <Project>{3b50baf3-236d-4e4f-a97a-094fbcef2f09}</Project>
+      <Name>TinyDdd.FluentValidation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TinyDdd.StructureMap\TinyDdd.StructureMap.csproj">
+      <Project>{32788e01-c373-4d56-b620-b13799a47ab5}</Project>
+      <Name>TinyDdd.StructureMap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TinyDdd\TinyDdd.csproj">
       <Project>{e56289ef-f2e9-4a5b-8fb5-abcad1d658e2}</Project>
       <Name>TinyDdd</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\UserResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

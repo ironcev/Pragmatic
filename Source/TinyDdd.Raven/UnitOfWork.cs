@@ -3,54 +3,30 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace TinyDdd.Raven
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : TinyDdd.UnitOfWork
     {
         private readonly IDocumentSession _documentSession;
 
-        /// <summary>
-        /// Counts how many times the <see cref="Begin"/> method is called.
-        /// </summary>
-        private int _counter;
-
         public UnitOfWork(IDocumentSession documentSession)
         {
+            Argument.IsNotNull(documentSession, "documentSession");
+
             _documentSession = documentSession;
         }
 
-        public void Begin()
+        public override void RegisterEntityToAddOrUpdateCore(IAggregateRoot entity)
         {
-            _counter++;
-        }
-
-        public void RegisterEntityToAddOrUpdate(IAggregateRoot entity)
-        {
-            Argument.IsNotNull(entity, "entity");
-            Argument.Is<Entity>((object)entity, "entity" );
-            CheckUnitOfWorkHasBegun();
-            
             _documentSession.Store(entity);
         }
 
-        public void RegisterEntityToDelete(IAggregateRoot entity)
+        public override void RegisterEntityToDeleteCore(IAggregateRoot entity)
         {
-            Argument.IsNotNull(entity, "entity");
-            Argument.Is<Entity>((object)entity, "entity");
-            CheckUnitOfWorkHasBegun();
-            
             _documentSession.Delete(entity);
         }
 
-        public void Commit()
+        public override void CommitCore()
         {
-            CheckUnitOfWorkHasBegun();
-
-            if ( --_counter == 0 )
-                _documentSession.SaveChanges();    
-        }
-
-        private void CheckUnitOfWorkHasBegun()
-        {
-            Operation.IsValid(_counter > 0, string.Format( "Unit of work has not begun. Unit of work must begin before any of its methods are called.")); // TODO-IG: Add to the message that the Begin() method has to be called after the Identifier supports method names with brackets.
+            _documentSession.SaveChanges();
         }
     }
 }

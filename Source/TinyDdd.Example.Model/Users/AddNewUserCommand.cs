@@ -1,5 +1,4 @@
-﻿using System;
-using TinyDdd.Interaction;
+﻿using TinyDdd.Interaction;
 
 namespace TinyDdd.Example.Model.Users
 {

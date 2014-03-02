@@ -8,7 +8,6 @@ using SwissKnife;
 using TinyDdd.Example.Model;
 using TinyDdd.Interaction;
 using TinyDdd.Interaction.StandardQueries;
-using TinyDdd.Raven;
 using TinyDdd.Raven.Interaction.StandardQueries;
 using TinyDdd.StructureMap;
 
@@ -53,7 +52,7 @@ namespace TinyDdd.Example.Client.Desktop
     {
         public RavenContainerRegistry()
         {
-            For<IUnitOfWork>().Use<UnitOfWork>();
+            For<UnitOfWork>().Use<Raven.UnitOfWork>();
 
             For<IDocumentSession>()
                 .HybridHttpOrThreadLocalScoped()

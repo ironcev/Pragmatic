@@ -9,7 +9,7 @@ namespace TinyDdd.Example.Model.Users
     {
         private readonly IValidator<User> _userValidator;
 
-        public AddNewUserCommandHandler(QueryExecutor queryExecutor, IUnitOfWork unitOfWork, IValidator<User> userValidator)
+        public AddNewUserCommandHandler(QueryExecutor queryExecutor, UnitOfWork unitOfWork, IValidator<User> userValidator)
             : base(queryExecutor, unitOfWork)
         {
             Argument.IsNotNull(userValidator, "userValidator");

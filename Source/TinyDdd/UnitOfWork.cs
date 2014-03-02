@@ -1,4 +1,8 @@
-﻿using SwissKnife.Diagnostics.Contracts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using SwissKnife.Collections;
+using SwissKnife.Diagnostics.Contracts;
 
 namespace TinyDdd
 {
@@ -18,6 +22,8 @@ namespace TinyDdd
         /// </summary>
         private int _counter;
 
+        private readonly HashSet<IAggregateRoot> _entitiesToAdd = new HashSet<IAggregateRoot>();
+
         public void Begin()
         {
             _counter++;
@@ -28,6 +34,12 @@ namespace TinyDdd
             Argument.IsNotNull(entity, "entity");
             Argument.Is<Entity>((object)entity, "entity");
             CheckUnitOfWorkHasBegun();
+
+            // If it is a new entity and already registered to add, ignore the method call.
+            if (((Entity) entity).IsNewEntity && _entitiesToAdd.Contains(entity)) return;
+
+            // Otherwise, register it to entities to add.
+            _entitiesToAdd.Add(entity);
 
             RegisterEntityToAddOrUpdateCore(entity);
         }
@@ -40,6 +52,10 @@ namespace TinyDdd
             Argument.Is<Entity>((object)entity, "entity");
             CheckUnitOfWorkHasBegun();
 
+            // If it is a new entity and was previously registered to add, remove it from the entities that are registered to add.
+            if (((Entity)entity).IsNewEntity && _entitiesToAdd.Contains(entity))
+                _entitiesToAdd.Remove(entity);
+
             RegisterEntityToDeleteCore(entity);
         }
 
@@ -49,8 +65,14 @@ namespace TinyDdd
         {
             CheckUnitOfWorkHasBegun();
 
-            if (--_counter == 0)
-                CommitCore();
+            if (--_counter != 0) return;
+
+            // Give unique Ids to all entites that are registered to add and remove them from the internal collection.
+            _entitiesToAdd.Cast<Entity>().ForEach(entity => entity.Id = Guid.NewGuid());
+            
+            CommitCore();
+
+            _entitiesToAdd.Clear();
         }
 
         public abstract void CommitCore();

@@ -10,7 +10,7 @@ namespace TinyDdd
     {
         /// <summary>
         /// The key of the <see cref="Entity"/>.
-        /// If it is <see cref="Guid.Empty"/>, the <see cref="Entity"/> is not persisted yet.
+        /// If it is <see cref="Guid.Empty"/>, the <see cref="Entity"/> is not yet persisted.
         /// </summary>
         /// <remarks>
         /// Identity Key pattern.
@@ -18,7 +18,18 @@ namespace TinyDdd
         public Guid Id
         {
             get;
-            protected set;
+            protected internal set;
+        }
+
+        /// <summary>
+        /// True if entity is not yet persisted.
+        /// </summary>
+        public virtual bool IsNewEntity
+        {
+            get
+            {
+                return Equals(Id, Guid.Empty);
+            }
         }
     }
 }

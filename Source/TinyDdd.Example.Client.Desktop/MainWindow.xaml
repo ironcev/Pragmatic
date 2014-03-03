@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TinyDdd.Example.Client.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:desktop="clr-namespace:TinyDdd.Example.Client.Desktop"
+        xmlns:Desktop="clr-namespace:TinyDdd.Example.Client.Desktop"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
@@ -12,11 +12,12 @@
         <StackPanel Grid.Row="0">
             <Button Content="Add New User" Command="{Binding AddNewUserCommand}"/>
             <Button Content="Get All Users" Command="{Binding GetAllUsersCommand}"/>
+            <Button Content="Delete Selected User" Command="{Binding DeleteUserCommand}"/>
         </StackPanel>
         
-        <ListBox Grid.Row="1" ItemsSource="{Binding Users}">
+        <ListBox Grid.Row="1" ItemsSource="{Binding Users}" IsSynchronizedWithCurrentItem="True">
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="desktop:UserViewModel">
+                <DataTemplate DataType="Desktop:UserViewModel">
                     <StackPanel>
                         <TextBlock Text="{Binding FullName}"/>
                         <TextBlock Text="{Binding Email}"/>

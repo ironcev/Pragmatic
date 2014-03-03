@@ -3,7 +3,7 @@ using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Commands;
 using TinyDdd.Interaction;
 using TinyDdd.StructureMap;
 
-namespace TinyDdd.Example.Model
+namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands
 {
     // ReSharper disable InconsistentNaming
     [TestFixture]

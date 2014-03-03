@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UICommands\DeleteUserUICommand.cs" />
     <Compile Include="UICommands\GetAllUsersUICommand.cs" />
     <Compile Include="UserInteraction.cs" />
     <Compile Include="UserViewModel.cs" />

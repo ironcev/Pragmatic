@@ -81,6 +81,8 @@
     <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUserDtosQueryHandler.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUsersQueryHandler.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Queries\GetUserByIdQuery.cs" />
+    <Compile Include="Users\DeleteUserCommand.cs" />
+    <Compile Include="Users\DeleteUserCommandHandler.cs" />
     <Compile Include="Users\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>

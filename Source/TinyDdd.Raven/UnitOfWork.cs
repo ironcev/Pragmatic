@@ -14,17 +14,17 @@ namespace TinyDdd.Raven
             _documentSession = documentSession;
         }
 
-        public override void RegisterEntityToAddOrUpdateCore(IAggregateRoot entity)
+        protected override void MarkEntityAsAddedOrUpdated(Entity entity)
         {
             _documentSession.Store(entity);
         }
 
-        public override void RegisterEntityToDeleteCore(IAggregateRoot entity)
+        protected override void MarkEntityAsDeleted(Entity entity)
         {
             _documentSession.Delete(entity);
         }
 
-        public override void CommitCore()
+        protected override void SaveMarkedChanges()
         {
             _documentSession.SaveChanges();
         }

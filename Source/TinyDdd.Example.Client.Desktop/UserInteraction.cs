@@ -26,5 +26,13 @@ namespace TinyDdd.Example.Client.Desktop
                             MessageBoxButton.OK,
                             MessageBoxImage.Information);
         }
+
+        internal static MessageBoxResult ShowQuestion(string message, MessageBoxButton messageBoxButton)
+        {
+           return  MessageBox.Show(message,
+                                   "Question",
+                                   messageBoxButton,
+                                   MessageBoxImage.Question);
+        }
     }
 }

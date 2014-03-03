@@ -4,7 +4,7 @@ using SwissKnife;
 
 namespace TinyDdd.Interaction
 {
-    public static class MessageKeyBuilder
+    public static class ResponseMessageKeyBuilder
     {
         private static readonly Identifier.ConversionOptions _conversionOptions = new Identifier.ConversionOptions
         {

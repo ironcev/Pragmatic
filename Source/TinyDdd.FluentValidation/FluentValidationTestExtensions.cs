@@ -12,7 +12,7 @@ namespace TinyDdd.FluentValidation
     {
         public static void ShouldHaveValidationErrorWithKeyFor<T, TValue>(this IValidator<T> validator, Expression<Func<T, TValue>> expression, T objectToTest, Expression<Func<string>> resourceSelector)
         {
-            ShouldHaveValidationErrorFor(validator, expression, objectToTest, MessageKeyBuilder.From(resourceSelector));
+            ShouldHaveValidationErrorFor(validator, expression, objectToTest, ResponseMessageKeyBuilder.From(resourceSelector));
         }
 
         public static void ShouldHaveValidationErrorFor<T, TValue>(this IValidator<T> validator, Expression<Func<T, TValue>> expression, T objectToTest, object customState)

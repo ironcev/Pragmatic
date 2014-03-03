@@ -8,11 +8,11 @@ namespace TinyDdd.Example.Model.Users
     {
         public UserValidator()
         {
-            RuleFor(x => x.FirstName).NotEmpty().WithLocalizedMessageAndKey(() => UserResources.FirstNameMustNotBeEmpty);
-            RuleFor(x => x.LastName).NotEmpty().WithLocalizedMessageAndKey(() => UserResources.LastNameMustNotBeEmpty);
+            RuleFor(x => x.FirstName).NotEmpty().WithError(() => UserResources.FirstNameMustNotBeEmpty);
+            RuleFor(x => x.LastName).NotEmpty().WithError(() => UserResources.LastNameMustNotBeEmpty);
             RuleFor(x => x.Email).Cascade(CascadeMode.StopOnFirstFailure)
-                .NotEmpty().WithLocalizedMessageAndKey(() => UserResources.EmailMustNotBeEmpty)
-                .EmailAddress().WithLocalizedMessageAndKey(() => UserResources.EmailMustBeAValidEmailAddress);
+                .NotEmpty().WithError(() => UserResources.EmailMustNotBeEmpty)
+                .EmailAddress().WithError(() => UserResources.EmailMustBeAValidEmailAddress);
         }
     }
 }

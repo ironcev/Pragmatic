@@ -10,12 +10,12 @@ namespace TinyDdd.FluentValidation
 {
     public static class FluentValidationExtensions
     {
-        public static IRuleBuilderOptions<T, TProperty> WithLocalizedMessageAndKey<T, TProperty>(this IRuleBuilderOptions<T, TProperty> ruleBuilderOptions, Expression<Func<string>> resourceSelector)
+        public static IRuleBuilderOptions<T, TProperty> WithError<T, TProperty>(this IRuleBuilderOptions<T, TProperty> ruleBuilderOptions, Expression<Func<string>> resourceSelector)
         {
             Argument.IsNotNull(ruleBuilderOptions, "ruleBuilderOptions");
             Argument.IsNotNull(resourceSelector, "resourceSelector");
 
-            return ruleBuilderOptions.WithLocalizedMessage(resourceSelector).WithState(x => MessageKeyBuilder.From(resourceSelector));
+            return ruleBuilderOptions.WithLocalizedMessage(resourceSelector).WithState(x => ResponseMessageKeyBuilder.From(resourceSelector));
         }
 
         public static Response AddErrors(this Response response, ValidationResult validationResult)

@@ -92,11 +92,11 @@ namespace TinyDdd.Interaction
             return this;
         }
 
-        public Response AddSuccessFromResource(Expression<Func<string>> resourceSelector)
+        public Response AddSuccess(Expression<Func<string>> resourceSelector)
         {
             Argument.IsNotNull( resourceSelector, "resourceSelector" );
 
-            AddSuccess( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
+            AddSuccess( resourceSelector.Compile()(), ResponseMessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
@@ -115,11 +115,11 @@ namespace TinyDdd.Interaction
             return this;
         }
 
-        public Response AddInformationFromResource(Expression<Func<string>> resourceSelector)
+        public Response AddInformation(Expression<Func<string>> resourceSelector)
         {
             Argument.IsNotNull( resourceSelector, "resourceSelector" );
 
-            AddInformation( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
+            AddInformation( resourceSelector.Compile()(), ResponseMessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
@@ -138,11 +138,11 @@ namespace TinyDdd.Interaction
             return this;
         }
 
-        public Response AddWarningFromResource(Expression<Func<string>> resourceSelector)
+        public Response AddWarning(Expression<Func<string>> resourceSelector)
         {
             Argument.IsNotNull( resourceSelector, "resourceSelector" );
 
-            AddWarning( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
+            AddWarning( resourceSelector.Compile()(), ResponseMessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
@@ -161,11 +161,11 @@ namespace TinyDdd.Interaction
             return this;
         }
 
-        public Response AddErrorFromResource(Expression<Func<string>> resourceSelector)
+        public Response AddError(Expression<Func<string>> resourceSelector)
         {
             Argument.IsNotNull( resourceSelector, "resourceSelector" );
 
-            AddError( resourceSelector.Compile()(), MessageKeyBuilder.From( resourceSelector ) );
+            AddError( resourceSelector.Compile()(), ResponseMessageKeyBuilder.From( resourceSelector ) );
 
             return this;
         }
@@ -197,3 +197,10 @@ namespace TinyDdd.Interaction
         }
     }
 }
+
+/*
+ * DECISIONS:
+ * Most likely the AddXYZ(resourceSelector) method is the one which will be mostly used.
+ * Since it compiles the expression and analizes it in the same tim to obtain the key it is the slowest of all overidables.
+ * We assume that there will be no performance issues because of that.
+ */

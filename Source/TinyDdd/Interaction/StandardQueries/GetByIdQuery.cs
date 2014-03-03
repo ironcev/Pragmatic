@@ -3,7 +3,7 @@ using SwissKnife;
 
 namespace TinyDdd.Interaction.StandardQueries
 {
-    public class GetByIdQuery<TEntity> : IQuery<Option<TEntity>> where TEntity : Entity, IAggregateRoot
+    public class GetByIdQuery<T> : IQuery<Option<T>> where T : class
     {
         public Guid Id { get; set; }
     }

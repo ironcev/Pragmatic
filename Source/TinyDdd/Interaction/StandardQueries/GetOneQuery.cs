@@ -4,8 +4,8 @@ using SwissKnife;
 
 namespace TinyDdd.Interaction.StandardQueries
 {
-    public class GetOneQuery<TEntity> : IQuery<Option<TEntity>> where TEntity : Entity, IAggregateRoot
+    public class GetOneQuery<T> : IQuery<Option<T>> where T : class
     {
-        public Expression<Func<TEntity, bool>> Criteria { get; set; }
+        public Expression<Func<T, bool>> Criteria { get; set; }
     }
 }

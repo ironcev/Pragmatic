@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Input;
 using SwissKnife;
 using SwissKnife.Diagnostics.Contracts;
-using TinyDdd.Example.Client.Desktop.Dialogs;
 using TinyDdd.Example.Model;
 using TinyDdd.Example.Model.Users;
 using TinyDdd.Interaction;

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using NUnit.Framework;
 using SwissKnife;
+using SwissKnife.IdentifierConversion;
 using TinyDdd.Interaction;
 
 namespace TinyDdd.Tests.Unit.Interaction
@@ -55,7 +56,7 @@ namespace TinyDdd.Tests.Unit.Interaction
 
         private static string GetNamespacedKey(Expression<Func<object>> identifierExpression)
         {
-            return Identifier.ToString(identifierExpression, new Identifier.ConversionOptions { StaticMemberConversion = Identifier.StaticMemberConversion.ParentTypeName });
+            return Identifier.ToString(identifierExpression, new ConversionOptions { StaticMemberConversion = StaticMemberConversion.ParentTypeName });
         }
     }
     // ReSharper restore InconsistentNaming

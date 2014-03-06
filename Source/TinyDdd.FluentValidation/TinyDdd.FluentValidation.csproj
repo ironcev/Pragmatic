@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Common.cs">
+      <Link>AssemblyInfo.Common.cs</Link>
+    </Compile>
     <Compile Include="FluentValidationExtensions.cs" />
     <Compile Include="FluentValidationTestExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.Common.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

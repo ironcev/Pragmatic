@@ -24,12 +24,16 @@ namespace TinyDdd
         /// <summary>
         /// True if entity is not yet persisted.
         /// </summary>
-        public virtual bool IsNewEntity
+        public bool IsNewEntity
         {
-            get
-            {
-                return Equals(Id, Guid.Empty);
-            }
+            get;
+            internal set;
+        }
+
+        protected Entity()
+        {
+            Id = Guid.NewGuid();
+            IsNewEntity = true;
         }
     }
 }

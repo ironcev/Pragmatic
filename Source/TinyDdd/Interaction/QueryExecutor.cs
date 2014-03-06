@@ -22,6 +22,8 @@ namespace TinyDdd.Interaction // TODO-IG: In general, move from extinsibility by
         {
             Argument.IsNotNull(query, "query");
 
+            InteractionScope.BeginOrJoin();
+
             var queryHandlers = GetQueryHandlers<TResult>(query.GetType()).ToArray();
 
             if (queryHandlers.Length <= 0)
@@ -47,6 +49,10 @@ namespace TinyDdd.Interaction // TODO-IG: In general, move from extinsibility by
                 LogException(additionalMessage, e);
 
                 throw new QueryExecutionException(additionalMessage, e);
+            }
+            finally
+            {
+                InteractionScope.End();
             }
         }
 

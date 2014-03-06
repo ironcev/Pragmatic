@@ -29,6 +29,12 @@ namespace TinyDdd.Example.Client.Desktop.UICommands
 
         public void Execute(object parameter)
         {
+            // WARNING:
+            // In a real application we would expect that the delete command loads the User and executes business logic
+            // that validates if the User can be deleted at all.
+            // Te purpose of thi example is to show that interaction scope can begin and end in the high level client code as well.
+            InteractionScope.BeginOrJoin();
+
             Option<UserViewModel> selectedUser = _mainWindowViewModel.Users.CurrentItem as UserViewModel;
             if (selectedUser.IsNone) return;
 
@@ -46,6 +52,8 @@ namespace TinyDdd.Example.Client.Desktop.UICommands
                 UserInteraction.ShowInformation("Selected user succesfully deleted.");
 
             // TODO-IG: Refresh the list.
+
+            InteractionScope.End();
         }
 
         public event EventHandler CanExecuteChanged;

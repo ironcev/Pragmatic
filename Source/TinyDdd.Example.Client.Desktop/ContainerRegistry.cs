@@ -52,14 +52,17 @@ namespace TinyDdd.Example.Client.Desktop
     {
         public RavenContainerRegistry()
         {
-            For<UnitOfWork>().Use<Raven.UnitOfWork>();
+            For<UnitOfWork>()
+                .LifecycleIs(new InteractionScopeLifecycle())
+                .Use<Raven.UnitOfWork>();
 
             For<IDocumentSession>()
-                .HybridHttpOrThreadLocalScoped()
+                .LifecycleIs(new InteractionScopeLifecycle())
                 .Use(() => ObjectFactory.GetInstance<IDocumentStore>().OpenSession());
 
+
             For<IAsyncDocumentSession>()
-                .HybridHttpOrThreadLocalScoped()
+                .LifecycleIs(new InteractionScopeLifecycle())
                 .Use(() => ObjectFactory.GetInstance<IDocumentStore>().OpenAsyncSession());
 
             For<IDocumentStore>()

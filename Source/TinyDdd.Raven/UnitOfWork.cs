@@ -14,7 +14,12 @@ namespace TinyDdd.Raven
             _documentSession = documentSession;
         }
 
-        protected override void MarkEntityAsAddedOrUpdated(Entity entity)
+        protected override void MarkEntityAsAdded(Entity entity)
+        {
+            _documentSession.Store(entity);
+        }
+
+        protected override void MarkEntityAsUpdated(Entity entity)
         {
             _documentSession.Store(entity);
         }

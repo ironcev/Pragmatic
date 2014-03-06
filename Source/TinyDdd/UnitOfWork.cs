@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace TinyDdd
@@ -17,7 +15,8 @@ namespace TinyDdd
     {
         private enum RegistrationType
         {
-            AddOrUpdate,
+            Add,
+            Update,
             Delete
         };
 
@@ -34,9 +33,14 @@ namespace TinyDdd
                 Entity = entity;
             }
 
-            internal static Registration AddOrUpdate(Entity entity)
+            internal static Registration Add(Entity entity)
             {
-                return new Registration(RegistrationType.AddOrUpdate, entity);
+                return new Registration(RegistrationType.Add, entity);
+            }
+
+            internal static Registration Update(Entity entity)
+            {
+                return new Registration(RegistrationType.Update, entity);
             }
 
             internal static Registration Delete(Entity entity)
@@ -57,22 +61,24 @@ namespace TinyDdd
             _counter++;
         }
 
-        public void RegisterEntityToAddOrUpdate(IAggregateRoot entity)
+        public void RegisterEntityToAddOrUpdate(IAggregateRoot aggregateRoot)
         {
-            Argument.IsNotNull(entity, "entity");
-            Argument.Is<Entity>((object)entity, "entity");
+            Argument.IsNotNull(aggregateRoot, "aggregateRoot");
+            Argument.Is<Entity>((object)aggregateRoot, "aggregateRoot");
             CheckThatUnitOfWorkHasBegun();
 
-            _registrations.Add(Registration.AddOrUpdate((Entity)entity));
+            Entity entity = (Entity) aggregateRoot;
+
+            _registrations.Add(entity.IsNewEntity ? Registration.Add(entity) : Registration.Update(entity));
         }
 
-        public void RegisterEntityToDelete(IAggregateRoot entity)
+        public void RegisterEntityToDelete(IAggregateRoot aggregateRoot)
         {
-            Argument.IsNotNull(entity, "entity");
-            Argument.Is<Entity>((object)entity, "entity");
+            Argument.IsNotNull(aggregateRoot, "aggregateRoot");
+            Argument.Is<Entity>((object)aggregateRoot, "aggregateRoot");
             CheckThatUnitOfWorkHasBegun();
 
-            _registrations.Add(Registration.Delete((Entity)entity));
+            _registrations.Add(Registration.Delete((Entity)aggregateRoot));
         }
 
         public void Commit()
@@ -81,24 +87,26 @@ namespace TinyDdd
 
             if (--_counter != 0) return;
 
-            // Give unique ids to all entites that are registered as added.
-            foreach (var registration in _registrations.Where(registration => registration.RegistrationType == RegistrationType.AddOrUpdate &&
-                                                                          registration.Entity.IsNewEntity))
-            {
-                // An entity can be register several times for adding or updating.
-                // We have to assign the id to it only once.
-                if (!registration.Entity.IsNewEntity) continue;
-
-                registration.Entity.Id = Guid.NewGuid();
-            }
             
             // Mark the registered changes in the underlying persistance.
             foreach (var registration in _registrations)
             {
-                if (registration.RegistrationType == RegistrationType.AddOrUpdate)
-                    MarkEntityAsAddedOrUpdated(registration.Entity);
-                else
-                    MarkEntityAsDeleted(registration.Entity);
+                switch (registration.RegistrationType)
+                {
+                    case RegistrationType.Add:
+                        MarkEntityAsAdded(registration.Entity);
+                        // Below this point, entites will be persisted.
+                        // The persistancy has to store the information that the entity is not a new entity any more.
+                        // Of course, we have concurency issues here, but we completely ignore thread safety so far.
+                        registration.Entity.IsNewEntity = false;
+                        break;
+                    case RegistrationType.Update:
+                        MarkEntityAsUpdated(registration.Entity);
+                        break;
+                    case RegistrationType.Delete:
+                        MarkEntityAsDeleted(registration.Entity);
+                        break;
+                }
             }
 
             SaveMarkedChanges();
@@ -106,7 +114,8 @@ namespace TinyDdd
             _registrations.Clear();
         }
 
-        protected abstract void MarkEntityAsAddedOrUpdated(Entity entity);
+        protected abstract void MarkEntityAsAdded(Entity entity);
+        protected abstract void MarkEntityAsUpdated(Entity entity);
         protected abstract void MarkEntityAsDeleted(Entity entity);
         protected abstract void SaveMarkedChanges();
 

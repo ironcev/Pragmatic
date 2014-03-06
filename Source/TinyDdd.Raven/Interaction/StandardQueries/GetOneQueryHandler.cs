@@ -7,7 +7,7 @@ using TinyDdd.Interaction.StandardQueries;
 
 namespace TinyDdd.Raven.Interaction.StandardQueries
 {
-    public class GetOneQueryHandler<T> : BaseQuery, IQueryHandler<GetOneQuery<T>, Option<T>> where T : class
+    public sealed class GetOneQueryHandler<T> : BaseQuery, IQueryHandler<GetOneQuery<T>, Option<T>> where T : class
     {
         public GetOneQueryHandler(IDocumentSession documentSession) : base(documentSession) { }
 

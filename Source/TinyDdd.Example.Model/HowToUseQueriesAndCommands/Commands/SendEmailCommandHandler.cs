@@ -2,7 +2,7 @@
 
 namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Commands
 {
-    public class SendEmailCommandHandler : ICommandHandler<SendEmailCommand, Response>
+    public sealed class SendEmailCommandHandler : ICommandHandler<SendEmailCommand, Response>
     {
         public Response Execute(SendEmailCommand command)
         {

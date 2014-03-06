@@ -22,8 +22,8 @@ namespace TinyDdd.StructureMap.Tests.Unit
             Assert.That(commandHandlers[0], Is.InstanceOf<TestCommandHandler>());
         }
 
-        public class TestCommand : ICommand<Response> { }
-        public class TestCommandHandler : ICommandHandler<TestCommand, Response>
+        public sealed class TestCommand : ICommand<Response> { }
+        public sealed class TestCommandHandler : ICommandHandler<TestCommand, Response>
         {
             public Response Execute(TestCommand command) { return null; }
         }

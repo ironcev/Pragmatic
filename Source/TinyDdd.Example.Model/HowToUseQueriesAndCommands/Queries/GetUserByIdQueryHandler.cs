@@ -2,7 +2,7 @@
 
 namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
-    public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, User>
+    public sealed class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, User>
     {
         public User Execute(GetUserByIdQuery query)
         {

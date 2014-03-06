@@ -3,7 +3,7 @@ using TinyDdd.Interaction;
 
 namespace TinyDdd.Example.Model.Users
 {
-    public class DeleteUserCommandHandler : BaseCommandHandler, ICommandHandler<DeleteUserCommand, Response>
+    public sealed class DeleteUserCommandHandler : BaseCommandHandler, ICommandHandler<DeleteUserCommand, Response>
     {
         public DeleteUserCommandHandler(QueryExecutor queryExecutor, UnitOfWork unitOfWork) : base(queryExecutor, unitOfWork)
         {

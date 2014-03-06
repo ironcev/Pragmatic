@@ -4,7 +4,7 @@ using SwissKnife;
 
 namespace TinyDdd.Interaction.StandardQueries
 {
-    public class GetOneQuery<T> : IQuery<Option<T>> where T : class
+    public sealed class GetOneQuery<T> : IQuery<Option<T>> where T : class
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
     }

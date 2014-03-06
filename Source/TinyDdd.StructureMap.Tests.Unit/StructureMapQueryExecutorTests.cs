@@ -22,8 +22,8 @@ namespace TinyDdd.StructureMap.Tests.Unit
             Assert.That(queryHandlers[0], Is.InstanceOf<TestQueryHandler>());
         }
 
-        public class TestQuery : IQuery<object> { }
-        public class TestQueryHandler : IQueryHandler<TestQuery, object>
+        public sealed class TestQuery : IQuery<object> { }
+        public sealed class TestQueryHandler : IQueryHandler<TestQuery, object>
         {
             public object Execute(TestQuery command) { return null; }
         }

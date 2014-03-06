@@ -19,7 +19,7 @@ namespace TinyDdd.Tests.Unit.Interaction
             Assert.That(exception.Message.StartsWith("There are 2 query handlers defined for the queries of type"));
         }
 
-        public class TestQuery : IQuery<object> { } // This class must be public in order to use it in Moq mocks.
+        public sealed class TestQuery : IQuery<object> { } // This class must be public in order to use it in Moq mocks.
         private class QueryExecutorWithMoreThanOneQueryHandlerDefined : QueryExecutor
         {
             protected override IEnumerable<object> GetQueryHandlers<TResult>(Type queryType)
@@ -36,7 +36,7 @@ namespace TinyDdd.Tests.Unit.Interaction
             Assert.That(response, Is.InstanceOf<TestResult>());
         }
         public class TestResult { } // This class must be public in order to use it in Moq mocks.
-        public class TestResultQuery : IQuery<TestResult> { } // This class must be public in order to use it in Moq mocks.
+        public sealed class TestResultQuery : IQuery<TestResult> { } // This class must be public in order to use it in Moq mocks.
         private class QueryExecutorWithQueryHandlerRegistered : QueryExecutor
         {
             protected override IEnumerable<object> GetQueryHandlers<TResult>(Type queryType)

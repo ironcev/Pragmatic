@@ -5,7 +5,7 @@ using TinyDdd.FluentValidation;
 
 namespace TinyDdd.Example.Model.Users
 {
-    public class AddNewUserCommandHandler : BaseCommandHandler, ICommandHandler<AddNewUserCommand, Response<User>> // TODO-IG: Do we really want the handlers to be public? They are now public just because of the StructureMap.
+    public sealed class AddNewUserCommandHandler : BaseCommandHandler, ICommandHandler<AddNewUserCommand, Response<User>> // TODO-IG: Do we really want the handlers to be public? They are now public just because of the StructureMap.
     {
         private readonly IValidator<User> _userValidator;
 

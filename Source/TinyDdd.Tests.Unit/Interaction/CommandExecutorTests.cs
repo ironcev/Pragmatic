@@ -19,7 +19,7 @@ namespace TinyDdd.Tests.Unit.Interaction
             Assert.That(exception.Message.StartsWith("There are 2 command handlers defined for the commands of type"));
         }
 
-        public class TestCommand : ICommand<Response> { } // This class must be public in order to use it in Moq mocks.
+        public sealed class TestCommand : ICommand<Response> { } // This class must be public in order to use it in Moq mocks.
         private class CommandExecutorWithMoreThanOneCommandHandlerDefined : CommandExecutor
         {
             protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)
@@ -37,7 +37,7 @@ namespace TinyDdd.Tests.Unit.Interaction
         }
 
         public class TestResponse : Response<object> { }
-        public class TestResponseCommand : ICommand<TestResponse> { } // This class must be public in order to use it in Moq mocks.
+        public sealed class TestResponseCommand : ICommand<TestResponse> { } // This class must be public in order to use it in Moq mocks.
         private class CommandExecutorWithCommandHandlerWithValidResponseType : CommandExecutor
         {
             protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)

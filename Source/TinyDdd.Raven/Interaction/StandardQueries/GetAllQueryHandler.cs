@@ -6,7 +6,7 @@ using TinyDdd.Interaction.StandardQueries;
 
 namespace TinyDdd.Raven.Interaction.StandardQueries
 {
-    public class GetAllQueryHandler<T> : BaseQuery, IQueryHandler<GetAllQuery<T>, IEnumerable<T>> where T : class
+    public sealed class GetAllQueryHandler<T> : BaseQuery, IQueryHandler<GetAllQuery<T>, IEnumerable<T>> where T : class
     {
         public GetAllQueryHandler(IDocumentSession documentSession) : base(documentSession) { }
 

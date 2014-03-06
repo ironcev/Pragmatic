@@ -2,7 +2,7 @@
 
 namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Commands
 {
-    public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Response<User>>
+    public sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Response<User>>
     {
         public Response<User> Execute(CreateUserCommand command)
         {

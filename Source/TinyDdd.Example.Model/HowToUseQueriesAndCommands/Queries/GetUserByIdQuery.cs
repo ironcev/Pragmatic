@@ -3,7 +3,7 @@ using TinyDdd.Interaction;
 
 namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
-    public class GetUserByIdQuery : IQuery<User>
+    public sealed class GetUserByIdQuery : IQuery<User>
     {
         public Guid Id { get; set; }
     }

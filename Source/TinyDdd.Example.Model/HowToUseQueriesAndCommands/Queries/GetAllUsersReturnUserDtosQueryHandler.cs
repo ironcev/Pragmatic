@@ -5,7 +5,7 @@ using TinyDdd.Interaction;
 
 namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
-    public class GetAllUsersReturnUserDtosQueryHandler : IQueryHandler<GetAllUsersQuery, IEnumerable<UserDto>>
+    public sealed class GetAllUsersReturnUserDtosQueryHandler : IQueryHandler<GetAllUsersQuery, IEnumerable<UserDto>>
     {
         public IEnumerable<UserDto> Execute(GetAllUsersQuery query)
         {

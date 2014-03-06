@@ -7,15 +7,15 @@ using TinyDdd.Interaction.StandardQueries;
 
 namespace TinyDdd.Raven.Interaction.StandardQueries
 {
-    public class GetOneQueryHandler<TEntity> : BaseQuery, IQueryHandler<GetOneQuery<TEntity>, Option<TEntity>> where TEntity : Entity, IAggregateRoot
+    public class GetOneQueryHandler<T> : BaseQuery, IQueryHandler<GetOneQuery<T>, Option<T>> where T : class
     {
         public GetOneQueryHandler(IDocumentSession documentSession) : base(documentSession) { }
 
-        public Option<TEntity> Execute(GetOneQuery<TEntity> query)
+        public Option<T> Execute(GetOneQuery<T> query)
         {
             Argument.IsNotNull(query, "query");
 
-            return DocumentSession.Query<TEntity>().FirstOrDefault(query.Criteria);
+            return DocumentSession.Query<T>().FirstOrDefault(query.Criteria);
         }
     }
 }

@@ -61,24 +61,20 @@ namespace TinyDdd
             _counter++;
         }
 
-        public void RegisterEntityToAddOrUpdate(IAggregateRoot aggregateRoot)
+        public void RegisterEntityToAddOrUpdate(Entity entity)
         {
-            Argument.IsNotNull(aggregateRoot, "aggregateRoot");
-            Argument.Is<Entity>((object)aggregateRoot, "aggregateRoot");
+            Argument.IsNotNull(entity, "entity");
             CheckThatUnitOfWorkHasBegun();
-
-            Entity entity = (Entity) aggregateRoot;
 
             _registrations.Add(entity.IsNewEntity ? Registration.Add(entity) : Registration.Update(entity));
         }
 
-        public void RegisterEntityToDelete(IAggregateRoot aggregateRoot)
+        public void RegisterEntityToDelete(Entity entity)
         {
-            Argument.IsNotNull(aggregateRoot, "aggregateRoot");
-            Argument.Is<Entity>((object)aggregateRoot, "aggregateRoot");
+            Argument.IsNotNull(entity, "entity");
             CheckThatUnitOfWorkHasBegun();
 
-            _registrations.Add(Registration.Delete((Entity)aggregateRoot));
+            _registrations.Add(Registration.Delete(entity));
         }
 
         public void Commit()

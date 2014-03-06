@@ -47,7 +47,6 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="Entity.cs" />
-    <Compile Include="IAggregateRoot.cs" />
     <Compile Include="Interaction\InteractionScope.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetOneQuery.cs" />

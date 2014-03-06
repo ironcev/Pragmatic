@@ -6,15 +6,15 @@ using TinyDdd.Interaction.StandardQueries;
 
 namespace TinyDdd.Raven.Interaction.StandardQueries
 {
-    public class GetByIdQueryHandler<TEntity> : BaseQuery, IQueryHandler<GetByIdQuery<TEntity>, Option<TEntity>> where TEntity : Entity, IAggregateRoot
+    public class GetByIdQueryHandler<T> : BaseQuery, IQueryHandler<GetByIdQuery<T>, Option<T>> where T : class
     {
         public GetByIdQueryHandler(IDocumentSession documentSession) : base(documentSession) { }
 
-        public Option<TEntity> Execute(GetByIdQuery<TEntity> query)
+        public Option<T> Execute(GetByIdQuery<T> query)
         {
             Argument.IsNotNull(query, "query");
 
-            return DocumentSession.Load<TEntity>(query.Id);
+            return DocumentSession.Load<T>(query.Id);
         }
     }
 }

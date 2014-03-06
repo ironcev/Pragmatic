@@ -9,26 +9,26 @@ namespace TinyDdd.Interaction
 {
     public static class QueryExecutorExstensions
     {
-        public static Option<TEntity> GetById<TEntity>(this QueryExecutor queryExecutor, Guid id) where TEntity : Entity, IAggregateRoot
+        public static Option<T> GetById<T>(this QueryExecutor queryExecutor, Guid id) where T : class
         {
             Argument.IsNotNull(queryExecutor, "queryExecutor");
 
-            return queryExecutor.Execute(new GetByIdQuery<TEntity> {Id = id});
+            return queryExecutor.Execute(new GetByIdQuery<T> {Id = id});
         }
 
-        public static Option<TEntity> GetOne<TEntity>(this QueryExecutor queryExecutor, Expression<Func<TEntity, bool>> criteria) where TEntity : Entity, IAggregateRoot
+        public static Option<T> GetOne<T>(this QueryExecutor queryExecutor, Expression<Func<T, bool>> criteria) where T : class
         {
             Argument.IsNotNull(queryExecutor, "queryExecutor");
             Argument.IsNotNull(criteria, "criteria");
 
-            return queryExecutor.Execute(new GetOneQuery<TEntity> { Criteria = criteria });
+            return queryExecutor.Execute(new GetOneQuery<T> { Criteria = criteria });
         }
 
-        public static IEnumerable<TEntity> GetAll<TEntity>(this QueryExecutor queryExecutor) where TEntity : Entity, IAggregateRoot
+        public static IEnumerable<T> GetAll<T>(this QueryExecutor queryExecutor) where T : class
         {
             Argument.IsNotNull(queryExecutor, "queryExecutor");
 
-            return queryExecutor.Execute(new GetAllQuery<TEntity>());
+            return queryExecutor.Execute(new GetAllQuery<T>());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace TinyDdd.Example.Model
 {
-    public class User : Entity, IAggregateRoot
+    public class User : Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

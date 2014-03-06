@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription(AssemblyDescription.Product)]
 
 [assembly: AssemblyVersion(AssemblyDescription.Version)]
-[assembly: AssemblyFileVersion(AssemblyDescription.FileVersion)]
+// We will not set the AssemblyFileVersion explicitly. This will automatically make it same as the AssemblyVersion.
 
 [assembly: AssemblyCulture(AssemblyDescription.Culture)]
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
@@ -30,7 +30,6 @@ internal static partial class AssemblyDescription
     public const string Product = "TinyDDD";
 
     public const string Version = "0.2.*";
-    public const string FileVersion = Version;
 
     public const string Culture = "";
 

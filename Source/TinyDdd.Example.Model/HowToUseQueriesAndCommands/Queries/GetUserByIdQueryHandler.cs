@@ -1,7 +1,6 @@
-﻿using TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries;
-using TinyDdd.Interaction;
+﻿using TinyDdd.Interaction;
 
-namespace TinyDdd.Example.Model.Queries
+namespace TinyDdd.Example.Model.HowToUseQueriesAndCommands.Queries
 {
     public class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, User>
     {

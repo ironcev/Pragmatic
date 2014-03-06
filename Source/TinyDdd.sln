@@ -26,8 +26,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyDdd.Example.Model", "Ti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyDdd.Example.Client.Desktop", "TinyDdd.Example.Client.Desktop\TinyDdd.Example.Client.Desktop.csproj", "{8B233807-0856-494B-97F7-C852069ED76A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyDdd.Testing", "TinyDdd.Testing\TinyDdd.Testing.csproj", "{1027118D-D42E-427A-8799-EB2E115D8E4E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,10 +64,6 @@ Global
 		{8B233807-0856-494B-97F7-C852069ED76A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B233807-0856-494B-97F7-C852069ED76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B233807-0856-494B-97F7-C852069ED76A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1027118D-D42E-427A-8799-EB2E115D8E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1027118D-D42E-427A-8799-EB2E115D8E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1027118D-D42E-427A-8799-EB2E115D8E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1027118D-D42E-427A-8799-EB2E115D8E4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -73,7 +73,7 @@
       <DependentUpon>UserResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\GetUserByIdQueryHandler.cs" />
+    <Compile Include="HowToUseQueriesAndCommands\Queries\GetUserByIdQueryHandler.cs" />
     <Compile Include="Users\AddNewUserCommand.cs" />
     <Compile Include="Users\AddNewUserCommandHandler.cs" />
     <Compile Include="User.cs" />

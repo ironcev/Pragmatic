@@ -12,6 +12,8 @@ namespace TinyDdd.Interaction
         {
             Argument.IsNotNull(command, "command");
 
+            InteractionScope.BeginOrJoin();
+
             var commandHandlers = GetCommandHandlers<TResponse>(command.GetType()).ToArray();
 
             if (commandHandlers.Length <= 0)
@@ -36,6 +38,10 @@ namespace TinyDdd.Interaction
                 LogException(additionalMessage, e);
 
                 throw new CommandExecutionException(additionalMessage, e);
+            }
+            finally
+            {
+                InteractionScope.End();
             }
         }
 

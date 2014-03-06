@@ -31,7 +31,7 @@ namespace TinyDdd.Example.Model.Users
             var userWithTheSameEmail = QueryExecutor.GetOne<User>(user => user.Email == newUser.Email);
 
             if (userWithTheSameEmail.IsSome)
-                return Response<User>.From(response.AddError("User with the same email already exists.")); // TODO-IG: Switch to the new AddError() method that works with resources once this is merged to the master branch.
+                return Response<User>.From(response.AddError("User with the same email already exists."));
 
             UnitOfWork.Begin();
             UnitOfWork.RegisterEntityToAddOrUpdate(newUser);

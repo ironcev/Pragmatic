@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwissKnife</name>
+    </assembly>
+    <members>
+        <member name="T:SwissKnife.Collections.CollectionExtensions">
+            <summary>
+            Contains extension methods that can be applyed on different types of collections.
+            </summary>
+        </member>
+        <member name="M:SwissKnife.Collections.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Executes the <paramref name="action"/> on each element of the <paramref name="enumerable"/>.
+            </summary>
+            <param name="enumerable">The enumerable to execute the <paramref name="action"/> on.</param>
+            <param name="action">The action to execute on the each element of the <paramref name="enumerable"/>.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="enumerable"/> or <paramref name="action"/> are null.</exception>
+        </member>
+        <member name="M:SwissKnife.Collections.CollectionExtensions.AddMany``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Adds <paramref name="itemsToAdd"/> to the <paramref name="collection"/>.
+            </summary>
+            <typeparam name="T">The type of the items in the <paramref name="collection"/>.</typeparam>
+            <param name="collection">The <see cref="T:System.Collections.Generic.ICollection`1"/> to which to add <paramref name="itemsToAdd"/>.</param>
+            <param name="itemsToAdd">Items that has to be added to the <paramref name="collection"/>.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="collection"/> or <paramref name="itemsToAdd"/> are null.</exception>
+            <exception cref="T:System.NotSupportedException">If <paramref name="collection"/> is read-only.</exception>
+        </member>
+        <member name="M:SwissKnife.Collections.CollectionExtensions.GetValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1})">
+            <summary>
+            Gets the value from the <paramref name="dictionary"/> associated with the specified <paramref name="key"/>.
+            If the <paramref name="dictionary"/> does not contain the <paramref name="key"/>, a new <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            will be added to the <paramref name="dictionary"/>.
+            The key and the value of that new <see cref="T:System.Collections.Generic.KeyValuePair`2"/> will be set to <paramref name="key"/> and the result of the <paramref name="getValueToAdd"/> respectively.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/> from which the value has to be get.</param>
+            <param name="key">The key associated with the value.</param>
+            <param name="getValueToAdd">
+            The function that returns the value that has to be inserted into the <paramref name="dictionary"/> if it does not contain the <paramref name="key"/>.
+            This function will be called only if the <paramref name="dictionary"/> does not contain the <paramref name="key"/>.
+            </param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="dictionary"/> or <paramref name="key"/> or <paramref name="getValueToAdd"/> are null.</exception>
+            <exception cref="T:System.NotSupportedException">If <paramref name="dictionary"/> is read-only.</exception>
+        </member>
+        <member name="T:System.Diagnostics.Contracts.ContractArgumentValidatorAttribute">
+            <summary>
+            Enables factoring if-then-throw contracts into separate methods.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.Contracts.ContractAbbreviatorAttribute">
+            <summary>
+            Enables writing abbreviations for contracts that get copied to other methods.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.Contracts.ContractOptionAttribute">
+            <summary>
+            Allows setting contract and tool options at assembly, type, or method granularity.
+            </summary>
+        </member>
+        <member name="T:SwissKnife.Diagnostics.Contracts.Argument">
+            <summary>
+            Contains static contract argument validator methods that represent preconditions on method arguments.
+            Each static method of the <see cref="T:SwissKnife.Diagnostics.Contracts.Argument"/> class throws an exception if a certain precondition is not fulfilled.
+            </summary>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsNotNullOrWhitespace(System.String,SwissKnife.Option{System.String})">
+            <summary>
+            Checks if a <see cref="T:System.String"/> method parameter is not null or white space.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="parameterValue"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">If <paramref name="parameterValue"/> is white space.</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsNotNullOrEmpty(System.String,SwissKnife.Option{System.String})">
+            <summary>
+            Checks if a <see cref="T:System.String"/> method parameter is not null or empty.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="parameterValue"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">If <paramref name="parameterValue"/> is null or empty string.</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsNotNull(System.Object,SwissKnife.Option{System.String})">
+            <summary>
+            Checks if a method parameter is not null.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="parameterValue"/> is null.</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsValid(System.Boolean,SwissKnife.Option{System.String},SwissKnife.Option{System.String})">
+            <summary>
+            Checks if a method parameter satisfies the <paramref name="validityCondition"/>.
+            </summary>
+            <param name="validityCondition">Logical condition that is true if the method parameter is valid.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <param name="exceptionMessage">The error message that describes the reason why the parameter is not valid.</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="validityCondition"/> is false.</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.Is(SwissKnife.Option{System.Object},System.Type,SwissKnife.Option{System.String})">
+            <summary>
+            Checks if a method parameter is compatible with a given type.
+            A method parameter is compatible with a given type if it can be assigned to a variable of that type.
+            Null is considered to be compatible with all types.
+            Thus, if the <paramref name="parameterValue"/> is null, this method will never throw an exception.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <param name="type">The type to which the method parameter must be assignable.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentNullException">If the <paramref name="type"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">If the <paramref name="parameterValue"/> cannot be asigned to an instance of the <paramref name="type"/>.</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.Is``1(SwissKnife.Option{System.Object},SwissKnife.Option{System.String})">
+            <summary>
+            Checks if a method parameter is compatible with a given type.
+            A method parameter is compatible with a given type if it can be assigned to a variable of that type.
+            Null is considered to be compatible with all types.
+            Thus, if the <paramref name="parameterValue"/> is null, this method will never throw an exception.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <typeparam name="T">The type to which the method parameter must be assignable.</typeparam>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentException">If the <paramref name="parameterValue"/> cannot be asigned to an instance of <typeparamref name="T"/>.</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsInRange(System.Int32,System.Int32,System.Int32,SwissKnife.Option{System.String})">
+            <summary>
+            Checks that <see cref="T:System.Int32"/> method parameter is greater than or equal to <paramref name="lowerBound"/> and lower than <paramref name="upperBound"/>.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <param name="lowerBound">The lower bound of the range.</param>
+            <param name="upperBound">The upper bound of the range.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If <paramref name="parameterValue"/> is not in the range [<paramref name="lowerBound"/>, <paramref name="upperBound"/>).</exception>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsGreaterThanZero(System.Int32,SwissKnife.Option{System.String})">
+            <summary>
+            Checks that <see cref="T:System.Int32"/> method parameter is greater than zero.
+            </summary>
+            <param name="parameterValue">The value of the method parameter.</param>
+            <param name="parameterName">The name of the method parameter.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If <paramref name="parameterValue"/> is not greater than zero.</exception>
+        </member>
+        <member name="T:SwissKnife.Diagnostics.Contracts.Operation">
+            <summary>
+            Contains static contract argument validator methods that represent preconditions on method arguments.
+            Each static method of the <see cref="T:SwissKnife.Diagnostics.Contracts.Operation"/> class throws an exception if a certain precondition is not fulfilled.
+            </summary>
+        </member>
+        <member name="M:SwissKnife.Diagnostics.Contracts.Operation.IsValid(System.Boolean,SwissKnife.Option{System.String})">
+            <summary>
+            Checks that operation satisfies <paramref name="validityCondition"/>.
+            </summary>
+            <param name="validityCondition">Logical condition that is true if the operation is valid.</param>
+            <param name="message">Exception message if the operation is invalid.</param>
+            <exception cref="T:System.InvalidOperationException">If <paramref name="validityCondition"/> is false.</exception>
+        </member>
+        <member name="T:SwissKnife.Identifier">
+            <summary>
+            Contains methods for converting identifier expressions into thier string representations.
+            For example, the identifier expression 'x => x.Property.SubProperty' will be converted into 'Property.SubProperty' and
+            identifier expression '() => Property' into 'Property'.
+            </summary>
+        </member>
+        <member name="M:SwissKnife.Identifier.ToString``2(System.Linq.Expressions.Expression{System.Func{``0,``1}},SwissKnife.Option{SwissKnife.IdentifierConversion.ConversionOptions})">
+            <summary>
+            Converts <paramref name="identifierExpression"/> into <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type whose memeber identifier has to be converted into <see cref="T:System.String"/>.</typeparam>
+            <param name="identifierExpression"><see cref="T:System.Linq.Expressions.Expression"/> that access members of the type <typeparamref name="T"/>.</param>
+            <exception cref="T:System.ArgumentNullException">If the <paramref name="identifierExpression"/> is <code>null</code>.</exception>
+            <exception cref="T:System.ArgumentException">If the <paramref name="identifierExpression"/> is not a valid identifier expression. For example: 'someInstance.IdentifierAsString(x =&gt; 0)'.</exception>
+        </member>
+        <member name="T:SwissKnife.IdentifierConversion.ConversionOptions">
+            <summary>
+            // TODO-iG: Combine these two comments: Represents the parameters used to customize the conversion of identifier expressions into thier string representations.
+            Represents the parameters used to customize the output of the <see cref="M:SwissKnife.Identifier.ToString``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})"/> methods.
+            </summary>
+        </member>
+        <member name="T:SwissKnife.Option`1">
+            <summary>
+            Describes the option type. An option is used when a value may or may not exist. An option has an underlying type and may either hold a value of that type or it may not have a value.
+            </summary>
+            <typeparam name="T">The underlying type.</typeparam>
+        </member>
+        <member name="M:SwissKnife.Option`1.Some(`0)">
+            <summary>
+            Creates an option value that is a Some value.
+            </summary>
+            <param name="value">The value represented by the option.</param>
+            <returns>An option that represents the <paramref name="value"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:SwissKnife.Option`1.From(`0)">
+            <summary>
+            Creates an option value that is either a None or a Some value.
+            If <paramref name="valueOrNull"/> is null, a None value is created.
+            If <paramref name="valueOrNull"/> is not null, a Some value is created.
+            </summary>
+            <param name="valueOrNull">The value represented by the option or null.</param>
+            <returns>None if <paramref name="valueOrNull"/> is null, otherwise Some that represents the value.</returns>
+        </member>
+        <member name="M:SwissKnife.Option`1.ValueOr(`0)">
+            <summary>
+            Gets the value of the option if the option is a Some value, or the <paramref name="defaultValue"/> if the option is a None value.
+            </summary>
+            <returns>
+            The value of the option if the option is a Some value, or <paramref name="defaultValue"/> if the option is a None value.
+            </returns>
+        </member>
+        <member name="M:SwissKnife.Option`1.Bind``1(System.Func{`0,SwissKnife.Option{``0}})">
+            <summary>
+            Invokes a function on an optional value that itself yields an option.
+            </summary>
+            <param name="binder">A function that takes the value of the type <typeparamref name="T"/> from the option and transforms it into an option containing a value of the type <typeparamref name="TOutput"/>.</param>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <returns>None if the option is None. The output of the <paramref name="binder"/> if the option is Some.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="binder"/> is null.</exception>
+        </member>
+        <member name="M:SwissKnife.Option`1.Bind``1(System.Func{`0,System.Nullable{``0}})">
+            <summary>
+            Invokes a function on an optional value that yields an <see cref="T:System.Nullable`1"/>.
+            </summary>
+            <param name="binder">A function that takes the value of type T from the option and transforms it into an nullable containing a value of type <typeparamref name="TOutput"/>.</param>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <returns>Null if the option is None. The output of the <paramref name="binder"/> if the option is Some.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="binder"/> is null.</exception>
+        </member>
+        <member name="M:SwissKnife.Option`1.MapToOption``1(System.Func{`0,``0})">
+            <summary>
+            Transforms an option value by using the specified mapping function.
+            </summary>
+            <param name="mapper">A function to apply to the option value.</param>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <returns>None if the option is None or the output of the <paramref name="mapper"/> is null. Some if the output of the <paramref name="mapper"/> is not null.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="mapper"/> is null.</exception>
+        </member>
+        <member name="M:SwissKnife.Option`1.MapToNullable``1(System.Func{`0,``0})">
+            <summary>
+            Transforms an option value by using the specified mapping function.
+            </summary>
+            <param name="mapper">A function to apply to the option value.</param>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <returns>None if the option is None or the output of the <paramref name="mapper"/> is null. Some if the output of the <paramref name="mapper"/> is not null.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="mapper"/> is null.</exception>
+        </member>
+        <member name="M:SwissKnife.Option`1.op_Implicit(`0)~SwissKnife.Option{`0}">
+            <summary>
+            Converts <paramref name="valueOrNull"/> into the <see cref="T:SwissKnife.Option`1"/> that represents it.
+            If the <paramref name="valueOrNull"/> is not null, Some will be returned.
+            If the <paramref name="valueOrNull"/> is null, None will be returned.
+            </summary>
+            <param name="valueOrNull">Value that has to be converted into <see cref="T:SwissKnife.Option`1"/>.</param>
+            <returns>Some if <paramref name="valueOrNull"/> is not null, otherwise None.</returns>
+        </member>
+        <member name="P:SwissKnife.Option`1.None">
+            <summary>
+            Creates an option value that is a None value.
+            </summary>
+            <returns>
+            An option that is set to None.
+            </returns>
+        </member>
+        <member name="P:SwissKnife.Option`1.IsNone">
+            <summary>
+            Returns true if the option has the None value.
+            </summary>
+        </member>
+        <member name="P:SwissKnife.Option`1.IsSome">
+            <summary>
+            Returns true if the option has a value that is not None.
+            </summary>
+        </member>
+        <member name="P:SwissKnife.Option`1.Value">
+            <summary>
+            Gets the value of the option if the option is a Some value.
+            </summary>
+            <returns>
+            The value of the option if the option is a Some value. An exception is thrown if the option is a None value.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">If the option is a None value.</exception>
+        </member>
+        <member name="P:SwissKnife.Option`1.ValueOrNull">
+            <summary>
+            Gets the value of the option if the option is a Some value, or null if the option is a None value.
+            </summary>
+            <returns>
+            The value of the option if the option is a Some value, or null if the option is a None value.
+            </returns>
+        </member>
+        <member name="T:SwissKnife.TypeExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="M:SwissKnife.TypeExtensions.IsStatic(System.Type)">
+            <summary>
+            Gets a value indicating whether the <paramref name="type"/> is static.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="type"/> is null.</exception>
+        </member>
+    </members>
+</doc>

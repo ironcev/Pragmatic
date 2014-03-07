@@ -37,7 +37,7 @@
       <HintPath>..\..\dependencies\packages\FluentValidation.5.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="SwissKnife">
-      <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.2.0\SwissKnife.dll</HintPath>
+      <HintPath>..\..\Dependencies\Vendors\SwissKnife.0.2.0.19578\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

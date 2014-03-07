@@ -29,7 +29,7 @@ internal static partial class AssemblyDescription
     public const string Copyright = "Copyright \u00a9 2014 " + Company + ". All rights reserved.";
     public const string Product = "TinyDDD";
 
-    public const string Version = "0.5.0";
+    public const string Version = "0.5.1.*";
 
     public const string Culture = "";
 

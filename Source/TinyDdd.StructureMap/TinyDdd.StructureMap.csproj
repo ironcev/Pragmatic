@@ -37,6 +37,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
+    <Reference Include="SwissKnife, Version=0.2.5178.26134, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Vendors\SwissKnife 0.2.0\SwissKnife.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +55,7 @@
     </Compile>
     <Compile Include="InteractionScopeLifecycle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryExtensions.cs" />
     <Compile Include="StructureMapQueryExecutor.cs" />
     <Compile Include="StructureMapCommandExecutor.cs" />
   </ItemGroup>

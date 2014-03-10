@@ -24,12 +24,12 @@ using System.Runtime.InteropServices;
 
 internal static partial class AssemblyDescription
 {
-    public const string Company = "TinyDDD";
+    public const string Company = "Pragmatic";
     public const string Trademark = "";
     public const string Copyright = "Copyright \u00a9 2014 " + Company + ". All rights reserved.";
-    public const string Product = "TinyDDD";
+    public const string Product = "Pragmatic";
 
-    public const string Version = "0.5.1.*";
+    public const string Version = "0.5.2.*";
 
     public const string Culture = "";
 

@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic", "Pragmatic\Pragmatic.csproj", "{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Tests.Unit", "Pragmatic.Tests.Unit\Pragmatic.Tests.Unit.csproj", "{24561E22-62B9-492A-999F-EAA7D6112A32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.StructureMap", "Pragmatic.StructureMap\Pragmatic.StructureMap.csproj", "{32788E01-C373-4D56-B620-B13799A47AB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A3ED95FC-7E75-43ED-ABAB-B46DD75DB86B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Raven", "Pragmatic.Raven\Pragmatic.Raven.csproj", "{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.StructureMap.Tests.Unit", "Pragmatic.StructureMap.Tests.Unit\Pragmatic.StructureMap.Tests.Unit.csproj", "{C155C8E3-AC91-465D-9648-218412E19B3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.FluentValidation", "Pragmatic.FluentValidation\Pragmatic.FluentValidation.csproj", "{3B50BAF3-236D-4E4F-A97A-094FBCEF2F09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Example.Model", "Pragmatic.Example.Model\Pragmatic.Example.Model.csproj", "{B8E749A3-CFA4-4B72-B642-BFCFD1435F39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Example.Client.Desktop", "Pragmatic.Example.Client.Desktop\Pragmatic.Example.Client.Desktop.csproj", "{8B233807-0856-494B-97F7-C852069ED76A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.NHibernate", "Pragmatic.NHibernate\Pragmatic.NHibernate.csproj", "{EEB85045-53EE-46A4-A2BF-38A70E30DDD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24561E22-62B9-492A-999F-EAA7D6112A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32788E01-C373-4D56-B620-B13799A47AB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C155C8E3-AC91-465D-9648-218412E19B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C155C8E3-AC91-465D-9648-218412E19B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C155C8E3-AC91-465D-9648-218412E19B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C155C8E3-AC91-465D-9648-218412E19B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B50BAF3-236D-4E4F-A97A-094FBCEF2F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B50BAF3-236D-4E4F-A97A-094FBCEF2F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B50BAF3-236D-4E4F-A97A-094FBCEF2F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B50BAF3-236D-4E4F-A97A-094FBCEF2F09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E749A3-CFA4-4B72-B642-BFCFD1435F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E749A3-CFA4-4B72-B642-BFCFD1435F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E749A3-CFA4-4B72-B642-BFCFD1435F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E749A3-CFA4-4B72-B642-BFCFD1435F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B233807-0856-494B-97F7-C852069ED76A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B233807-0856-494B-97F7-C852069ED76A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B233807-0856-494B-97F7-C852069ED76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B233807-0856-494B-97F7-C852069ED76A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB85045-53EE-46A4-A2BF-38A70E30DDD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB85045-53EE-46A4-A2BF-38A70E30DDD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB85045-53EE-46A4-A2BF-38A70E30DDD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB85045-53EE-46A4-A2BF-38A70E30DDD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

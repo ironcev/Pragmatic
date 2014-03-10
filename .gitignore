@@ -64,7 +64,7 @@ x64/
 .builds
 
 # Iclude SQLite.Interop
-!Source/TinyDdd.Example.Client.Desktop/x64/
+!Source/Pragmatic.Example.Client.Desktop/x64/
 
 # Visual C++ cache files
 ipch/

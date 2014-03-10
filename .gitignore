@@ -9,8 +9,8 @@ Tools/**
 !ReadMe.txt
 
 # Vendors Directory
-Dependencies/Vendors/**
-!ReadMe.txt
+#Dependencies/Vendors/**
+#!ReadMe.txt
 
 # NuGet Packages Directory
 Dependencies/Packages/**

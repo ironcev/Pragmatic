@@ -16,7 +16,6 @@ Tools/**
 Dependencies/Packages/**
 !ReadMe.txt
 
-
 OverrideVariables.bat
 
 # Sample App_Data
@@ -63,6 +62,9 @@ x64/
 *.vspscc
 *.vssscc
 .builds
+
+# Iclude SQLite.Interop
+!Source/TinyDdd.Example.Client.Desktop/x64/
 
 # Visual C++ cache files
 ipch/

@@ -32,7 +32,7 @@ namespace TinyDdd
 
         protected Entity()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid(); // TODO-IG: Id generation must be pluggable. It can depend on entity type.
             IsNewEntity = true;
         }
     }

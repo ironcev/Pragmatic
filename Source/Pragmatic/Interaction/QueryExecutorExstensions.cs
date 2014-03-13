@@ -38,5 +38,20 @@ namespace Pragmatic.Interaction
 
             return queryExecutor.Execute( new GetAllQuery<T> { Criteria = criteria } );
         }
+
+        public static int GetTotalCount<T>(this QueryExecutor queryExecutor) where T : class
+        {
+            Argument.IsNotNull( queryExecutor, "queryExecutor" );
+
+            return queryExecutor.Execute( new GetTotalCountQuery<T>() );
+        }
+
+        public static int GetTotalCount<T>(this QueryExecutor queryExecutor, Expression<Func<T, bool>> criteria) where T : class
+        {
+            Argument.IsNotNull( queryExecutor, "queryExecutor" );
+            Argument.IsNotNull( criteria, "criteria" );
+
+            return queryExecutor.Execute( new GetTotalCountQuery<T> { Criteria = criteria } );
+        }
     }
 }

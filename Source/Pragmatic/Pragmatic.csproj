@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="Interaction\InteractionScope.cs" />
+    <Compile Include="Interaction\StandardQueries\GetTotalCountQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetOneQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetByIdQuery.cs" />

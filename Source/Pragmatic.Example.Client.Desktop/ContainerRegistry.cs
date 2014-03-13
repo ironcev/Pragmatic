@@ -19,7 +19,7 @@ namespace Pragmatic.Example.Client.Desktop
     {
         private ContainerRegistry()
         {
-            Scan( scan =>
+            Scan(scan =>
             {
                 scan.TheCallingAssembly();
                 scan.WithDefaultConventions();
@@ -27,41 +27,43 @@ namespace Pragmatic.Example.Client.Desktop
                 scan.AssemblyContainingType<UnitOfWork>();
                 scan.AssemblyContainingType<User>();
 
-                scan.ConnectImplementationsToTypesClosing( typeof( ICommandHandler<,> ) );
-                scan.ConnectImplementationsToTypesClosing( typeof( IQueryHandler<,> ) );
-                scan.ConnectImplementationsToTypesClosing( typeof( IValidator<> ) );
-            } );
+                scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));
+                scan.ConnectImplementationsToTypesClosing(typeof(IQueryHandler<,>));
+                scan.ConnectImplementationsToTypesClosing(typeof(IValidator<>));
+            });
 
-            For<IResponseMapper>().Use( new InvariantResponseMapper() );
+            For<IResponseMapper>().Use(new InvariantResponseMapper());
             For<CommandExecutor>().Use<StructureMapCommandExecutor>();
             For<QueryExecutor>().Use<StructureMapQueryExecutor>();
 
             // Register query handlers for standard queries.
             QueryHandlerGenericTypeDefinitions definitions;
-            if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof (Pragmatic.Raven.UnitOfWork))
+            if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Pragmatic.Raven.UnitOfWork))
             {
                 definitions = new QueryHandlerGenericTypeDefinitions
                     (
-                    typeof (GetByIdQueryHandler<>),
-                    typeof (GetOneQueryHandler<>),
-                    typeof (GetAllQueryHandler<>)
+                    typeof(GetByIdQueryHandler<>),
+                    typeof(GetOneQueryHandler<>),
+                    typeof(GetAllQueryHandler<>),
+                    typeof(GetTotalCountQueryHandler<>)
                     );
             }
             else
             {
                 definitions = new QueryHandlerGenericTypeDefinitions
                 (
-                    typeof( Pragmatic.NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<> ),
-                    typeof( Pragmatic.NHibernate.Interaction.StandardQueries.GetOneQueryHandler<> ),
-                    typeof( Pragmatic.NHibernate.Interaction.StandardQueries.GetAllQueryHandler<> )
+                    typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),
+                    typeof(NHibernate.Interaction.StandardQueries.GetOneQueryHandler<>),
+                    typeof(NHibernate.Interaction.StandardQueries.GetAllQueryHandler<>),
+                    typeof(NHibernate.Interaction.StandardQueries.GetTotalCountQueryHandler<>)
                 );
             }
-            
-            this.ConnectQueryHandlerImplementationsToStandardQueriesForDerivedTypesOf( definitions, typeof( Entity ), typeof( User ).Assembly );
+
+            this.ConnectQueryHandlerImplementationsToStandardQueriesForDerivedTypesOf(definitions, typeof(Entity), typeof(User).Assembly);
 
             For<UnitOfWork>()
-                .LifecycleIs( new InteractionScopeLifecycle() )
-                .Use( UnitOfWorkFactory.CreateUnitOfWork );
+                .LifecycleIs(new InteractionScopeLifecycle())
+                .Use(UnitOfWorkFactory.CreateUnitOfWork);
 
             IncludeRegistry<RavenContainerRegistry>();
             IncludeRegistry<NHibernateContainerRegistry>();
@@ -69,7 +71,7 @@ namespace Pragmatic.Example.Client.Desktop
 
         public static void Initialize()
         {
-            ObjectFactory.Initialize( x => x.AddRegistry( new ContainerRegistry() ) );
+            ObjectFactory.Initialize(x => x.AddRegistry(new ContainerRegistry()));
         }
     }
 
@@ -78,22 +80,22 @@ namespace Pragmatic.Example.Client.Desktop
         public RavenContainerRegistry()
         {
             For<IDocumentSession>()
-                .LifecycleIs( new InteractionScopeLifecycle() )
-                .Use( () => ObjectFactory.GetInstance<IDocumentStore>().OpenSession() );
+                .LifecycleIs(new InteractionScopeLifecycle())
+                .Use(() => ObjectFactory.GetInstance<IDocumentStore>().OpenSession());
 
 
             For<IAsyncDocumentSession>()
-                .LifecycleIs( new InteractionScopeLifecycle() )
-                .Use( () => ObjectFactory.GetInstance<IDocumentStore>().OpenAsyncSession() );
+                .LifecycleIs(new InteractionScopeLifecycle())
+                .Use(() => ObjectFactory.GetInstance<IDocumentStore>().OpenAsyncSession());
 
             For<IDocumentStore>()
                 .Singleton()
-                .Use( () =>
+                .Use(() =>
                 {
                     var documentStore = new DocumentStore { ConnectionStringName = "RavenConnStr" };
 
                     return documentStore.Initialize();
-                } );
+                });
         }
     }
 
@@ -102,8 +104,8 @@ namespace Pragmatic.Example.Client.Desktop
         public NHibernateContainerRegistry()
         {
             For<ISession>()
-                .LifecycleIs( new InteractionScopeLifecycle() )
-                .Use( () => ObjectFactory.GetInstance<ISessionFactory>().OpenSession() );
+                .LifecycleIs(new InteractionScopeLifecycle())
+                .Use(() => ObjectFactory.GetInstance<ISessionFactory>().OpenSession());
 
             For<ISessionFactory>()
                 .Singleton()
@@ -112,7 +114,7 @@ namespace Pragmatic.Example.Client.Desktop
                     var configuration = Fluently.Configure()
                         .Database(SQLiteConfiguration.Standard.UsingFile("Pragmatic.db"))
                         .Mappings(mappings =>
-                            mappings.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetAssembly(typeof (UserMap)))
+                            mappings.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetAssembly(typeof(UserMap)))
                         );
 
                     SchemaExport schema = new SchemaExport(configuration.BuildConfiguration());

@@ -14,7 +14,7 @@ namespace Pragmatic.NHibernate.Interaction.StandardQueries
         {
             Argument.IsNotNull(query, "query");
 
-            return Session.QueryOver<T>().List();
+            return query.Criteria.IsSome ? Session.QueryOver<T>().Where(query.Criteria.Value).List() : Session.QueryOver<T>().List();
         }
     }
 }

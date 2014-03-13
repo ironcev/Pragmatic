@@ -7,5 +7,6 @@ namespace Pragmatic.Interaction.StandardQueries
     public sealed class GetOneQuery<T> : IQuery<Option<T>> where T : class
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
+        public Option<OrderBy<T>> OrderBy { get; set; }
     }
 }

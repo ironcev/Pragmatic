@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using SwissKnife.Diagnostics.Contracts;
+
+namespace Pragmatic.Interaction
+{
+    public class Paging
+    {
+        public Paging(int page, int pageSize)
+        {
+            Argument.IsGreaterThanZero(page, "page");
+            Argument.IsGreaterThanZero(pageSize, "pageSize");
+
+            Page = page;
+            PageSize = pageSize;
+        }
+
+        /// <summary>
+        /// One-based page to retrieve.
+        /// </summary>
+        public int Page { get; private set; }
+
+        /// <summary>
+        /// Number of entities to retrieve per page.
+        /// </summary>
+        public int PageSize { get; private set; }
+
+        /// <summary>
+        /// Number of entities to be skipped in order to get the first entity on the page.
+        /// This value can be used in <see cref="Enumerable.Skip(IEnumerable{TSource},int)"/>. 
+        /// </summary>
+        public int Skip { get { return (Page - 1) * PageSize; } }
+    }
+}

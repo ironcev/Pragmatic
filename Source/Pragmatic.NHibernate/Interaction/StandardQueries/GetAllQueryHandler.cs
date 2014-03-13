@@ -1,20 +1,24 @@
-﻿using System.Collections.Generic;
-using NHibernate;
+﻿using NHibernate;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.StandardQueries;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.NHibernate.Interaction.StandardQueries
 {
-    public sealed class GetAllQueryHandler<T> : BaseQuery, IQueryHandler<GetAllQuery<T>, IEnumerable<T>> where T : class
+    public sealed class GetAllQueryHandler<T> : BaseQuery, IQueryHandler<GetAllQuery<T>, IPagedEnumerable<T>> where T : class
     {
         public GetAllQueryHandler(ISession session) : base(session) { }
 
-        public IEnumerable<T> Execute(GetAllQuery<T> query)
+        public IPagedEnumerable<T> Execute(GetAllQuery<T> query)
         {
             Argument.IsNotNull(query, "query");
 
-            return query.Criteria.IsSome ? Session.QueryOver<T>().Where(query.Criteria.Value).List() : Session.QueryOver<T>().List();
+            var queryOver = Session.QueryOver<T>().OrderBy(query.OrderBy);
+
+            // Constant expressions are not allowed so we are falling back to standard if check. E.g. this is not possible: var where = query.Criteria.IsSome ? query.Criteria.Value : t => true;
+            if (query.Criteria.IsSome) queryOver.Where(query.Criteria.Value);
+
+            return queryOver.ToPagedEnumerable(query.Paging);
         }
     }
 }

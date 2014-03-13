@@ -15,7 +15,7 @@ namespace Pragmatic.Raven.Interaction.StandardQueries
         {
             Argument.IsNotNull(query, "query");
 
-            return DocumentSession.Query<T>().FirstOrDefault(query.Criteria);
+            return DocumentSession.Query<T>().OrderBy(query.OrderBy).FirstOrDefault(query.Criteria);
         }
     }
 }

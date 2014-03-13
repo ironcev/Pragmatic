@@ -27,7 +27,8 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 
         public void Execute(object parameter)
         {
-            _mainWindowViewModel.SetUsers(QueryExecutor.GetAll<User>());
+            //_mainWindowViewModel.SetUsers(QueryExecutor.GetAll<User>());
+            _mainWindowViewModel.SetUsers(QueryExecutor.GetAll(new OrderBy<User>(user => user.FirstName).ThenBy(user => user.Email, OrderByDirection.Descending), new Paging(1, 2)));
         }
 
         public event EventHandler CanExecuteChanged;

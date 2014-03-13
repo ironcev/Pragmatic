@@ -48,7 +48,16 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="Entity.cs" />
+    <Compile Include="Interaction\IPagedEnumerable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interaction\OrderedQueryableExtensions.cs" />
     <Compile Include="Interaction\InteractionScope.cs" />
+    <Compile Include="Interaction\OrderBy.cs" />
+    <Compile Include="Interaction\OrderByDirection.cs" />
+    <Compile Include="Interaction\PagedList.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interaction\StandardQueries\GetTotalCountQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetOneQuery.cs" />
@@ -65,9 +74,10 @@
     <Compile Include="Interaction\ICommandHandler.cs" />
     <Compile Include="Interaction\IQuery.cs" />
     <Compile Include="Interaction\IQueryHandler.cs" />
-    <Compile Include="Interaction\QueryExecutorExstensions.cs" />
+    <Compile Include="Interaction\QueryExecutorExtensions.cs" />
     <Compile Include="Interaction\Response.cs" />
     <Compile Include="Interaction\ResponseMessage.cs" />
+    <Compile Include="Interaction\Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

@@ -49,7 +49,7 @@ namespace Pragmatic.StructureMap
             {
                 ConnectQueryHandlerToStandardQueryForQueriedType(registry, typeof(GetByIdQuery<>), typeof(Option<>), queryHandlerGenericTypeDefinitions.GetByIdDefinition, derivedType);
                 ConnectQueryHandlerToStandardQueryForQueriedType(registry, typeof(GetOneQuery<>), typeof(Option<>), queryHandlerGenericTypeDefinitions.GetOneDefinition, derivedType);
-                ConnectQueryHandlerToStandardQueryForQueriedType(registry, typeof(GetAllQuery<>), typeof(IEnumerable<>), queryHandlerGenericTypeDefinitions.GetAllDefinition, derivedType);
+                ConnectQueryHandlerToStandardQueryForQueriedType(registry, typeof(GetAllQuery<>), typeof(IPagedEnumerable<>), queryHandlerGenericTypeDefinitions.GetAllDefinition, derivedType);
                 ConnectQueryHandlerToStandardQueryForQueriedType(registry, typeof(GetTotalCountQuery<>), typeof(int), queryHandlerGenericTypeDefinitions.GetTotalCountDefinition, derivedType);
             }
         }

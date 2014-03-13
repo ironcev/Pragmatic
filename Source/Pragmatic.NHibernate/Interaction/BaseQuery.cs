@@ -1,4 +1,7 @@
-﻿using NHibernate;
+﻿using System.Linq;
+using NHibernate;
+using Pragmatic.Interaction;
+using SwissKnife;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.NHibernate.Interaction

@@ -37,9 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
-    <Reference Include="SwissKnife, Version=0.4.0.23787, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SwissKnife, Version=0.4.0.25142, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\Vendors\SwissKnife.0.4.0.25142\SwissKnife.dll</HintPath>
+      <HintPath>..\..\Dependencies\Vendors\SwissKnife.0.4.1.6188\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

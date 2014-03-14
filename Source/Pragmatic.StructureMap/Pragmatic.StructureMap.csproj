@@ -56,8 +56,7 @@
     <Compile Include="InteractionScopeLifecycle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryExtensions.cs" />
-    <Compile Include="StructureMapQueryExecutor.cs" />
-    <Compile Include="StructureMapCommandExecutor.cs" />
+    <Compile Include="StructureMapInteractionHandlerResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pragmatic\Pragmatic.csproj">

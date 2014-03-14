@@ -51,8 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StructureMapQueryExecutorTests.cs" />
-    <Compile Include="StructureMapCommandExecutorTests.cs" />
+    <Compile Include="StructureMapInteractionHandlerResolverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

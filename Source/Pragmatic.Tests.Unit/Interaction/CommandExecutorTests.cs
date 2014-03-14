@@ -13,16 +13,16 @@ namespace Pragmatic.Tests.Unit.Interaction
         [Test]
         public void Execute_MoreThanOneCommandHandlerDefined_ThrowsException()
         {
-            var commandExecutor = new CommandExecutorWithMoreThanOneCommandHandlerDefined();
+            var commandExecutor = new CommandExecutor(new InteractionHandlerResolverWithMoreThanOneCommandHandlerDefined());
             var exception = Assert.Throws<NotSupportedException>(() => commandExecutor.Execute(new TestCommand()));
             Console.WriteLine(exception.Message);
             Assert.That(exception.Message.StartsWith("There are 2 command handlers defined for the commands of type"));
         }
 
         public sealed class TestCommand : ICommand<Response> { } // This class must be public in order to use it in Moq mocks.
-        private class CommandExecutorWithMoreThanOneCommandHandlerDefined : CommandExecutor
+        private class InteractionHandlerResolverWithMoreThanOneCommandHandlerDefined : IInteractionHandlerResolver
         {
-            protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)
+            public IEnumerable<object> ResolveInteractionHandler(Type interactionHandlerType)
             {
                 yield return new Mock<ICommandHandler<TestCommand, Response>>().Object;
                 yield return new Mock<ICommandHandler<TestCommand, Response>>().Object;
@@ -32,15 +32,15 @@ namespace Pragmatic.Tests.Unit.Interaction
         [Test]
         public void Execute_CommandHandlerWithValidResponseType_ResponseReturned()
         {
-            var response = new CommandExecutorWithCommandHandlerWithValidResponseType().Execute(new TestResponseCommand());
+            var response = new CommandExecutor(new InteractionHandlerResolverWithCommandHandlerWithValidResponseType()).Execute(new TestResponseCommand());
             Assert.That(response, Is.InstanceOf<TestResponse>());
         }
 
         public class TestResponse : Response<object> { }
         public sealed class TestResponseCommand : ICommand<TestResponse> { } // This class must be public in order to use it in Moq mocks.
-        private class CommandExecutorWithCommandHandlerWithValidResponseType : CommandExecutor
+        private class InteractionHandlerResolverWithCommandHandlerWithValidResponseType : IInteractionHandlerResolver
         {
-            protected override IEnumerable<object> GetCommandHandlers<TResponse>(Type commandType)
+            public IEnumerable<object> ResolveInteractionHandler(Type interactionHandlerType)
             {
                 var mock = new Mock<ICommandHandler<TestResponseCommand, TestResponse>>();
                 mock.Setup(x => x.Execute(It.IsAny<TestResponseCommand>())).Returns(new TestResponse());

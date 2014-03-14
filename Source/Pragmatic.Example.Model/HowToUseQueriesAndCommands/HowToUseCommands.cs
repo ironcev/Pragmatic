@@ -15,7 +15,7 @@ namespace Pragmatic.Example.Model.HowToUseQueriesAndCommands
         public void TestFixtureSetUp()
         {
             Initialization.Initialize();
-            _commandExecutor = new StructureMapCommandExecutor();
+            _commandExecutor = new CommandExecutor(new StructureMapInteractionHandlerResolver());
         }
 
         [Test]

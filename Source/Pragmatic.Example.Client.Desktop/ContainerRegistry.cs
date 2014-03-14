@@ -33,12 +33,11 @@ namespace Pragmatic.Example.Client.Desktop
             });
 
             For<IResponseMapper>().Use(new InvariantResponseMapper());
-            For<CommandExecutor>().Use<StructureMapCommandExecutor>();
-            For<QueryExecutor>().Use<StructureMapQueryExecutor>();
+            For<IInteractionHandlerResolver>().Use(new StructureMapInteractionHandlerResolver());
 
             // Register query handlers for standard queries.
             QueryHandlerGenericTypeDefinitions definitions;
-            if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Pragmatic.Raven.UnitOfWork))
+            if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Raven.UnitOfWork))
             {
                 definitions = new QueryHandlerGenericTypeDefinitions
                     (

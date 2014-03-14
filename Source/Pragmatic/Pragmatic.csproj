@@ -48,6 +48,7 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="Entity.cs" />
+    <Compile Include="Interaction\IInteractionHandlerResolver.cs" />
     <Compile Include="Interaction\IPagedEnumerable.cs">
       <SubType>Code</SubType>
     </Compile>

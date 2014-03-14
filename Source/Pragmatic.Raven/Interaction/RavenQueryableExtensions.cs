@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Pragmatic.Interaction;
 using Raven.Client.Linq;
 using SwissKnife;
@@ -15,17 +14,16 @@ namespace Pragmatic.Raven.Interaction
             Argument.IsNotNull(queryable, "queryable");
             Argument.Is<IRavenQueryable<T>>((object)queryable, "queryable");
 
-            var take = paging.IsSome ? paging.Value.PageSize : int.MaxValue;
-            var skip = paging.IsSome ? paging.Value.Skip : 0;
+            Paging pagingValue = paging.ValueOr(Paging.None);
 
             RavenQueryStatistics stats;
             var results = ((IRavenQueryable<T>)queryable)
                 .Statistics(out stats)
-                .Skip(skip)
-                .Take(take)
+                .Skip(pagingValue.Skip)
+                .Take(pagingValue.PageSize)
                 .ToArray();
 
-            return new PagedList<T>(results, paging.Value.Page, paging.Value.PageSize, stats.TotalResults);
+            return new PagedList<T>(results, pagingValue.Page, pagingValue.PageSize, stats.TotalResults);
         }
     }
 }

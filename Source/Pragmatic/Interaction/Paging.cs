@@ -4,8 +4,14 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction
 {
-    public class Paging
+    public class Paging // TODO-IG: Equality.
     {
+        public static readonly Paging None = new Paging();
+
+        public Paging() : this(1, int.MaxValue)
+        {
+        }
+
         public Paging(int page, int pageSize)
         {
             Argument.IsGreaterThanZero(page, "page");
@@ -30,5 +36,8 @@ namespace Pragmatic.Interaction
         /// This value can be used in <see cref="Enumerable.Skip(IEnumerable{TSource},int)"/>. 
         /// </summary>
         public int Skip { get { return (Page - 1) * PageSize; } }
+
+
+        public bool IsNone { get { return Page == 1 && PageSize == int.MaxValue; } }
     }
 }

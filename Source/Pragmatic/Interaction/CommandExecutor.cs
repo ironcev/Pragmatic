@@ -51,7 +51,7 @@ namespace Pragmatic.Interaction
         {
             try
             {
-                var executeMethod = commandHandler.GetType().GetMethod("Execute", // TODO-IG: Replace with labda expressions once when SwissKnife supports that.
+                var executeMethod = commandHandler.GetType().GetMethod("Execute", // TODO-IG: Replace with lambda expressions once when SwissKnife supports that.
                                         BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod,
                                         null, CallingConventions.HasThis,
                                         new[] { command.GetType() },

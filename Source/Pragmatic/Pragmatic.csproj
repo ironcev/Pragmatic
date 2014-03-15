@@ -48,6 +48,10 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="Entity.cs" />
+    <Compile Include="Interaction\RequestExecutor.cs" />
+    <Compile Include="Interaction\RequestExecutionException.cs" />
+    <Compile Include="Interaction\IRequestHandler.cs" />
+    <Compile Include="Interaction\IRequest.cs" />
     <Compile Include="Interaction\IInteractionHandlerResolver.cs" />
     <Compile Include="Interaction\IPagedEnumerable.cs">
       <SubType>Code</SubType>

@@ -11,7 +11,7 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 {
     class AddNewUserUICommand : BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
     {
-        public AddNewUserUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor) : base(commandExecutor, queryExecutor)
+        public AddNewUserUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor) : base(commandExecutor, queryExecutor, requestExecutor)
         {
         }
 

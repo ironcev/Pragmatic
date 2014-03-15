@@ -12,8 +12,8 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
     {
         private readonly MainWindowViewModel _mainWindowViewModel;
 
-        public GetAllUsersUICommand(MainWindowViewModel mainWindowViewModel, CommandExecutor commandExecutor, QueryExecutor queryExecutor)
-            : base(commandExecutor, queryExecutor)
+        public GetAllUsersUICommand(MainWindowViewModel mainWindowViewModel, CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor)
+            : base(commandExecutor, queryExecutor, requestExecutor)
         {
             Argument.IsNotNull(mainWindowViewModel, "mainWindowViewModel");
 

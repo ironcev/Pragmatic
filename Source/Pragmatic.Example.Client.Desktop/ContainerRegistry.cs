@@ -29,6 +29,7 @@ namespace Pragmatic.Example.Client.Desktop
 
                 scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));
                 scan.ConnectImplementationsToTypesClosing(typeof(IQueryHandler<,>));
+                scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
                 scan.ConnectImplementationsToTypesClosing(typeof(IValidator<>));
             });
 

@@ -3,7 +3,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Model.Users
 {
-    public sealed class DeleteUserCommandHandler : BaseCommandHandler, ICommandHandler<DeleteUserCommand, Response>
+    public sealed class DeleteUserCommandHandler : BaseInteractionHandler, ICommandHandler<DeleteUserCommand, Response>
     {
         public DeleteUserCommandHandler(QueryExecutor queryExecutor, UnitOfWork unitOfWork) : base(queryExecutor, unitOfWork)
         {

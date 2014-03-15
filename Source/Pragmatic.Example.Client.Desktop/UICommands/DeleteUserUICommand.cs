@@ -15,8 +15,8 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
     {
         private readonly MainWindowViewModel _mainWindowViewModel; // TODO-IG: Should we have some bae class for such comamnds as well?
 
-        public DeleteUserUICommand(MainWindowViewModel mainWindowViewModel, CommandExecutor commandExecutor, QueryExecutor queryExecutor)
-            : base(commandExecutor, queryExecutor)
+        public DeleteUserUICommand(MainWindowViewModel mainWindowViewModel, CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor)
+            : base(commandExecutor, queryExecutor, requestExecutor)
         {
             Argument.IsNotNull(mainWindowViewModel, "mainWindowViewModel");
 
@@ -33,7 +33,7 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             // WARNING:
             // In a real application we would expect that the delete command loads the User and executes business logic
             // that validates if the User can be deleted at all.
-            // Te purpose of thi example is to show that interaction scope can begin and end in the high level client code as well.
+            // The purpose of this example is to show that interaction scope can begin and end in the high level client code as well.
             InteractionScope.BeginOrJoin();
 
             Option<UserViewModel> selectedUser = _mainWindowViewModel.Users.CurrentItem as UserViewModel;
@@ -42,7 +42,9 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             Option<User> user = QueryExecutor.GetById<User>(selectedUser.Value.Id);
             if (user.IsNone) return;
 
-            var deleteUser = UserInteraction.ShowQuestion(string.Format("Do you really want to delete the user {0}?", user.Value.FullName), MessageBoxButton.YesNo);
+            Response deleteUserRequesResponse = RequestExecutor.Execute(new DeleteUserRequest { User = user.Value });
+
+            var deleteUser = UserInteraction.ShowResponse(string.Format("Do you really want to delete the user {0}?", user.Value.FullName), deleteUserRequesResponse, MessageBoxButton.YesNo);
             if (deleteUser != MessageBoxResult.Yes) return;
 
             Response response = CommandExecutor.Execute(new DeleteUserCommand {User = user.Value});

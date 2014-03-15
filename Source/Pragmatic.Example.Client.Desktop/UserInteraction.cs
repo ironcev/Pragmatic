@@ -1,4 +1,5 @@
-﻿using System;
+﻿// TODO-IG: Add Intentionally Bad Code warning!
+using System;
 using System.Linq;
 using System.Windows;
 using Pragmatic.Interaction;
@@ -33,6 +34,34 @@ namespace Pragmatic.Example.Client.Desktop
                                    "Question",
                                    messageBoxButton,
                                    MessageBoxImage.Question);
+        }
+
+        internal static MessageBoxResult ShowResponse(string message, Response response, MessageBoxButton messageBoxButton)
+        {
+            MessageBoxImage messageBoxImage = MessageBoxImage.Information;
+            string caption = "Information";
+
+            if (response.HasErrors)
+            {
+                messageBoxImage = MessageBoxImage.Error;
+                caption = "Error";
+            }
+            else if (response.HasWarnings)
+            {
+                messageBoxImage = MessageBoxImage.Warning;
+                caption = "Warning";
+            }
+            else if (response.HasInformations)
+            {
+                messageBoxImage = MessageBoxImage.Information;
+                caption = "Information";
+            }
+
+            string responseMessage = (response.Errors.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message)) + Environment.NewLine +
+                                      response.Warnings.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message)) + Environment.NewLine +
+                                      response.Informations.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message))).Trim();
+
+            return MessageBox.Show((message + Environment.NewLine + responseMessage).Trim(), caption, messageBoxButton, messageBoxImage);
         }
     }
 }

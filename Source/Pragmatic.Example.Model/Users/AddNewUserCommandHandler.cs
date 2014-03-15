@@ -5,7 +5,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Model.Users
 {
-    public sealed class AddNewUserCommandHandler : BaseCommandHandler, ICommandHandler<AddNewUserCommand, Response<User>> // TODO-IG: Do we really want the handlers to be public? They are now public just because of the StructureMap.
+    public sealed class AddNewUserCommandHandler : BaseInteractionHandler, ICommandHandler<AddNewUserCommand, Response<User>> // TODO-IG: Do we really want the handlers to be public? They are now public just because of the StructureMap.
     {
         private readonly IValidator<User> _userValidator;
 

@@ -58,7 +58,7 @@
     <Compile Include="..\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="BaseCommandHandler.cs" />
+    <Compile Include="BaseInteractionHandler.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommand.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommandHandler.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Commands\SendEmailCommand.cs" />
@@ -82,7 +82,9 @@
     <Compile Include="HowToUseQueriesAndCommands\Queries\GetAllUsersReturnUsersQueryHandler.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Queries\GetUserByIdQuery.cs" />
     <Compile Include="Users\DeleteUserCommand.cs" />
+    <Compile Include="Users\DeleteUserRequestHandler.cs" />
     <Compile Include="Users\DeleteUserCommandHandler.cs" />
+    <Compile Include="Users\DeleteUserRequest.cs" />
     <Compile Include="Users\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>

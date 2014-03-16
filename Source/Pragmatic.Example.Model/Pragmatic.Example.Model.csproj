@@ -59,6 +59,8 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="BaseInteractionHandler.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="EntityIdGenerator.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommand.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Commands\CreateUserCommandHandler.cs" />
     <Compile Include="HowToUseQueriesAndCommands\Commands\SendEmailCommand.cs" />

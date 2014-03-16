@@ -9,6 +9,8 @@ namespace Pragmatic.Example.Model
         static Initialization()
         {
             ObjectFactory.Configure(x => x.AddRegistry(new ExampleRegistry()));
+
+            Entity.IdGenerator = EntityIdGenerator.GenerateId;
         }
 
         internal static void Initialize()
@@ -27,6 +29,7 @@ namespace Pragmatic.Example.Model
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
                     scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));
+                    scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
                     scan.ConnectImplementationsToTypesClosing(typeof(IQueryHandler<,>));
                 });
             }

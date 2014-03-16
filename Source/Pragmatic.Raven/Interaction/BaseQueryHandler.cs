@@ -3,11 +3,11 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Raven.Interaction
 {
-    public abstract class BaseQuery
+    public abstract class BaseQueryHandler
     {
         protected IDocumentSession DocumentSession { get; private set; }
 
-        protected BaseQuery(IDocumentSession documentSession)
+        protected BaseQueryHandler(IDocumentSession documentSession)
         {
             Argument.IsNotNull(documentSession, "documentSession");
 

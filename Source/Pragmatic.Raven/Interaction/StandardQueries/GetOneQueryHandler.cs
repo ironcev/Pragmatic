@@ -7,7 +7,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Raven.Interaction.StandardQueries
 {
-    public sealed class GetOneQueryHandler<T> : BaseQuery, IQueryHandler<GetOneQuery<T>, Option<T>> where T : class
+    public sealed class GetOneQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetOneQuery<T>, Option<T>> where T : class
     {
         public GetOneQueryHandler(IDocumentSession documentSession) : base(documentSession) { }
 

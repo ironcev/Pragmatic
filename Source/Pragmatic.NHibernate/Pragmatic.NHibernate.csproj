@@ -54,7 +54,7 @@
     <Compile Include="..\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="Interaction\BaseQuery.cs" />
+    <Compile Include="Interaction\BaseQueryHandler.cs" />
     <Compile Include="Interaction\QueryOverExtensions.cs" />
     <Compile Include="Interaction\StandardQueries\GetTotalCountQueryHandler.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQueryHandler.cs" />

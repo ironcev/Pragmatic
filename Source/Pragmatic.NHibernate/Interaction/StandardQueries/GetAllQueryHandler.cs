@@ -5,7 +5,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.NHibernate.Interaction.StandardQueries
 {
-    public sealed class GetAllQueryHandler<T> : BaseQuery, IQueryHandler<GetAllQuery<T>, IPagedEnumerable<T>> where T : class
+    public sealed class GetAllQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetAllQuery<T>, IPagedEnumerable<T>> where T : class
     {
         public GetAllQueryHandler(ISession session) : base(session) { }
 

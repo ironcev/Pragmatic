@@ -6,7 +6,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Raven.Interaction.StandardQueries
 {
-    public sealed class GetTotalCountQueryHandler<T> : BaseQuery, IQueryHandler<GetTotalCountQuery<T>, int> where T : class
+    public sealed class GetTotalCountQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetTotalCountQuery<T>, int> where T : class
     {
         public GetTotalCountQueryHandler(IDocumentSession documentSession) : base(documentSession) { }
 

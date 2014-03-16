@@ -5,7 +5,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.NHibernate.Interaction.StandardQueries
 {
-    public sealed class GetTotalCountQueryHandler<T> : BaseQuery, IQueryHandler<GetTotalCountQuery<T>, int> where T : class
+    public sealed class GetTotalCountQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetTotalCountQuery<T>, int> where T : class
     {
         public GetTotalCountQueryHandler(ISession session) : base(session) { }
 

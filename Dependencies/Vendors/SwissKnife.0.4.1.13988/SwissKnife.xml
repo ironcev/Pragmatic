@@ -6,7 +6,7 @@
     <members>
         <member name="T:SwissKnife.Collections.CollectionExtensions">
             <summary>
-            Contains extension methods that can be applyed on different types of collections.
+            Contains extension methods that can be applied on different types of collections.
             </summary>
         </member>
         <member name="M:SwissKnife.Collections.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
@@ -60,7 +60,7 @@
         </member>
         <member name="T:SwissKnife.Diagnostics.Contracts.Argument">
             <summary>
-            Contains static contract argument validator methods that represent preconditions on method arguments.
+            Contains static contract methods that validate preconditions on method arguments.
             Each static method of the <see cref="T:SwissKnife.Diagnostics.Contracts.Argument"/> class throws an exception if a certain precondition is not fulfilled.
             </summary>
         </member>
@@ -110,7 +110,7 @@
             <param name="type">The type to which the method parameter must be assignable.</param>
             <param name="parameterName">The name of the method parameter.</param>
             <exception cref="T:System.ArgumentNullException">If the <paramref name="type"/> is null.</exception>
-            <exception cref="T:System.ArgumentException">If the <paramref name="parameterValue"/> cannot be asigned to an instance of the <paramref name="type"/>.</exception>
+            <exception cref="T:System.ArgumentException">If the <paramref name="parameterValue"/> cannot be assigned to an instance of the <paramref name="type"/>.</exception>
         </member>
         <member name="M:SwissKnife.Diagnostics.Contracts.Argument.Is``1(SwissKnife.Option{System.Object},SwissKnife.Option{System.String})">
             <summary>
@@ -122,7 +122,7 @@
             <param name="parameterValue">The value of the method parameter.</param>
             <typeparam name="T">The type to which the method parameter must be assignable.</typeparam>
             <param name="parameterName">The name of the method parameter.</param>
-            <exception cref="T:System.ArgumentException">If the <paramref name="parameterValue"/> cannot be asigned to an instance of <typeparamref name="T"/>.</exception>
+            <exception cref="T:System.ArgumentException">If the <paramref name="parameterValue"/> cannot be assigned to an instance of <typeparamref name="T"/>.</exception>
         </member>
         <member name="M:SwissKnife.Diagnostics.Contracts.Argument.IsInRange(System.Int32,System.Int32,System.Int32,SwissKnife.Option{System.String})">
             <summary>
@@ -144,7 +144,7 @@
         </member>
         <member name="T:SwissKnife.Diagnostics.Contracts.Operation">
             <summary>
-            Contains static contract argument validator methods that represent preconditions on method arguments.
+            Contains static contract methods that validate operations done by methods.
             Each static method of the <see cref="T:SwissKnife.Diagnostics.Contracts.Operation"/> class throws an exception if a certain precondition is not fulfilled.
             </summary>
         </member>
@@ -158,7 +158,7 @@
         </member>
         <member name="T:SwissKnife.Identifier">
             <summary>
-            Contains methods for converting identifier expressions into thier string representations.
+            Contains methods for converting identifier expressions into their string representations.
             For example, the identifier expression 'x => x.Property.SubProperty' will be converted into 'Property.SubProperty' and
             identifier expression '() => Property' into 'Property'.
             </summary>
@@ -167,14 +167,14 @@
             <summary>
             Converts <paramref name="identifierExpression"/> into <see cref="T:System.String"/>.
             </summary>
-            <typeparam name="T">Type whose memeber identifier has to be converted into <see cref="T:System.String"/>.</typeparam>
+            <typeparam name="T">Type whose member identifier has to be converted into <see cref="T:System.String"/>.</typeparam>
             <param name="identifierExpression"><see cref="T:System.Linq.Expressions.Expression"/> that access members of the type <typeparamref name="T"/>.</param>
             <exception cref="T:System.ArgumentNullException">If the <paramref name="identifierExpression"/> is <code>null</code>.</exception>
             <exception cref="T:System.ArgumentException">If the <paramref name="identifierExpression"/> is not a valid identifier expression. For example: 'someInstance.IdentifierAsString(x =&gt; 0)'.</exception>
         </member>
         <member name="T:SwissKnife.IdentifierConversion.ConversionOptions">
             <summary>
-            // TODO-iG: Combine these two comments: Represents the parameters used to customize the conversion of identifier expressions into thier string representations.
+            // TODO-iG: Combine these two comments: Represents the parameters used to customize the conversion of identifier expressions into their string representations.
             Represents the parameters used to customize the output of the <see cref="M:SwissKnife.Identifier.ToString``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})"/> methods.
             </summary>
         </member>

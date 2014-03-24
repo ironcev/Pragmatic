@@ -8,8 +8,8 @@ using SwissKnife.Diagnostics.Contracts;
 namespace Pragmatic.Interaction
 {
     // FUTURE: Support more than one resource assembly or maybe provide CompoundResponseMapper.
-    //         In the second case, the IResponseMapper should have the CanMappe() method.
-    public class NamespacedKeyResourceResponseMapper : IResponseMapper // TODO-IG: Test this class properly and mybe add some more error handling.
+    //         In the second case, the IResponseMapper should have the CanMap() method.
+    public class NamespacedKeyResourceResponseMapper : IResponseMapper
     {
         private readonly Dictionary<string, ResourceManager> _resourceManagers = new Dictionary<string, ResourceManager>();
         private readonly Assembly _resourceAssembly;
@@ -29,6 +29,15 @@ namespace Pragmatic.Interaction
             Argument.IsNotNull(originalResponse, "originalResponse");
 
             Response result = new Response();
+            originalResponse.AllMessages.ForEach(message => result.Add(MapSingleResponseMessage(message)));
+            return result;
+        }
+
+        public Response<T> Map<T>(Response<T> originalResponse)
+        {
+            Argument.IsNotNull(originalResponse, "originalResponse");
+
+            Response<T> result = new Response<T>(originalResponse.Result);
             originalResponse.AllMessages.ForEach(message => result.Add(MapSingleResponseMessage(message)));
             return result;
         }

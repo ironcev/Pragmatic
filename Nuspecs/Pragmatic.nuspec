@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Pragmatic</id>
+        <version>0.6.1.37468</version>
+        <title>Pragmatic</title>
+        <authors>Igor Rončević</authors>
+        <projectUrl>http://github.com/ironcev/pragmatic</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>[The description is still to come.]</description>
+        <copyright>Copyright © 2014 Igor Rončević</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5.1">
+                <dependency id="SwissKnife" version="0.4.1.13988" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\Source\Bin\Product\Release\Pragmatic.dll" target="lib\net451\Pragmatic.dll" />
+    </files>
+</package>

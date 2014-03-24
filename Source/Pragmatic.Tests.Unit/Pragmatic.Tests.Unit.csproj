@@ -41,9 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SwissKnife, Version=0.4.1.13988, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SwissKnife, Version=0.4.1.41484, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dependencies\packages\SwissKnife.0.4.1.13988\lib\net40\SwissKnife.dll</HintPath>
+      <HintPath>..\..\dependencies\packages\SwissKnife.0.4.1.41484\lib\net40\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pragmatic</id>
-        <version>0.6.1.37468</version>
+        <version>0.6.1.41804</version>
         <title>Pragmatic</title>
         <authors>Igor Rončević</authors>
         <projectUrl>http://github.com/ironcev/pragmatic</projectUrl>
@@ -11,7 +11,7 @@
         <copyright>Copyright © 2014 Igor Rončević</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.5.1">
-                <dependency id="SwissKnife" version="0.4.1.13988" />
+                <dependency id="SwissKnife" version="0.4.1.41484" />
             </group>
         </dependencies>
     </metadata>

@@ -73,8 +73,8 @@ namespace Pragmatic.Interaction
                 resourceName += ("." + responseMessage.Key.Substring(0, indexOfTheLastDot));
 
                 if (indexOfTheLastDot == responseMessage.Key.Length - 1)
-                    throw new InvalidOperationException(string.Format("Invalid namespaced key. A namespaced key cannot end with a dot (.).{0}" +
-                                                                      "The namespaced key is: {1}",
+                    throw new InvalidOperationException(string.Format("Invalid name-spaced key. A name-spaced key cannot end with a dot (.).{0}" +
+                                                                      "The name-spaced key is: {1}",
                                                                       Environment.NewLine,
                                                                       responseMessage.Key));
                 keyWithoutNamespace = responseMessage.Key.Substring(indexOfTheLastDot + 1);

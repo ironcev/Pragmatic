@@ -29,7 +29,9 @@ namespace Pragmatic.Interaction
             Argument.IsNotNull(originalResponse, "originalResponse");
 
             Response result = new Response();
-            originalResponse.AllMessages.ForEach(message => result.Add(MapSingleResponseMessage(message)));
+            foreach (var message in originalResponse.AllMessages)
+                result.Add(MapSingleResponseMessage(message));
+
             return result;
         }
 
@@ -38,7 +40,9 @@ namespace Pragmatic.Interaction
             Argument.IsNotNull(originalResponse, "originalResponse");
 
             Response<T> result = new Response<T>(originalResponse.Result);
-            originalResponse.AllMessages.ForEach(message => result.Add(MapSingleResponseMessage(message)));
+            foreach (var message in originalResponse.AllMessages)
+                result.Add(MapSingleResponseMessage(message));
+
             return result;
         }
 

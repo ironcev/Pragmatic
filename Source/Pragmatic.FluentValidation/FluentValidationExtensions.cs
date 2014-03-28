@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using FluentValidation;
 using FluentValidation.Results;
 using Pragmatic.Interaction;
-using SwissKnife.Collections;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.FluentValidation
@@ -23,7 +22,8 @@ namespace Pragmatic.FluentValidation
             Argument.IsNotNull(response, "response");
             Argument.IsNotNull(validationResult, "validationResult");
 
-            validationResult.Errors.ForEach(error => response.AddError(error.ErrorMessage, error.CustomState is string ? (string)error.CustomState : string.Empty));
+            foreach (var error in validationResult.Errors)
+                response.AddError(error.ErrorMessage, error.CustomState is string ? (string) error.CustomState : string.Empty);
 
             return response;
         }

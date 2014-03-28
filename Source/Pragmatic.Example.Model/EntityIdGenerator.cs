@@ -1,4 +1,5 @@
 ﻿using System;
+using SwissKnife;
 
 namespace Pragmatic.Example.Model
 {
@@ -11,7 +12,7 @@ namespace Pragmatic.Example.Model
             GenerateId = type =>
             {
                 if (type == typeof (Company))
-                    return Guid.NewGuid(); // TODO-IG: Add sequential guid generation here, once when it's added to SwissKnife.
+                    return GuidUtility.NewSequentialGuid();
 
                 return Guid.NewGuid();
             };

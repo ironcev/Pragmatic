@@ -6,7 +6,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction
 {
-    public class RequestExecutor // TODO-IG: There is too much code duplication between the executors. Refector that.
+    public class RequestExecutor // TODO-IG: There is too much code duplication between the executors. Re-factor that.
     {
         private readonly IInteractionHandlerResolver _interactionHandlerResolver;
 
@@ -31,7 +31,7 @@ namespace Pragmatic.Interaction
                     throw new InvalidOperationException(string.Format("There is no request handler defined for the requests of type '{0}'.", request.GetType()));
 
                 if (requestHandlers.Length > 1)
-                    throw new NotSupportedException(string.Format("There are {1} request handlers defined for the requests of type '{2}'.{0}" + // TODO-IG: Introduce ExceptionBuilder class to avoid code polution.
+                    throw new NotSupportedException(string.Format("There are {1} request handlers defined for the requests of type '{2}'.{0}" +
                                                                   "Having more than one request handler per request type is not supported.{0}" +
                                                                   "The defined request handlers are:{0}{3}",
                                                                   Environment.NewLine,
@@ -60,7 +60,7 @@ namespace Pragmatic.Interaction
             }
             catch (Exception e)
             {
-                string message = string.Format("An exception occured while executing the request handler of type '{0}'.", requestHandler.GetType());
+                string message = string.Format("An exception occurred while executing the request handler of type '{0}'.", requestHandler.GetType());
 
                 throw new RequestExecutionException(message, e);
             }
@@ -77,7 +77,7 @@ namespace Pragmatic.Interaction
             }
             catch (Exception e)
             {
-                string message = string.Format("An exception occured while resolving request handlers for the requests of type '{0}'.", requestType);
+                string message = string.Format("An exception occurred while resolving request handlers for the requests of type '{0}'.", requestType);
 
                 throw new RequestExecutionException(message, e);
             } 

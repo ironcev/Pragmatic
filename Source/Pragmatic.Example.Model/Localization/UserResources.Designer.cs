@@ -61,6 +61,15 @@ namespace Pragmatic.Example.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The user with administrator privileges cannot be deleted..
+        /// </summary>
+        public static string AdministratorCannotBeDeleted {
+            get {
+                return ResourceManager.GetString("AdministratorCannotBeDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleteing user permanently deletes all information about the user. The information cannot be recovered later on..
         /// </summary>
         public static string DeletingUserPermanentlyDeletesAllItsData {
@@ -93,6 +102,15 @@ namespace Pragmatic.Example.Model.Localization {
         public static string FirstNameMustNotBeEmpty {
             get {
                 return ResourceManager.GetString("FirstNameMustNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User: {0}.
+        /// </summary>
+        public static string InformationUserFullName {
+            get {
+                return ResourceManager.GetString("InformationUserFullName", resourceCulture);
             }
         }
         

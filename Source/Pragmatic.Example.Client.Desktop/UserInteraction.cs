@@ -51,7 +51,7 @@ namespace Pragmatic.Example.Client.Desktop
                 messageBoxImage = MessageBoxImage.Warning;
                 caption = "Warning";
             }
-            else if (response.HasInformations)
+            else if (response.HasInformation)
             {
                 messageBoxImage = MessageBoxImage.Information;
                 caption = "Information";
@@ -59,7 +59,7 @@ namespace Pragmatic.Example.Client.Desktop
 
             string responseMessage = (response.Errors.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message)) + Environment.NewLine +
                                       response.Warnings.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message)) + Environment.NewLine +
-                                      response.Informations.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message))).Trim();
+                                      response.Information.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message))).Trim();
 
             return MessageBox.Show((message + Environment.NewLine + responseMessage).Trim(), caption, messageBoxButton, messageBoxImage);
         }

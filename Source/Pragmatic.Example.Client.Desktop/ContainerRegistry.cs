@@ -6,6 +6,9 @@ using NHibernate.Tool.hbm2ddl;
 using Pragmatic.Example.Client.Desktop.NHibernateMappings;
 using Pragmatic.Example.Model;
 using Pragmatic.Interaction;
+using Pragmatic.Interaction.EntityDeletion;
+using Pragmatic.Interaction.StandardCommands;
+using Pragmatic.Interaction.StandardRequests;
 using Pragmatic.Raven.Interaction.StandardQueries;
 using Pragmatic.StructureMap;
 using Raven.Client;
@@ -31,16 +34,20 @@ namespace Pragmatic.Example.Client.Desktop
                 scan.ConnectImplementationsToTypesClosing(typeof(IQueryHandler<,>));
                 scan.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
                 scan.ConnectImplementationsToTypesClosing(typeof(IValidator<>));
+                scan.ConnectImplementationsToTypesClosing(typeof(EntityDeleter<>));
             });
 
             For<IResponseMapper>().Use(new InvariantResponseMapper());
-            For<IInteractionHandlerResolver>().Use(new StructureMapInteractionHandlerResolver());
+
+            var structureMapInteractionObjectResolver = new StructureMapInteractionObjectResolver();
+            For<IInteractionHandlerResolver>().Use(structureMapInteractionObjectResolver);
+            For<IEntityDeleterResolver>().Use(structureMapInteractionObjectResolver);
 
             // Register query handlers for standard queries.
-            QueryHandlerGenericTypeDefinitions definitions;
+            QueryHandlerGenericTypeDefinitions queryHandlerGenericTypeDefinitions;
             if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Raven.UnitOfWork))
             {
-                definitions = new QueryHandlerGenericTypeDefinitions
+                queryHandlerGenericTypeDefinitions = new QueryHandlerGenericTypeDefinitions
                     (
                     typeof(GetByIdQueryHandler<>),
                     typeof(GetOneQueryHandler<>),
@@ -50,7 +57,7 @@ namespace Pragmatic.Example.Client.Desktop
             }
             else
             {
-                definitions = new QueryHandlerGenericTypeDefinitions
+                queryHandlerGenericTypeDefinitions = new QueryHandlerGenericTypeDefinitions
                 (
                     typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),
                     typeof(NHibernate.Interaction.StandardQueries.GetOneQueryHandler<>),
@@ -59,7 +66,24 @@ namespace Pragmatic.Example.Client.Desktop
                 );
             }
 
-            this.ConnectQueryHandlerImplementationsToStandardQueriesForDerivedTypesOf(definitions, typeof(Entity), typeof(User).Assembly);
+            this.ConnectQueryHandlerImplementationsToStandardQueriesForDerivedTypesOf(queryHandlerGenericTypeDefinitions, typeof(Entity), typeof(User).Assembly);
+
+            // Register request handlers for standard requests.
+            RequestHandlerGenericTypeDefinitions requestHandlerGenericTypeDefinitions = new RequestHandlerGenericTypeDefinitions
+            (
+                typeof(CanDeleteEntityRequestHandler<>)
+            );
+
+            this.ConnectRequestHandlerImplementationsToStandardRequestsForDerivedTypesOf(requestHandlerGenericTypeDefinitions, typeof(Entity), typeof(User).Assembly);
+
+            // Register command handlers for standard requests.
+            CommandHandlerGenericTypeDefinitions commandHandlerGenericTypeDefinitions = new CommandHandlerGenericTypeDefinitions
+            (
+                typeof(DeleteEntityCommandHandler<>)
+            );
+
+            this.ConnectCommandHandlerImplementationsToStandardCommandsForDerivedTypesOf(commandHandlerGenericTypeDefinitions, typeof(Entity), typeof(User).Assembly);
+
 
             For<UnitOfWork>()
                 .LifecycleIs(new InteractionScopeLifecycle())

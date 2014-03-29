@@ -8,7 +8,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands
 {
-    class GetAllUsersUICommand : BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
+    class GetAllUsersUICommand : BaseUICommand, ICommand // TODO-IG: Replace with appropriate classes from SwissKnife, once they are implemented.
     {
         private readonly MainWindowViewModel _mainWindowViewModel;
 

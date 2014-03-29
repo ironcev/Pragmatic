@@ -31,7 +31,7 @@ namespace Pragmatic.Interaction
                     throw new InvalidOperationException(string.Format("There is no command handler defined for the commands of type '{0}'.", command.GetType()));
 
                 if (commandHandlers.Length > 1)
-                    throw new NotSupportedException(string.Format("There are {1} command handlers defined for the commands of type '{2}'.{0}" + // TODO-IG: Introduce ExceptionBuilder class to avoid code polution.
+                    throw new NotSupportedException(string.Format("There are {1} command handlers defined for the commands of type '{2}'.{0}" +
                                                                   "Having more than one command handler per command type is not supported.{0}" +
                                                                   "The defined command handlers are:{0}{3}",
                                                                   Environment.NewLine,
@@ -60,7 +60,7 @@ namespace Pragmatic.Interaction
             }
             catch (Exception e)
             {
-                string message = string.Format("An exception occured while executing the command handler of type '{0}'.", commandHandler.GetType());
+                string message = string.Format("An exception occurred while executing the command handler of type '{0}'.", commandHandler.GetType());
 
                 throw new CommandExecutionException(message, e);
             }

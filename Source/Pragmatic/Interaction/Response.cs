@@ -45,12 +45,13 @@ namespace Pragmatic.Interaction
     {
         private readonly IList<ResponseMessage> _responseMessages = new List<ResponseMessage>();
 
-        public bool HasInformations { get { return HasMessagesOfType(MessageType.Information); } }
+        public bool HasInformation { get { return HasMessagesOfType(MessageType.Information); } }
         public bool HasWarnings { get { return HasMessagesOfType(MessageType.Warning); } }
         public bool HasErrors { get { return HasMessagesOfType(MessageType.Error); } }
+        public bool HasInformationOrWarnings { get { return HasInformation || HasWarnings; } }
 
         public IEnumerable<ResponseMessage> Successes { get { return GetMessagesOfType(MessageType.Success); } }
-        public IEnumerable<ResponseMessage> Informations { get { return GetMessagesOfType(MessageType.Information); } }
+        public IEnumerable<ResponseMessage> Information { get { return GetMessagesOfType(MessageType.Information); } }
         public IEnumerable<ResponseMessage> Warnings { get { return GetMessagesOfType(MessageType.Warning); } }
         public IEnumerable<ResponseMessage> Errors { get { return GetMessagesOfType(MessageType.Error); } }
         public IEnumerable<ResponseMessage> AllMessages { get { return _responseMessages; } }

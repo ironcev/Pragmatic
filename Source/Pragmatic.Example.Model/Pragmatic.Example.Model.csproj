@@ -75,6 +75,7 @@
     <Compile Include="Users\DeleteUserRequestHandler.cs" />
     <Compile Include="Users\DeleteUserCommandHandler.cs" />
     <Compile Include="Users\DeleteUserRequest.cs" />
+    <Compile Include="Users\UserEntityDeleter.cs" />
     <Compile Include="Users\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ namespace Pragmatic.StructureMap.Tests.Unit
         {
             ObjectFactory.Initialize(x => x.AddRegistry(new StructureMapRegistry()));
 
-            var queryHandlers = new StructureMapInteractionHandlerResolver().ResolveInteractionHandler(typeof(IQueryHandler<TestQuery, object>)).ToArray();
+            var queryHandlers = new StructureMapInteractionObjectResolver().ResolveInteractionHandler(typeof(IQueryHandler<TestQuery, object>)).ToArray();
             Assert.That(queryHandlers.Length, Is.EqualTo(1));
             Assert.That(queryHandlers[0], Is.InstanceOf<TestQueryHandler>());
         }
@@ -31,7 +31,7 @@ namespace Pragmatic.StructureMap.Tests.Unit
         {
             ObjectFactory.Initialize(x => x.AddRegistry(new StructureMapRegistry()));
 
-            var commandHandlers = new StructureMapInteractionHandlerResolver().ResolveInteractionHandler(typeof(ICommandHandler<TestCommand, Response>)).ToArray();
+            var commandHandlers = new StructureMapInteractionObjectResolver().ResolveInteractionHandler(typeof(ICommandHandler<TestCommand, Response>)).ToArray();
             Assert.That(commandHandlers.Length, Is.EqualTo(1));
             Assert.That(commandHandlers[0], Is.InstanceOf<TestCommandHandler>());
         }

@@ -6,7 +6,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction
 {
-    public class QueryExecutor // TODO-IG: What if we have hierarchy of queries? What is the expected behavior - polimorphic or not? (Same with the commands.)
+    public class QueryExecutor // TODO-IG: What if we have hierarchy of queries? What is the expected behavior - polymorphic or not? (Same with the commands.)
     {
         private readonly IInteractionHandlerResolver _interactionHandlerResolver;
 

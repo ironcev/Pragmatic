@@ -18,18 +18,28 @@ namespace Pragmatic.Interaction.EntityDeletion
 
         public Option<EntityDeleter<TEntity>> GetEntityDeleterFor<TEntity>() where TEntity : Entity
         {
-            var entityDeleters = _entityDeleterResolver.ResolveEntityDeleter(typeof(EntityDeleter<>).MakeGenericType(typeof(TEntity))).ToArray();
+            return GetEntityDeleterFor(typeof(TEntity)).MapToOption(deleter => (EntityDeleter<TEntity>)deleter);
+        }
+
+        public Option<IEntityDeleter> GetEntityDeleterFor(Type entityType)
+        {
+            Argument.IsNotNull(entityType, "entityType"); // TODO-IG: Code duplication with CanDeleteEntityRequest.
+            Argument.IsValid(typeof(Entity).IsAssignableFrom(entityType),
+                             string.Format("Entity type does not derive from '{0}'. Entity type must derive from '{0}'. The entity type is: '{1}'.", typeof(Entity), entityType),
+                             "entityType");
+
+            var entityDeleters = _entityDeleterResolver.ResolveEntityDeleter(typeof(EntityDeleter<>).MakeGenericType(entityType)).ToArray();
 
             if (entityDeleters.Length > 1)
-                throw new NotSupportedException(string.Format("There are {1} entity deleters defined for the entity of type '{2}'.{0}" + 
+                throw new NotSupportedException(string.Format("There are {1} entity deleters defined for the entity of type '{2}'.{0}" +
                                               "Having more than one entity deleter per entity type is not supported.{0}" +
                                               "The defined entity deleters are:{0}{3}",
                                               Environment.NewLine,
                                               entityDeleters.Length,
-                                              typeof(TEntity),
+                                              entityType,
                                               entityDeleters.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + Environment.NewLine)));
 
-            return entityDeleters.Length > 0 ? (EntityDeleter<TEntity>)entityDeleters[0] : null; // TODO-IG: Do we want to leave it like this? This potentially throws InvalidCastException.
+            return entityDeleters.Length > 0 ? Option<IEntityDeleter>.Some((IEntityDeleter)entityDeleters[0]) : Option<IEntityDeleter>.None; // TODO-IG: Do we want to leave it like this? This potentially throws InvalidCastException.
         }
     }
 }

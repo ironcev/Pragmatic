@@ -4,7 +4,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction.EntityDeletion
 {
-    public abstract class EntityDeleter<TEntity> where TEntity : Entity
+    public abstract class EntityDeleter<TEntity> : IEntityDeleter where TEntity : Entity
     {
         protected UnitOfWork UnitOfWork { get; private set; }
         protected QueryExecutor QueryExecutor { get; private set; }
@@ -16,6 +16,16 @@ namespace Pragmatic.Interaction.EntityDeletion
 
             UnitOfWork = unitOfWork;
             QueryExecutor = queryExecutor;
+        }
+
+        void IEntityDeleter.DeleteEntity(Entity entity)
+        {
+            Argument.IsNotNull(entity, "entity");
+            Argument.IsValid(entity is TEntity,
+                             string.Format("The entity deleter '{0}' can delete only entities of type '{1}'. The provided entity is of type '{2}'", GetType(), typeof(TEntity), entity.GetType()),
+                             "entity");
+
+            DeleteEntity((TEntity)entity);
         }
 
         public void DeleteEntity(Guid entityId)
@@ -55,6 +65,15 @@ namespace Pragmatic.Interaction.EntityDeletion
             return CanDeleteEntityCore(entity.Value);
         }
 
+        Response<Option<Entity>> IEntityDeleter.CanDeleteEntity(Guid entityId)
+        {
+            Response<Option<TEntity>> response = CanDeleteEntity(entityId);
+            Option<Entity> entity = response.Result.MapToOption(result => (Entity)result);
+            Response<Option<Entity>> convertedResponse = new Response<Option<Entity>>(entity);
+            convertedResponse.Add(response); // Add original messages to the converted response.
+            return convertedResponse;
+        }
+
         public Response<Option<TEntity>> CanDeleteEntity(TEntity entity)
         {
             Argument.IsNotNull(entity, "entity");
@@ -63,5 +82,12 @@ namespace Pragmatic.Interaction.EntityDeletion
         }
 
         protected abstract Response<Option<TEntity>> CanDeleteEntityCore(TEntity entity);
+    }
+
+    public interface IEntityDeleter
+    {
+        void DeleteEntity(Guid entityId);
+        void DeleteEntity(Entity entity);
+        Response<Option<Entity>> CanDeleteEntity(Guid entityId);
     }
 }

@@ -13,5 +13,13 @@ namespace Pragmatic.Interaction
 
             return requestExecutor.Execute(new CanDeleteEntityRequest<TEntity> { EntityId = entityId });
         }
+
+        public static Response<Option<Entity>> CanDeleteEntity(this RequestExecutor requestExecutor, Type entityType, Guid entityId)
+        {
+            Argument.IsNotNull(requestExecutor, "requestExecutor");
+            // The entityType argument is checked in the CanDeleteEntityRequest.EntityType setter.
+
+            return requestExecutor.Execute(new CanDeleteEntityRequest { EntityId = entityId, EntityType = entityType });
+        }
     }
 }

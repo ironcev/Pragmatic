@@ -32,7 +32,9 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             Option<UserViewModel> selectedUser = _mainWindowViewModel.Users.CurrentItem as UserViewModel;
             if (selectedUser.IsNone) return;
 
+            // Comment/uncomment these two lines to switch between deleting over generic method or over the method that accepts entity type.
             var response = RequestExecutor.CanDeleteEntity<User>(selectedUser.Value.Id);
+            //var response = RequestExecutor.CanDeleteEntity(typeof(User), selectedUser.Value.Id);
             if (response.HasErrors)
             {
                 UserInteraction.ShowError("The user cannot be deleted because of the following reasons:", response);
@@ -40,15 +42,18 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             }
 
             // If there are no errors, we know that we got the entity back.
+
+            // Comment/uncomment these two lines to switch between deleting over generic method or over the method that accepts entity type.
             User userToDelete = response.Result.Value;
+            //Entity userToDelete = response.Result.Value;
 
             if (response.HasInformationOrWarnings)
             {
-                var deleteUser = UserInteraction.ShowResponse(string.Format("Do you really want to delete the user {0}?", userToDelete.FullName), response, MessageBoxButton.YesNo);
+                var deleteUser = UserInteraction.ShowResponse("Do you really want to delete the user?", response, MessageBoxButton.YesNo);
                 if (deleteUser != MessageBoxResult.Yes) return;
             }
 
-
+            // Since the compiler will properly infer the type, this line stays the same in switching between deleting over generic method or over the method that accepts base entity type.
             CommandExecutor.DeleteEntity(userToDelete);
 
             UserInteraction.ShowInformation("Selected user successfully deleted.");

@@ -17,4 +17,20 @@ namespace Pragmatic.Interaction.StandardCommands
             }
         }
     }
+
+    public sealed class DeleteEntityCommand : Command
+    {
+        private Entity _entityToDelete;
+
+        public Entity EntityToDelete
+        {
+            get { return _entityToDelete; }
+            set
+            {
+                Argument.IsNotNull(value, "value");
+
+                _entityToDelete = value;
+            }
+        }
+    }
 }

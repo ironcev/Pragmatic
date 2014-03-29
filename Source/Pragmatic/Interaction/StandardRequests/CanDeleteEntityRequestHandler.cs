@@ -30,4 +30,31 @@ namespace Pragmatic.Interaction.StandardRequests
             return entityDeleter.Value.CanDeleteEntity(request.EntityId);
         }
     }
+
+    public sealed class CanDeleteEntityRequestHandler : IRequestHandler<CanDeleteEntityRequest, Response<Option<Entity>>>
+    {
+        private readonly EntityDeleterProvider _entityDeleterProvider;
+
+        public CanDeleteEntityRequestHandler(EntityDeleterProvider entityDeleterProvider)
+        {
+            Argument.IsNotNull(entityDeleterProvider, "entityDeleterProvider");
+
+            _entityDeleterProvider = entityDeleterProvider;
+        }
+
+        public Response<Option<Entity>> Execute(CanDeleteEntityRequest request)
+        {
+            Response response = new Response();
+
+            var entityDeleter = _entityDeleterProvider.GetEntityDeleterFor(request.EntityType);
+
+            if (entityDeleter.IsNone)
+            {
+                response.AddError(() => EntityResources.DeletingOfEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
+                return Response<Option<Entity>>.From(response);
+            }
+
+            return entityDeleter.Value.CanDeleteEntity(request.EntityId);
+        }
+    }
 }

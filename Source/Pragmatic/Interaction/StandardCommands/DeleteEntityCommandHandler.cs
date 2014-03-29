@@ -33,4 +33,35 @@ namespace Pragmatic.Interaction.StandardCommands
             return response;
         }
     }
+
+    public sealed class DeleteEntityCommandHandler : ICommandHandler<DeleteEntityCommand, Response>
+    {
+        private readonly EntityDeleterProvider _entityDeleterProvider;
+
+        public DeleteEntityCommandHandler(EntityDeleterProvider entityDeleterProvider)
+        {
+            Argument.IsNotNull(entityDeleterProvider, "entityDeleterProvider");
+
+            _entityDeleterProvider = entityDeleterProvider;
+        }
+
+        public Response Execute(DeleteEntityCommand command)
+        {
+            Response response = new Response();
+
+            var entityDeleter = _entityDeleterProvider.GetEntityDeleterFor(command.EntityToDelete.GetType());
+
+            if (entityDeleter.IsNone)
+            {
+                response.AddError(() => EntityResources.DeletingOfEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
+                return response;
+            }
+
+            // We want this to throw exception if the entity cannot be deleted.
+            entityDeleter.Value.DeleteEntity(command.EntityToDelete);
+
+            // In case of a successful deletion an empty response is returned. 
+            return response;
+        }
+    }
 }

@@ -24,6 +24,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -38,6 +39,9 @@
 
             <Label Grid.Row="2" Grid.Column="0" Content="Email:"/>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Email}"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Is administrator:"/>
+            <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding IsAdministrator}" VerticalAlignment="Center"/>
         </Grid>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal"  FlowDirection="RightToLeft">

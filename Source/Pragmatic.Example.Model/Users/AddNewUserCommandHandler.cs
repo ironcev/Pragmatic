@@ -48,7 +48,8 @@ namespace Pragmatic.Example.Model.Users
             {
                 FirstName = command.FirstName,
                 LastName = command.LastName,
-                Email = command.Email
+                Email = command.Email,
+                IsAdministrator = command.IsAdministrator
             };
         }
     }

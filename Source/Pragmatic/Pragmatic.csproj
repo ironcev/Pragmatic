@@ -55,7 +55,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Interaction\EntityDeletion\DeleteEntityResponse.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleterProvider.cs" />
     <Compile Include="Interaction\CommandExecutorExtensions.cs" />

@@ -27,8 +27,13 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 
         public void Execute(object parameter)
         {
-            //_mainWindowViewModel.SetUsers(QueryExecutor.GetAll<User>());
-            _mainWindowViewModel.SetUsers(QueryExecutor.GetAll(new OrderBy<User>(user => user.FirstName).ThenBy(user => user.Email, OrderByDirection.Descending), new Paging(1, 2)));
+            // This query returns all users without any particular sorting.
+            var users = QueryExecutor.GetAll<User>();
+
+            // This query returns paginated result. The first page is returned with maximum 10 users. The users are sorted by their first name and then by email.
+            //var users = QueryExecutor.GetAll(new OrderBy<User>(user => user.FirstName).ThenBy(user => user.Email, OrderByDirection.Descending), new Paging(1, 10));
+
+            _mainWindowViewModel.SetUsers(users);
         }
 
         public event EventHandler CanExecuteChanged;

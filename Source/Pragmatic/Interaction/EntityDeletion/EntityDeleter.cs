@@ -48,7 +48,12 @@ namespace Pragmatic.Interaction.EntityDeletion
             DeleteEntityCore(response.Result.Value);            
         }
 
-        protected abstract void DeleteEntityCore(TEntity entity);
+        protected virtual void DeleteEntityCore(TEntity entity)
+        {
+            UnitOfWork.Begin();
+            UnitOfWork.RegisterEntityToDelete(entity);
+            UnitOfWork.Commit();
+        }
 
         public Response<Option<TEntity>> CanDeleteEntity(Guid entityId)
         {

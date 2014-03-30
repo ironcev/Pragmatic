@@ -32,11 +32,7 @@ namespace Pragmatic.Interaction
         public static Response DeleteEntity(this CommandExecutor commandExecutor, Type entityType, Guid entityId)
         {
             Argument.IsNotNull(commandExecutor, "commandExecutor");
-            Argument.IsNotNull(entityType, "entityType"); // TODO-IG: Code duplication!
-            Argument.IsValid(typeof(Entity).IsAssignableFrom(entityType),
-                             string.Format("Entity type does not derive from '{0}'. Entity type must derive from '{0}'. The entity type is: '{1}'.", typeof(Entity), entityType),
-                             "entityType");
-
+            // The check for entity type is done in the constructor of the DeleteEntityByIdCommand.
 
             return commandExecutor.Execute(new DeleteEntityByIdCommand { EntityId = entityId, EntityType = entityType });
         }

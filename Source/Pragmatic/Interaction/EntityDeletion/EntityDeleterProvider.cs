@@ -23,17 +23,14 @@ namespace Pragmatic.Interaction.EntityDeletion
 
         public Option<IEntityDeleter> GetEntityDeleterFor(Type entityType)
         {
-            Argument.IsNotNull(entityType, "entityType"); // TODO-IG: Code duplication with CanDeleteEntityRequest.
-            Argument.IsValid(typeof(Entity).IsAssignableFrom(entityType),
-                             string.Format("Entity type does not derive from '{0}'. Entity type must derive from '{0}'. The entity type is: '{1}'.", typeof(Entity), entityType),
-                             "entityType");
+            ArgumentCheck.EntityTypeRepresentsEntityType(entityType, "entityType");
 
             var entityDeleters = _entityDeleterResolver.ResolveEntityDeleter(typeof(EntityDeleter<>).MakeGenericType(entityType)).ToArray();
 
             if (entityDeleters.Length > 1)
-                throw new NotSupportedException(string.Format("There are {1} entity deleters defined for the entity of type '{2}'.{0}" +
+                throw new NotSupportedException(string.Format("There are {1} entity deleter types defined for the entity of type '{2}'.{0}" +
                                               "Having more than one entity deleter per entity type is not supported.{0}" +
-                                              "The defined entity deleters are:{0}{3}",
+                                              "The defined entity deleter types are:{0}{3}",
                                               Environment.NewLine,
                                               entityDeleters.Length,
                                               entityType,

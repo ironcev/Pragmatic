@@ -1,5 +1,4 @@
 ﻿using System;
-using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction.StandardCommands
 {
@@ -13,10 +12,7 @@ namespace Pragmatic.Interaction.StandardCommands
             get { return _entityType; }
             set
             {
-                Argument.IsNotNull(value, "value"); // TODO-IG: Code duplication!
-                Argument.IsValid(typeof(Entity).IsAssignableFrom(value),
-                                 string.Format("Entity type does not derive from '{0}'. Entity type must derive from '{0}'. The entity type is: '{1}'.", typeof(Entity), value),
-                                 "entityType");
+                ArgumentCheck.EntityTypeRepresentsEntityType(value, "value");
 
                 _entityType = value;
             }

@@ -18,6 +18,8 @@ namespace Pragmatic.Interaction.StandardCommands
         }
     }
 
+    // Normally, we would simply have this DeleteEntityCommand : DeleteEntityCommand<Entity> { }.
+    // In this case we cannot do that because DeleteEntityCommand<Entity> is sealed since all commands have to be sealed.
     public sealed class DeleteEntityCommand : Command
     {
         private Entity _entityToDelete;

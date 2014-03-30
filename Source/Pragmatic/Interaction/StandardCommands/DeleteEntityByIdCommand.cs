@@ -1,15 +1,9 @@
 ﻿using System;
-using SwissKnife;
 using SwissKnife.Diagnostics.Contracts;
 
-namespace Pragmatic.Interaction.StandardRequests
+namespace Pragmatic.Interaction.StandardCommands
 {
-    public sealed class CanDeleteEntityRequest<TEntity> : IRequest<Response<Option<TEntity>>> where TEntity : Entity
-    {
-        public Guid EntityId { get; set; }
-    }
-
-    public sealed class CanDeleteEntityRequest : IRequest<Response<Option<Entity>>>
+    public sealed class DeleteEntityByIdCommand : Command
     {
         public Guid EntityId { get; set; }
 

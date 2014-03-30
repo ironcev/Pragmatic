@@ -75,7 +75,9 @@
     <Compile Include="Interaction\PagedList.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interaction\StandardCommands\DeleteEntityByIdCommand.cs" />
     <Compile Include="Interaction\StandardCommands\DeleteEntityCommand.cs" />
+    <Compile Include="Interaction\StandardCommands\DeleteEntityByIdCommandHandler.cs" />
     <Compile Include="Interaction\StandardCommands\DeleteEntityCommandHandler.cs" />
     <Compile Include="Interaction\StandardQueries\GetTotalCountQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQuery.cs" />

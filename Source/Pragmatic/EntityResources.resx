@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DeletingOfEntitiesOfTypeIsNotForseen" xml:space="preserve">
-    <value>Deleting of entities of this type is not forseen.</value>
+  <data name="DeletingEntitiesOfTypeIsNotForseen" xml:space="preserve">
+    <value>Deleting entities of this type is not forseen.</value>
   </data>
   <data name="EntityDoesNotExistInTheSystem" xml:space="preserve">
     <value>Entity does not exist in the system.</value>

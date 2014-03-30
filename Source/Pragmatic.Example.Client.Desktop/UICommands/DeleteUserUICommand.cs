@@ -58,10 +58,13 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             //CommandExecutor.DeleteEntity(userToDelete);
             // Alternatively, its type and id can be provided.
             //CommandExecutor.DeleteEntity<User>(selectedUser.Value.Id);
-            CommandExecutor.DeleteEntity(typeof(User), selectedUser.Value.Id);
+            Response userDeletedResponse = CommandExecutor.DeleteEntity(typeof(User), selectedUser.Value.Id);
 
 
-            UserInteraction.ShowInformation("Selected user successfully deleted.");
+            if (userDeletedResponse.HasErrors)
+                UserInteraction.ShowError("The user cannot be deleted because of the following reasons:", userDeletedResponse);
+            else
+                UserInteraction.ShowInformation("Selected user successfully deleted.");
 
             //// TODO-IG: Refresh the list.
         }

@@ -18,41 +18,43 @@ namespace Pragmatic.Interaction.EntityDeletion
             QueryExecutor = queryExecutor;
         }
 
-        void IEntityDeleter.DeleteEntity(Entity entity)
+        Response IEntityDeleter.DeleteEntity(Entity entity)
         {
             Argument.IsNotNull(entity, "entity");
             Argument.IsValid(entity is TEntity,
-                             string.Format("The entity deleter '{0}' can delete only entities of type '{1}'. The provided entity is of type '{2}'", GetType(), typeof(TEntity), entity.GetType()),
+                             string.Format("The entity deleter '{0}' can delete only entities of type '{1}'. The provided entity is of type '{2}'.", GetType(), typeof(TEntity), entity.GetType()),
                              "entity");
 
-            DeleteEntity((TEntity)entity);
+            return DeleteEntity((TEntity)entity);
         }
 
-        public void DeleteEntity(Guid entityId)
+        public Response DeleteEntity(Guid entityId)
         {
-            DeleteEntityUponResponseOfCanDeleteEntityRequest(CanDeleteEntity(entityId), entityId);
+            return DeleteEntityUponResponseOfCanDeleteEntityRequest(CanDeleteEntity(entityId));
         }
 
-        public void DeleteEntity(TEntity entity)
+        public Response DeleteEntity(TEntity entity)
         {
             Argument.IsNotNull(entity, "entity");
 
-            DeleteEntityUponResponseOfCanDeleteEntityRequest(CanDeleteEntity(entity), entity.Id);
+            return DeleteEntityUponResponseOfCanDeleteEntityRequest(CanDeleteEntity(entity));
         }
 
-        private void DeleteEntityUponResponseOfCanDeleteEntityRequest(Response<Option<TEntity>> response, Guid entityId)
+        private Response DeleteEntityUponResponseOfCanDeleteEntityRequest(Response<Option<TEntity>> canDeleteEntityResponse)
         {
-            Operation.IsValid(!response.HasErrors && response.Result.IsSome,
-                               string.Format("The entity of type '{0}' cannot be deleted. The entity id is: {1}.", typeof(TEntity).FullName, entityId));
+            if (canDeleteEntityResponse.HasErrors || canDeleteEntityResponse.Result.IsNone)
+                return canDeleteEntityResponse;
 
-            DeleteEntityCore(response.Result.Value);            
+            return DeleteEntityCore(canDeleteEntityResponse.Result.Value);    
         }
 
-        protected virtual void DeleteEntityCore(TEntity entity)
+        protected virtual Response DeleteEntityCore(TEntity entity)
         {
             UnitOfWork.Begin();
             UnitOfWork.RegisterEntityToDelete(entity);
             UnitOfWork.Commit();
+
+            return new Response();
         }
 
         public Response<Option<TEntity>> CanDeleteEntity(Guid entityId)
@@ -87,12 +89,5 @@ namespace Pragmatic.Interaction.EntityDeletion
         }
 
         protected abstract Response<Option<TEntity>> CanDeleteEntityCore(TEntity entity);
-    }
-
-    public interface IEntityDeleter
-    {
-        void DeleteEntity(Guid entityId);
-        void DeleteEntity(Entity entity);
-        Response<Option<Entity>> CanDeleteEntity(Guid entityId);
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="Interaction\EntityDeletion\EntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleterProvider.cs" />
     <Compile Include="Interaction\CommandExecutorExtensions.cs" />
+    <Compile Include="Interaction\EntityDeletion\IEntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\IEntityDeleterResolver.cs" />
     <Compile Include="Interaction\RequestExecutorExtensions.cs" />
     <Compile Include="Interaction\RequestExecutor.cs" />

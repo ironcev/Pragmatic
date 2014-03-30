@@ -57,11 +57,7 @@ namespace Pragmatic.Interaction.StandardCommands
                 return response;
             }
 
-            // We want this to throw exception if the entity cannot be deleted.
-            entityDeleter.Value.DeleteEntity(command.EntityToDelete);
-
-            // In case of a successful deletion an empty response is returned. 
-            return response;
+            return entityDeleter.Value.DeleteEntity(command.EntityToDelete);
         }
     }
 }

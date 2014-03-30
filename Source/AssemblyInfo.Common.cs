@@ -29,7 +29,7 @@ internal static partial class AssemblyDescription
     public const string Copyright = "Copyright \u00a9 2014 " + Company + ". All rights reserved.";
     public const string Product = "Pragmatic";
 
-    public const string Version = "0.6.4.*";
+    public const string Version = "0.6.5.*";
 
     public const string Culture = "";
 

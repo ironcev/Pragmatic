@@ -19,7 +19,7 @@ namespace Pragmatic.NHibernate.Interaction
             Paging pagingValue = paging.ValueOr(Paging.None);
 
             var rowCountQuery = queryOver.ToRowCountQuery();
-            var result = queryOver.Skip(pagingValue.Skip).Take(pagingValue.Page).Future();
+            var result = queryOver.Skip(pagingValue.Skip).Take(pagingValue.PageSize).Future();
             var totalResults = rowCountQuery.FutureValue<int>().Value;
 
             return new PagedList<T>(result, pagingValue.Page, pagingValue.PageSize, totalResults);

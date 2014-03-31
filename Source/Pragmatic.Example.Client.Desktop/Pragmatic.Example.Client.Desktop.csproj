@@ -101,12 +101,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Blog.xaml.cs">
+      <DependentUpon>Blog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NHibernateMappings\UserMap.cs" />
     <Compile Include="UICommands\DeleteUserUICommand.cs" />
+    <Compile Include="UICommands\ExecuteBlogUICommand.cs" />
     <Compile Include="UICommands\GetAllUsersUICommand.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="UserInteraction.cs" />
     <Compile Include="UserViewModel.cs" />
+    <Page Include="Blog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\UserProfileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

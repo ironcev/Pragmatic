@@ -59,6 +59,9 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="BaseInteractionHandler.cs" />
+    <Compile Include="BlogDescription.cs" />
+    <Compile Include="BlogPost.cs" />
+    <Compile Include="BlogPostComment.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="EntityIdGenerator.cs" />
     <Compile Include="Initialization.cs" />

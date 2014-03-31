@@ -13,6 +13,7 @@
             <Button Content="Add New User" Command="{Binding AddNewUserCommand}"/>
             <Button Content="Get All Users" Command="{Binding GetAllUsersCommand}"/>
             <Button Content="Delete Selected User" Command="{Binding DeleteUserCommand}"/>
+            <Button Content="Execute Blog Application" Command="{Binding ExecuteBlogCommand}"/>
         </StackPanel>
         
         <ListBox Grid.Row="1" ItemsSource="{Binding Users}" IsSynchronizedWithCurrentItem="True">

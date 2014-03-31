@@ -7,8 +7,6 @@ using Pragmatic.Example.Client.Desktop.NHibernateMappings;
 using Pragmatic.Example.Model;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.EntityDeletion;
-using Pragmatic.Interaction.StandardCommands;
-using Pragmatic.Interaction.StandardRequests;
 using Pragmatic.Raven.Interaction.StandardQueries;
 using Pragmatic.StructureMap;
 using Raven.Client;
@@ -27,7 +25,7 @@ namespace Pragmatic.Example.Client.Desktop
                 scan.TheCallingAssembly();
                 scan.WithDefaultConventions();
 
-                scan.AssemblyContainingType<UnitOfWork>();
+                scan.AssemblyContainingType<Entity>();
                 scan.AssemblyContainingType<User>();
 
                 scan.ConnectImplementationsToTypesClosing(typeof(ICommandHandler<,>));

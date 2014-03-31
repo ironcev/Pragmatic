@@ -44,10 +44,10 @@ namespace Pragmatic.Example.Client.Desktop
             For<IEntityDeleterResolver>().Use(structureMapInteractionObjectResolver);
 
             // Register query handlers for standard queries.
-            QueryHandlerGenericTypeDefinitions queryHandlerGenericTypeDefinitions;
+            StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions;
             if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Raven.UnitOfWork))
             {
-                queryHandlerGenericTypeDefinitions = new QueryHandlerGenericTypeDefinitions
+                standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                     (
                     typeof(GetByIdQueryHandler<>),
                     typeof(GetOneQueryHandler<>),
@@ -57,7 +57,7 @@ namespace Pragmatic.Example.Client.Desktop
             }
             else
             {
-                queryHandlerGenericTypeDefinitions = new QueryHandlerGenericTypeDefinitions
+                standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                 (
                     typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),
                     typeof(NHibernate.Interaction.StandardQueries.GetOneQueryHandler<>),
@@ -66,24 +66,7 @@ namespace Pragmatic.Example.Client.Desktop
                 );
             }
 
-            this.ConnectQueryHandlerImplementationsToStandardQueriesForDerivedTypesOf(queryHandlerGenericTypeDefinitions, typeof(Entity), typeof(User).Assembly);
-
-            // Register request handlers for standard requests.
-            RequestHandlerGenericTypeDefinitions requestHandlerGenericTypeDefinitions = new RequestHandlerGenericTypeDefinitions
-            (
-                typeof(CanDeleteEntityRequestHandler<>)
-            );
-
-            this.ConnectRequestHandlerImplementationsToStandardRequestsForDerivedTypesOf(requestHandlerGenericTypeDefinitions, typeof(Entity), typeof(User).Assembly);
-
-            // Register command handlers for standard requests.
-            CommandHandlerGenericTypeDefinitions commandHandlerGenericTypeDefinitions = new CommandHandlerGenericTypeDefinitions
-            (
-                typeof(DeleteEntityCommandHandler<>)
-            );
-
-            this.ConnectCommandHandlerImplementationsToStandardCommandsForDerivedTypesOf(commandHandlerGenericTypeDefinitions, typeof(Entity), typeof(User).Assembly);
-
+            StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions, typeof(User).Assembly);
 
             For<UnitOfWork>()
                 .LifecycleIs(new InteractionScopeLifecycle())

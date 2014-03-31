@@ -1,4 +1,5 @@
-﻿using Pragmatic.Interaction.StandardCommands;
+﻿using System;
+using Pragmatic.Interaction.StandardCommands;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction
@@ -19,6 +20,21 @@ namespace Pragmatic.Interaction
             Argument.IsNotNull(entityToDelete, "entityToDelete");
 
             return commandExecutor.Execute(new DeleteEntityCommand { EntityToDelete = entityToDelete });
+        }
+
+        public static Response DeleteEntity<TEntity>(this CommandExecutor commandExecutor, Guid entityId) where TEntity : Entity
+        {
+            Argument.IsNotNull(commandExecutor, "commandExecutor");
+
+            return commandExecutor.Execute(new DeleteEntityByIdCommand { EntityId = entityId, EntityType = typeof(TEntity) });
+        }
+
+        public static Response DeleteEntity(this CommandExecutor commandExecutor, Type entityType, Guid entityId)
+        {
+            Argument.IsNotNull(commandExecutor, "commandExecutor");
+            // The check for entity type is done in the constructor of the DeleteEntityByIdCommand.
+
+            return commandExecutor.Execute(new DeleteEntityByIdCommand { EntityId = entityId, EntityType = entityType });
         }
     }
 }

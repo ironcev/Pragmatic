@@ -11,13 +11,6 @@ namespace Pragmatic.Example.Model.Users
         {
         }
 
-        protected override void DeleteEntityCore(User entity)
-        {
-            UnitOfWork.Begin();
-            UnitOfWork.RegisterEntityToDelete(entity);
-            UnitOfWork.Commit();
-        }
-
         protected override Response<Option<User>> CanDeleteEntityCore(User entity)
         {
             Response response = new Response();

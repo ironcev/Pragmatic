@@ -49,6 +49,7 @@
     <Compile Include="..\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
+    <Compile Include="ArgumentCheck.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -58,6 +59,7 @@
     <Compile Include="Interaction\EntityDeletion\EntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleterProvider.cs" />
     <Compile Include="Interaction\CommandExecutorExtensions.cs" />
+    <Compile Include="Interaction\EntityDeletion\IEntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\IEntityDeleterResolver.cs" />
     <Compile Include="Interaction\RequestExecutorExtensions.cs" />
     <Compile Include="Interaction\RequestExecutor.cs" />
@@ -75,8 +77,11 @@
     <Compile Include="Interaction\PagedList.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interaction\StandardCommands\DeleteEntityByIdCommand.cs" />
     <Compile Include="Interaction\StandardCommands\DeleteEntityCommand.cs" />
+    <Compile Include="Interaction\StandardCommands\DeleteEntityByIdCommandHandler.cs" />
     <Compile Include="Interaction\StandardCommands\DeleteEntityCommandHandler.cs" />
+    <Compile Include="Interaction\StandardInteractionHandlerGenericTypeDefinitions.cs" />
     <Compile Include="Interaction\StandardQueries\GetTotalCountQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQuery.cs" />
     <Compile Include="Interaction\StandardQueries\GetOneQuery.cs" />

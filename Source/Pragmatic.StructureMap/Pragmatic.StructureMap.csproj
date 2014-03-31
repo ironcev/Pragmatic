@@ -55,7 +55,7 @@
     </Compile>
     <Compile Include="InteractionScopeLifecycle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistryExtensions.cs" />
+    <Compile Include="StandardInteractionHandlerRegistration.cs" />
     <Compile Include="StructureMapInteractionObjectResolver.cs" />
   </ItemGroup>
   <ItemGroup>

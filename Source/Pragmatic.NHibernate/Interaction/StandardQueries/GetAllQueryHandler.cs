@@ -13,9 +13,12 @@ namespace Pragmatic.NHibernate.Interaction.StandardQueries
         {
             Argument.IsNotNull(query, "query");
 
-            var queryOver = Session.QueryOver<T>().OrderBy(query.OrderBy);
+            var queryOver = Session.QueryOver<T>();
 
-            // Constant expressions are not allowed so we are falling back to standard if check. E.g. this is not possible: var where = query.Criteria.IsSome ? query.Criteria.Value : t => true;
+            // Constant expressions are not allowed so we are falling back to standard if check.
+            // E.g. this is not possible: var where = query.Criteria.IsSome ? query.Criteria.Value : t => true;
+            if (query.OrderBy.IsSome) queryOver.OrderBy(query.OrderBy);
+
             if (query.Criteria.IsSome) queryOver.Where(query.Criteria.Value);
 
             return queryOver.ToPagedEnumerable(query.Paging);

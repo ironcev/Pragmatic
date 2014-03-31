@@ -53,10 +53,18 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
                 if (deleteUser != MessageBoxResult.Yes) return;
             }
 
+            // An entity can be deleted by providing the entity itself.
             // Since the compiler will properly infer the type, this line stays the same in switching between deleting over generic method or over the method that accepts base entity type.
-            CommandExecutor.DeleteEntity(userToDelete);
+            //CommandExecutor.DeleteEntity(userToDelete);
+            // Alternatively, its type and id can be provided.
+            //CommandExecutor.DeleteEntity<User>(selectedUser.Value.Id);
+            Response userDeletedResponse = CommandExecutor.DeleteEntity(typeof(User), selectedUser.Value.Id);
 
-            UserInteraction.ShowInformation("Selected user successfully deleted.");
+
+            if (userDeletedResponse.HasErrors)
+                UserInteraction.ShowError("The user cannot be deleted because of the following reasons:", userDeletedResponse);
+            else
+                UserInteraction.ShowInformation("Selected user successfully deleted.");
 
             //// TODO-IG: Refresh the list.
         }

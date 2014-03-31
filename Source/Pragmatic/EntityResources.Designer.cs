@@ -61,11 +61,11 @@ namespace Pragmatic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting of entities of this type is not forseen..
+        ///   Looks up a localized string similar to Deleting entities of this type is not forseen..
         /// </summary>
-        internal static string DeletingOfEntitiesOfTypeIsNotForseen {
+        internal static string DeletingEntitiesOfTypeIsNotForseen {
             get {
-                return ResourceManager.GetString("DeletingOfEntitiesOfTypeIsNotForseen", resourceCulture);
+                return ResourceManager.GetString("DeletingEntitiesOfTypeIsNotForseen", resourceCulture);
             }
         }
         

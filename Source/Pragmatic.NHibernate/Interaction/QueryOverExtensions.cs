@@ -16,14 +16,13 @@ namespace Pragmatic.NHibernate.Interaction
 
         public static IPagedEnumerable<T> ToPagedEnumerable<T>(this IQueryOver<T, T> queryOver, Option<Paging> paging)
         {
-            var take = paging.IsSome ? paging.Value.PageSize : int.MaxValue;
-            var skip = paging.IsSome ? paging.Value.Skip : 0;
-            
+            Paging pagingValue = paging.ValueOr(Paging.None);
+
             var rowCountQuery = queryOver.ToRowCountQuery();
-            var result = queryOver.Skip(skip).Take(take).Future();
+            var result = queryOver.Skip(pagingValue.Skip).Take(pagingValue.PageSize).Future();
             var totalResults = rowCountQuery.FutureValue<int>().Value;
 
-            return new PagedList<T>(result, paging.Value.Page, paging.Value.PageSize, totalResults);
+            return new PagedList<T>(result, pagingValue.Page, pagingValue.PageSize, totalResults);
         }
     }
 }

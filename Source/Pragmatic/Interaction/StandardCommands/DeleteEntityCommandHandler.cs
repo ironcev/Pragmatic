@@ -22,7 +22,7 @@ namespace Pragmatic.Interaction.StandardCommands
 
             if (entityDeleter.IsNone)
             {
-                response.AddError(() => EntityResources.DeletingOfEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
+                response.AddError(() => EntityResources.DeletingEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
                 return response;
             }
 
@@ -53,15 +53,11 @@ namespace Pragmatic.Interaction.StandardCommands
 
             if (entityDeleter.IsNone)
             {
-                response.AddError(() => EntityResources.DeletingOfEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
+                response.AddError(() => EntityResources.DeletingEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
                 return response;
             }
 
-            // We want this to throw exception if the entity cannot be deleted.
-            entityDeleter.Value.DeleteEntity(command.EntityToDelete);
-
-            // In case of a successful deletion an empty response is returned. 
-            return response;
+            return entityDeleter.Value.DeleteEntity(command.EntityToDelete);
         }
     }
 }

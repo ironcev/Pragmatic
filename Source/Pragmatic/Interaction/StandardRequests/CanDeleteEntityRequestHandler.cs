@@ -23,7 +23,7 @@ namespace Pragmatic.Interaction.StandardRequests
 
             if (entityDeleter.IsNone)
             {
-                response.AddError(() => EntityResources.DeletingOfEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
+                response.AddError(() => EntityResources.DeletingEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
                 return Response<Option<TEntity>>.From(response);
             }
 
@@ -50,7 +50,7 @@ namespace Pragmatic.Interaction.StandardRequests
 
             if (entityDeleter.IsNone)
             {
-                response.AddError(() => EntityResources.DeletingOfEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
+                response.AddError(() => EntityResources.DeletingEntitiesOfTypeIsNotForseen); // TODO-IG: Replace the generic word entity with the localized entity description.
                 return Response<Option<Entity>>.From(response);
             }
 

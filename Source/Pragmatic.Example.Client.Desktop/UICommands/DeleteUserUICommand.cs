@@ -55,10 +55,10 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 
             // An entity can be deleted by providing the entity itself.
             // Since the compiler will properly infer the type, this line stays the same in switching between deleting over generic method or over the method that accepts base entity type.
-            //CommandExecutor.DeleteEntity(userToDelete);
+            Response userDeletedResponse = CommandExecutor.DeleteEntity(userToDelete);
             // Alternatively, its type and id can be provided.
-            //CommandExecutor.DeleteEntity<User>(selectedUser.Value.Id);
-            Response userDeletedResponse = CommandExecutor.DeleteEntity(typeof(User), selectedUser.Value.Id);
+            //Response userDeletedResponse = CommandExecutor.DeleteEntity<User>(selectedUser.Value.Id);
+            //Response userDeletedResponse = CommandExecutor.DeleteEntity(typeof(User), selectedUser.Value.Id);
 
 
             if (userDeletedResponse.HasErrors)

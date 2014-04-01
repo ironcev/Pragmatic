@@ -36,5 +36,13 @@ namespace Pragmatic.Interaction
 
             return commandExecutor.Execute(new DeleteEntityByIdCommand { EntityId = entityId, EntityType = entityType });
         }
+
+        public static Response DeleteEntity(this CommandExecutor commandExecutor, DeleteEntityByIdCommand deleteEntityByIdCommand)
+        {
+            Argument.IsNotNull(commandExecutor, "commandExecutor");
+            Argument.IsNotNull(deleteEntityByIdCommand, "deleteEntityByIdCommand");
+
+            return commandExecutor.Execute(deleteEntityByIdCommand);
+        }
     }
 }

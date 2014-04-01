@@ -43,6 +43,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\dependencies\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\..\Dependencies\Vendors\ModernUI.1.0.5\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\dependencies\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -101,17 +104,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Blog.xaml.cs">
-      <DependentUpon>Blog.xaml</DependentUpon>
+    <Compile Include="BlogApplicationControl.xaml.cs">
+      <DependentUpon>BlogApplicationControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="NHibernateMappings\UserMap.cs" />
     <Compile Include="UICommands\DeleteUserUICommand.cs" />
-    <Compile Include="UICommands\ExecuteBlogUICommand.cs" />
+    <Compile Include="UICommands\StartBlogApplicationUICommand.cs" />
     <Compile Include="UICommands\GetAllUsersUICommand.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="UserInteraction.cs" />
     <Compile Include="UserViewModel.cs" />
-    <Page Include="Blog.xaml">
+    <Compile Include="ViewModels\BlogApplicationControlViewModel.cs" />
+    <Page Include="BlogApplicationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

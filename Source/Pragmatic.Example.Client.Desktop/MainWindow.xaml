@@ -1,9 +1,19 @@
-﻿<Window x:Class="Pragmatic.Example.Client.Desktop.MainWindow"
+﻿<mui:ModernWindow x:Class="Pragmatic.Example.Client.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:desktop="clr-namespace:Pragmatic.Example.Client.Desktop"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        Title="MainWindow" Height="450" Width="625" WindowState="Normal">
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Welcome Pragmatic Example Applications" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Blog Application" Source="BlogApplicationControl.xaml"/>
+                <mui:Link DisplayName="Other Application" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+
+
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -27,5 +37,5 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-    </Grid>
-</Window>
+    </Grid>-->
+</mui:ModernWindow>

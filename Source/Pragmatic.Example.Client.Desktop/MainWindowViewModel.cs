@@ -40,7 +40,7 @@ namespace Pragmatic.Example.Client.Desktop
             AddNewUserCommand = ObjectFactory.GetInstance<AddNewUserUICommand>();
             GetAllUsersCommand = ObjectFactory.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object>{ {"mainWindowViewModel", this}}));
             DeleteUserCommand = ObjectFactory.GetInstance<DeleteUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
-            ExecuteBlogCommand = ObjectFactory.GetInstance<ExecuteBlogUICommand>();
+            ExecuteBlogCommand = ObjectFactory.GetInstance<StartBlogApplicationUICommand>();
         }
         
     }

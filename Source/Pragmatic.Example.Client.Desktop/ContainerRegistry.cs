@@ -56,6 +56,8 @@ namespace Pragmatic.Example.Client.Desktop
             }
             else
             {
+                For(typeof(EntityDeleter<>)).LifecycleIs(new InteractionScopeLifecycle());
+
                 standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                 (
                     typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),

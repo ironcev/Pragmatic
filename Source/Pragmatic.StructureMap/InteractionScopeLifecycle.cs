@@ -35,6 +35,6 @@ namespace Pragmatic.StructureMap
             return (IObjectCache)items[StructureMapInstancesDictionaryKey];
         }
 
-        public string Description { get { return typeof(InteractionScope).Name.Replace("Lifecycle", ""); } }
+        public string Description { get { return typeof(InteractionScopeLifecycle).Name.Replace("Lifecycle", ""); } }
     }
 }

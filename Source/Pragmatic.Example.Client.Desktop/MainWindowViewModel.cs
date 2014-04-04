@@ -36,9 +36,9 @@ namespace Pragmatic.Example.Client.Desktop
 
         private void CreateCommands()
         {
-            AddNewUserCommand = ObjectFactory.GetInstance<AddNewUserUICommand>();
-            GetAllUsersCommand = ObjectFactory.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object>{ {"mainWindowViewModel", this}}));
-            DeleteUserCommand = ObjectFactory.GetInstance<DeleteUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
+            AddNewUserCommand = ObjectFactory.Container.GetInstance<AddNewUserUICommand>();
+            GetAllUsersCommand = ObjectFactory.Container.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object> { {"mainWindowViewModel", this} }));
+            DeleteUserCommand = ObjectFactory.Container.GetInstance<DeleteUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
         }
     }
 }

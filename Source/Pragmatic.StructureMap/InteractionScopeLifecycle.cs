@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Pragmatic.Interaction;
+using StructureMap;
 using StructureMap.Pipeline;
 
 namespace Pragmatic.StructureMap
@@ -8,12 +9,12 @@ namespace Pragmatic.StructureMap
     {
         public static readonly string StructureMapInstancesDictionaryKey = "STRUCTUREMAP-INSTANCES-562DAE3E-0374-4FAB-A7EC-7E1AC25FFA92";
 
-        public void EjectAll()
+        public void EjectAll(ILifecycleContext context)
         {
-            FindCache().DisposeAndClear();
+            FindCache(context).DisposeAndClear();
         }
 
-        public IObjectCache FindCache()
+        public IObjectCache FindCache(ILifecycleContext context)
         {
             IDictionary items = InteractionScope.Items;
 
@@ -23,7 +24,7 @@ namespace Pragmatic.StructureMap
                 {
                     if (!items.Contains(StructureMapInstancesDictionaryKey))
                     {
-                        var cache = new MainObjectCache();
+                        var cache = new LifecycleObjectCache();
                         items.Add(StructureMapInstancesDictionaryKey, cache);
 
                         return cache;
@@ -34,6 +35,6 @@ namespace Pragmatic.StructureMap
             return (IObjectCache)items[StructureMapInstancesDictionaryKey];
         }
 
-        public string Scope { get { return typeof(InteractionScope).Name.Replace("Lifecycle", ""); } }
+        public string Description { get { return typeof(InteractionScope).Name.Replace("Lifecycle", ""); } }
     }
 }

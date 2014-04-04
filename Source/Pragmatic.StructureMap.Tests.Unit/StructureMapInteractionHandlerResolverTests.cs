@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Pragmatic.Interaction;
 using StructureMap;
 using StructureMap.Configuration.DSL;
+using StructureMap.Graph;
 
 namespace Pragmatic.StructureMap.Tests.Unit
 {

@@ -13,6 +13,7 @@ using Raven.Client;
 using Raven.Client.Document;
 using StructureMap;
 using StructureMap.Configuration.DSL;
+using StructureMap.Graph;
 
 namespace Pragmatic.Example.Client.Desktop
 {
@@ -41,7 +42,7 @@ namespace Pragmatic.Example.Client.Desktop
             For<IInteractionHandlerResolver>().Use(structureMapInteractionObjectResolver);
             For<IEntityDeleterResolver>().Use(structureMapInteractionObjectResolver);
 
-            // Register query handlers for standard queries.
+            // Register query handlers for standard queries. WARNING: Intentionally Bad Code!
             StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions;
             if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Raven.UnitOfWork))
             {
@@ -55,6 +56,8 @@ namespace Pragmatic.Example.Client.Desktop
             }
             else
             {
+                For(typeof(EntityDeleter<>)).LifecycleIs(new InteractionScopeLifecycle());
+
                 standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                 (
                     typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),
@@ -68,7 +71,7 @@ namespace Pragmatic.Example.Client.Desktop
 
             For<UnitOfWork>()
                 .LifecycleIs(new InteractionScopeLifecycle())
-                .Use(UnitOfWorkFactory.CreateUnitOfWork);
+                .Use(() => UnitOfWorkFactory.CreateUnitOfWork());
 
             IncludeRegistry<RavenContainerRegistry>();
             IncludeRegistry<NHibernateContainerRegistry>();
@@ -93,14 +96,10 @@ namespace Pragmatic.Example.Client.Desktop
                 .LifecycleIs(new InteractionScopeLifecycle())
                 .Use(() => ObjectFactory.GetInstance<IDocumentStore>().OpenAsyncSession());
 
+            IDocumentStore documentStore = new DocumentStore {ConnectionStringName = "RavenConnStr"}.Initialize();
             For<IDocumentStore>()
                 .Singleton()
-                .Use(() =>
-                {
-                    var documentStore = new DocumentStore { ConnectionStringName = "RavenConnStr" };
-
-                    return documentStore.Initialize();
-                });
+                .Use(documentStore);
         }
     }
 
@@ -112,22 +111,18 @@ namespace Pragmatic.Example.Client.Desktop
                 .LifecycleIs(new InteractionScopeLifecycle())
                 .Use(() => ObjectFactory.GetInstance<ISessionFactory>().OpenSession());
 
+            var configuration = Fluently.Configure()
+                                        .Database(SQLiteConfiguration.Standard.UsingFile("Pragmatic.db"))
+                                        .Mappings(mappings => mappings.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetAssembly(typeof(UserMap))));
+
+            SchemaExport schema = new SchemaExport(configuration.BuildConfiguration());
+            schema.Execute(false, true, false);
+
+            ISessionFactory sessionFactory = configuration.BuildSessionFactory();
+
             For<ISessionFactory>()
                 .Singleton()
-                .Use(() =>
-                {
-                    var configuration = Fluently.Configure()
-                        .Database(SQLiteConfiguration.Standard.UsingFile("Pragmatic.db"))
-                        .Mappings(mappings =>
-                            mappings.FluentMappings.AddFromAssembly(System.Reflection.Assembly.GetAssembly(typeof(UserMap)))
-                        );
-
-                    SchemaExport schema = new SchemaExport(configuration.BuildConfiguration());
-                    schema.Execute(false, true, false);
-
-                    return configuration.BuildSessionFactory();
-                });
+                .Use(sessionFactory);
         }
-
     }
 }

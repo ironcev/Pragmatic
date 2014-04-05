@@ -17,7 +17,6 @@ namespace Pragmatic.Example.Client.Desktop
         public ICommand AddNewUserCommand { get; private set; }
         public ICommand GetAllUsersCommand { get; private set; }
         public ICommand DeleteUserCommand { get; private set; }
-        public ICommand ExecuteBlogCommand { get; private set; }
 
         private readonly ObservableCollection<UserViewModel> _users = new ObservableCollection<UserViewModel>();
         public ICollectionView Users { get; private set; }
@@ -37,11 +36,9 @@ namespace Pragmatic.Example.Client.Desktop
 
         private void CreateCommands()
         {
-            AddNewUserCommand = ObjectFactory.GetInstance<AddNewUserUICommand>();
-            GetAllUsersCommand = ObjectFactory.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object>{ {"mainWindowViewModel", this}}));
-            DeleteUserCommand = ObjectFactory.GetInstance<DeleteUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
-            ExecuteBlogCommand = ObjectFactory.GetInstance<StartBlogApplicationUICommand>();
+            AddNewUserCommand = ObjectFactory.Container.GetInstance<AddNewUserUICommand>();
+            GetAllUsersCommand = ObjectFactory.Container.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object> { {"mainWindowViewModel", this} }));
+            DeleteUserCommand = ObjectFactory.Container.GetInstance<DeleteUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
         }
-        
     }
 }

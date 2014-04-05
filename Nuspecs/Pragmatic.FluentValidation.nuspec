@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pragmatic.FluentValidation</id>
-        <version>0.6.5.27781</version>
+        <version>0.6.6.11835</version>
         <title>Pragmatic.FluentValidation</title>
         <authors>Igor Rončević</authors>
         <projectUrl>http://github.com/ironcev/pragmatic</projectUrl>
@@ -11,7 +11,7 @@
         <copyright>Copyright © 2014 Igor Rončević</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.5.1">
-                <dependency id="Pragmatic" version="0.6.5.27781" />
+                <dependency id="Pragmatic" version="0.6.6.11835" />
                 <dependency id="FluentValidation" version="5.0.0.1" />
             </group>
         </dependencies>

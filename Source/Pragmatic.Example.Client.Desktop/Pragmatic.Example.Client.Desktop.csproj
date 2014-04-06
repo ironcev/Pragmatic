@@ -108,10 +108,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BlogApplicationControl.xaml.cs">
+    <Compile Include="NHibernateMappings\UserMap.cs" />
+    <Compile Include="Pages\BlogApplicationControl.xaml.cs">
       <DependentUpon>BlogApplicationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NHibernateMappings\UserMap.cs" />
+    <Compile Include="Pages\BlogPostControl.xaml.cs">
+      <DependentUpon>BlogPostControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UsersControl.xaml.cs">
+      <DependentUpon>UsersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UICommands\DeleteUserUICommand.cs" />
     <Compile Include="UICommands\StartBlogApplicationUICommand.cs" />
     <Compile Include="UICommands\GetAllUsersUICommand.cs" />
@@ -119,10 +131,6 @@
     <Compile Include="UserInteraction.cs" />
     <Compile Include="UserViewModel.cs" />
     <Compile Include="ViewModels\BlogApplicationControlViewModel.cs" />
-    <Page Include="BlogApplicationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dialogs\UserProfileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +155,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BlogApplicationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlogPostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UsersControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Welcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />

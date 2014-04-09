@@ -9,7 +9,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel >
-                <mui:BBCodeBlock BBCode="[b]Comming Soon.[/b]" Margin="0,0,0,32" />
+                <mui:BBCodeBlock BBCode="[b]Under construction.[/b]" Margin="0,0,0,32" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

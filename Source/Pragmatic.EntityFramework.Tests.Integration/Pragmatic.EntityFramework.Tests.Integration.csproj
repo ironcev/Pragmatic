@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\PeopleContext.cs" />
+    <Compile Include="GetByIdQueryHandlerTests.cs" />
     <Compile Include="GetOneQueryHandlerTests.cs" />
     <Compile Include="Data\Person.cs" />
     <Compile Include="Data\PrepareData.cs" />

@@ -109,6 +109,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\UserProfileDialog.xaml.cs">
+      <DependentUpon>UserProfileDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NHibernateMappings\UserMap.cs" />
     <Compile Include="Pages\BlogApplicationControl.xaml.cs">
       <DependentUpon>BlogApplicationControl.xaml</DependentUpon>
@@ -149,9 +152,6 @@
     </Compile>
     <Compile Include="UICommands\AddNewUserUICommand.cs" />
     <Compile Include="UICommands\BaseUICommand.cs" />
-    <Compile Include="Dialogs\UserProfileDialog.xaml.cs">
-      <DependentUpon>UserProfileDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

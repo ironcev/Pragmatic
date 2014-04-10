@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.NHibernate", "Pra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.EntityFramework", "Pragmatic.EntityFramework\Pragmatic.EntityFramework.csproj", "{855CFF01-5A30-490A-A419-7B713D1DDB9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.EntityFramework.Tests.Integration", "Pragmatic.EntityFramework.Tests.Integration\Pragmatic.EntityFramework.Tests.Integration.csproj", "{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{855CFF01-5A30-490A-A419-7B713D1DDB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855CFF01-5A30-490A-A419-7B713D1DDB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{855CFF01-5A30-490A-A419-7B713D1DDB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

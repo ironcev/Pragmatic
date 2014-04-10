@@ -39,7 +39,7 @@
       <HintPath>..\..\dependencies\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="SwissKnife">
-      <HintPath>..\..\Dependencies\Vendors\SwissKnife.0.4.1.6188\SwissKnife.dll</HintPath>
+      <HintPath>..\..\dependencies\packages\SwissKnife.0.5.3.30059\lib\net40\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -53,10 +53,10 @@
   <ItemGroup>
     <Compile Include="Interaction\BaseQueryHandler.cs" />
     <Compile Include="Interaction\QueryableExtensions.cs" />
-    <Compile Include="Interaction\SandardQueries\GetAllQueryHandlerHandler.cs" />
-    <Compile Include="Interaction\SandardQueries\GetByIdQueryHandler.cs" />
-    <Compile Include="Interaction\SandardQueries\GetOneQueryHandler.cs" />
-    <Compile Include="Interaction\SandardQueries\GetTotalCountQueryHandler.cs" />
+    <Compile Include="Interaction\StandardQueries\GetAllQueryHandlerHandler.cs" />
+    <Compile Include="Interaction\StandardQueries\GetByIdQueryHandler.cs" />
+    <Compile Include="Interaction\StandardQueries\GetOneQueryHandler.cs" />
+    <Compile Include="Interaction\StandardQueries\GetTotalCountQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitFoWork.cs" />
   </ItemGroup>

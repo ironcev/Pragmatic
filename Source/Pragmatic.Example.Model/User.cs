@@ -1,4 +1,6 @@
-﻿namespace Pragmatic.Example.Model
+﻿using System;
+
+namespace Pragmatic.Example.Model
 {
     public class User : Entity
     {
@@ -9,5 +11,8 @@
         public string FullName { get { return (FirstName + " " + LastName).Trim(); } }
 
         public bool IsAdministrator { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

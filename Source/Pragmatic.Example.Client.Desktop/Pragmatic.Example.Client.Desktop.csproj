@@ -43,6 +43,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\dependencies\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.5.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\dependencies\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -106,11 +110,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="NHibernateMappings\UserMap.cs" />
+    <Compile Include="Pages\BlogApplicationControl.xaml.cs">
+      <DependentUpon>BlogApplicationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BlogPostControl.xaml.cs">
+      <DependentUpon>BlogPostControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UsersControl.xaml.cs">
+      <DependentUpon>UsersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UICommands\DeleteUserUICommand.cs" />
+    <Compile Include="UICommands\StartBlogApplicationUICommand.cs" />
     <Compile Include="UICommands\GetAllUsersUICommand.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="UserInteraction.cs" />
     <Compile Include="UserViewModel.cs" />
+    <Compile Include="ViewModels\BlogApplicationControlViewModel.cs" />
     <Page Include="Dialogs\UserProfileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +156,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BlogApplicationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BlogPostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UsersControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Welcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />

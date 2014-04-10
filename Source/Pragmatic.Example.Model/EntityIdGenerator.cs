@@ -11,7 +11,7 @@ namespace Pragmatic.Example.Model
         {
             GenerateId = type =>
             {
-                if (type == typeof (Company))
+                if (type == typeof (BlogPost))
                     return GuidUtility.NewSequentialGuid();
 
                 return Guid.NewGuid();

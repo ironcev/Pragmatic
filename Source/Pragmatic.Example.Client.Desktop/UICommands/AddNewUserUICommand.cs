@@ -1,6 +1,7 @@
 ﻿// TODO-IG: Add Intentionally Bad Code warning!
 
 using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Pragmatic.Example.Client.Desktop.Dialogs;
 using Pragmatic.Example.Model;
@@ -11,7 +12,8 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 {
     class AddNewUserUICommand : BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
     {
-        public AddNewUserUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor) : base(commandExecutor, queryExecutor, requestExecutor)
+        public AddNewUserUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor)
+            : base(commandExecutor, queryExecutor, requestExecutor)
         {
         }
 
@@ -22,10 +24,17 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 
         public void Execute(object parameter)
         {
-            UserProfileDialog dialog = new UserProfileDialog();
-            if (dialog.ShowDialog() != true) return;
+            var userProfileDialog = new UserProfileDialog
+               {
+                   Title = "Edit Profile",
+                   Buttons = new Button[] { } //TODO-VKY: This will be removed when NuGet fix "ModernDialog ShowDialog always return false"
+               };
 
-            AddNewUserCommand addNewUserCommand = dialog.UserProfile;
+            // userProfileDialog.Buttons = new Button[] { userProfileDialog.OkButton, userProfileDialog.CancelButton };
+
+            if (userProfileDialog.ShowDialog() != true) return;
+
+            AddNewUserCommand addNewUserCommand = userProfileDialog.UserProfile;
             Response<User> response = CommandExecutor.Execute(addNewUserCommand);
 
             if (response.HasErrors)

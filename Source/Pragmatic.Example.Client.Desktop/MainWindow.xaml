@@ -14,7 +14,8 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Welcome">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="close" Source="/Pages/Welcome.xaml" />
+                <mui:Link Source="/Pages/Welcome.xaml" />
+                <mui:Link DisplayName="CLOSE" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
 

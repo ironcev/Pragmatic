@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             Width="350"
+             Width="400"
              WindowStartupLocation="CenterOwner"
              SizeToContent="Height"
              ShowInTaskbar="False"
@@ -13,7 +13,7 @@
     <mui:ModernDialog.Resources>
         <Style TargetType="Button">
             <Setter Property="Width" Value="75"/>
-            <Setter Property="Margin" Value="0,0,5,0"/>
+            <Setter Property="Margin" Value="0,30,5,0"/>
         </Style>
     </mui:ModernDialog.Resources>
     <Grid>
@@ -35,22 +35,20 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="First Name:"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FirstName}"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="First Name:" Margin="0,10,5,0"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FirstName}" Margin="0,10,5,0"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Last Name:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LastName}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Last Name:" Margin="0,10,5,0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LastName}" Margin="0,10,5,0"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Email:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Email}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Email:" Margin="0,10,5,0"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Email}" Margin="0,10,5,0"/>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Is administrator:"/>
-            <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding IsAdministrator}" VerticalAlignment="Center"/>
-        </Grid>
+            </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal"  FlowDirection="RightToLeft">
             <Button Content="Cancel" IsCancel="True" />
-            <Button x:Name="_btnOk" Content="Ok" />
+            <Button x:Name="_btnOk" Content="Ok" IsDefault="True" />
         </StackPanel>
     </Grid>
 </mui:ModernDialog>

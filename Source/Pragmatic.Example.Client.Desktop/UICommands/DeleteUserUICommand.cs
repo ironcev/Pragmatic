@@ -79,7 +79,7 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             else
                 UserInteraction.ShowInformation("Selected user successfully deleted.");
 
-            //// TODO-IG: Refresh the list.
+           _mainWindowViewModel.GetAllUsersCommand.Execute(true);
         }
 
         public event EventHandler CanExecuteChanged;

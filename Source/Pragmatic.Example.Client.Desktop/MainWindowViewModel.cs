@@ -21,6 +21,8 @@ namespace Pragmatic.Example.Client.Desktop
         private readonly ObservableCollection<UserViewModel> _users = new ObservableCollection<UserViewModel>();
         public ICollectionView Users { get; private set; }
 
+        public int SelectedUserIndex { get { return _users.Count - 1; }}
+        
         internal MainWindowViewModel()
         {
             CreateCommands();
@@ -36,7 +38,7 @@ namespace Pragmatic.Example.Client.Desktop
 
         private void CreateCommands()
         {
-            AddNewUserCommand = ObjectFactory.Container.GetInstance<AddNewUserUICommand>();
+            AddNewUserCommand = ObjectFactory.Container.GetInstance<AddNewUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
             GetAllUsersCommand = ObjectFactory.Container.GetInstance<GetAllUsersUICommand>(new ExplicitArguments(new Dictionary<string, object> { {"mainWindowViewModel", this} }));
             DeleteUserCommand = ObjectFactory.Container.GetInstance<DeleteUserUICommand>(new ExplicitArguments(new Dictionary<string, object> { { "mainWindowViewModel", this } }));
         }

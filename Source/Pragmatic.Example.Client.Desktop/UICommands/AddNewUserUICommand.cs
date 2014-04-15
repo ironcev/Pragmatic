@@ -7,14 +7,20 @@ using Pragmatic.Example.Client.Desktop.Dialogs;
 using Pragmatic.Example.Model;
 using Pragmatic.Example.Model.Users;
 using Pragmatic.Interaction;
+using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands
 {
     class AddNewUserUICommand : BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
     {
-        public AddNewUserUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor)
+        private readonly MainWindowViewModel _mainWindowViewModel;
+
+        public AddNewUserUICommand(MainWindowViewModel mainWindowViewModel, CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor)
             : base(commandExecutor, queryExecutor, requestExecutor)
         {
+            Argument.IsNotNull(mainWindowViewModel, "mainWindowViewModel");
+
+            _mainWindowViewModel = mainWindowViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -39,10 +45,8 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 
             if (response.HasErrors)
                 UserInteraction.ShowError("New user cannot be added.", response);
-            else
-                UserInteraction.ShowInformation("New user succesfully added.");
 
-            // TODO-IG: Display the user.
+           _mainWindowViewModel.GetAllUsersCommand.Execute(true);
         }
 
         public event EventHandler CanExecuteChanged;

@@ -5,18 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:desktop="clr-namespace:Pragmatic.Example.Client.Desktop"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
+   
     <Grid Style="{StaticResource ContentRoot}">
+        <Grid.Resources>
+            <Style x:Key="AlternatingListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+                <Style.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                        <Setter Property="Background" Value="LightCyan"></Setter>
+                    </Trigger>
+                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                        <Setter Property="Background" Value="LightYellow"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Button Content="Add New User" Command="{Binding AddNewUserCommand}"/>
-            <Button Content="Get All Users" Command="{Binding GetAllUsersCommand}"/>
-            <Button Content="Delete Selected User" Command="{Binding DeleteUserCommand}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <Button Content="Add New User" Command="{Binding AddNewUserCommand}" Margin="0,0,0,0" />
+            <Button Content="Get All Users" Command="{Binding GetAllUsersCommand}" Margin="10,0,0,0" />
+            <Button Content="Delete Selected User" Command="{Binding DeleteUserCommand}" Margin="10,0,0,0" />
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Users}" IsSynchronizedWithCurrentItem="True">
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+            <ListBox ItemsSource="{Binding Users}" IsSynchronizedWithCurrentItem="True" AlternationCount="2"  ItemContainerStyle="{StaticResource AlternatingListBoxItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="desktop:UserViewModel">
                     <StackPanel>
@@ -26,5 +40,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+            </Border>
     </Grid>
 </UserControl>

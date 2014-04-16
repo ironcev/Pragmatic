@@ -33,7 +33,8 @@
 
         <mui:LinkGroup DisplayName="users" >
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="" Source="/Pages/UsersControl.xaml"/>
+                <mui:Link Source="/Pages/UsersControl.xaml"/>
+                <mui:Link DisplayName="CREATE NEW USER" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>

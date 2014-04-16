@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 
@@ -34,6 +35,7 @@ namespace Pragmatic.Example.Client.Desktop.Pages
             if (e.Source != null) return;
             var parentWindow = Window.GetWindow(this);
             if (parentWindow != null) parentWindow.Close();
+            e.Cancel = true;
         }
     }
 }

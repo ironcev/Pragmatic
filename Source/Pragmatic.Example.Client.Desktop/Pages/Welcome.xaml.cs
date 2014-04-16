@@ -31,6 +31,7 @@ namespace Pragmatic.Example.Client.Desktop.Pages
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            if (e.Source != null) return;
             var parentWindow = Window.GetWindow(this);
             if (parentWindow != null) parentWindow.Close();
         }

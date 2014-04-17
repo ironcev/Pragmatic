@@ -15,7 +15,7 @@
         <mui:LinkGroup DisplayName="Welcome">
             <mui:LinkGroup.Links>
                 <mui:Link Source="/Pages/Welcome.xaml" />
-                <mui:Link DisplayName="CLOSE" />
+                <mui:Link DisplayName="CLOSE" Source="Close"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
 
@@ -34,7 +34,7 @@
         <mui:LinkGroup DisplayName="users" >
             <mui:LinkGroup.Links>
                 <mui:Link Source="/Pages/UsersControl.xaml"/>
-                <mui:Link DisplayName="CREATE NEW USER" />
+                <mui:Link DisplayName="CREATE NEW USER" Source="CreateNewUser"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>

@@ -39,10 +39,12 @@ namespace Pragmatic.Example.Client.Desktop.Pages
         // This is invoked when the content is about to become inactive.
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (e.Source != null) return;
-            var vm = DataContext as MainWindowViewModel;
-            if (vm != null) vm.AddNewUserCommand.Execute(true);
-            e.Cancel = true; // For cancel navigation.
+            if (e.Source.ToString() == "CreateNewUser")
+            {
+                var vm = DataContext as MainWindowViewModel;
+                if (vm != null) vm.AddNewUserCommand.Execute(true);
+                e.Cancel = true; // For cancel navigation.            }
+            }
         }
     }
 }

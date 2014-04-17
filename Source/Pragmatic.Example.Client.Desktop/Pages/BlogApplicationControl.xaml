@@ -29,7 +29,7 @@
                                 <StackPanel>
                                     <TextBlock Text="{Binding Title}"/>
                                     <TextBlock Text="{Binding Content }"/>
-                                    <TextBlock Text="Posted by:"/>
+                                    <!--<TextBlock Text="Posted by:"/>-->
                                     <TextBlock Text="{Binding Username}"/>
                                 </StackPanel>
                             </DataTemplate>

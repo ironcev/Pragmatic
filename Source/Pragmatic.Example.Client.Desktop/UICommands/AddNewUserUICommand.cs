@@ -35,6 +35,14 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
                    Title = "Edit Profile",
                    Buttons = new Button[] { } //TODO-VKY: This will be removed when NuGet fix "ModernDialog ShowDialog always return false"
                };
+           
+            if (_mainWindowViewModel.SelectedUser != null)
+            {
+                userProfileDialog.UserProfile.FirstName = _mainWindowViewModel.SelectedUser.FirstName;
+                userProfileDialog.UserProfile.LastName = _mainWindowViewModel.SelectedUser.LastName;
+                userProfileDialog.UserProfile.Email = _mainWindowViewModel.SelectedUser.Email;
+                userProfileDialog.Title = "Edit Profile" + "-" + _mainWindowViewModel.SelectedUser.FirstName;
+            }
 
             // userProfileDialog.Buttons = new Button[] { userProfileDialog.OkButton, userProfileDialog.CancelButton };
 

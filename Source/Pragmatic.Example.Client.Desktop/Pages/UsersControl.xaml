@@ -5,26 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:desktop="clr-namespace:Pragmatic.Example.Client.Desktop"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
+
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Button Content="Add New User" Command="{Binding AddNewUserCommand}"/>
-            <Button Content="Get All Users" Command="{Binding GetAllUsersCommand}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
             <Button Content="Delete Selected User" Command="{Binding DeleteUserCommand}"/>
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Users}" IsSynchronizedWithCurrentItem="True">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="desktop:UserViewModel">
-                    <StackPanel>
-                        <TextBlock Text="{Binding FullName}"/>
-                        <TextBlock Text="{Binding Email}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+            <ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser,Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="desktop:UserViewModel">
+                        <StackPanel>
+                            <TextBlock Text="{Binding FullName}"/>
+                            <TextBlock Text="{Binding Email}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </Grid>
 </UserControl>

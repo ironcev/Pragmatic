@@ -53,9 +53,11 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
 
             if (response.HasErrors)
                 UserInteraction.ShowError("New user cannot be added.", response);
-
-            _mainWindowViewModel.GetAllUsersCommand.Execute(true);
-            _mainWindowViewModel.SetSelectedUser();
+            else
+            {
+                _mainWindowViewModel.GetAllUsersCommand.Execute(true);
+                _mainWindowViewModel.SetSelectedUser();
+            }
         }
 
         public event EventHandler CanExecuteChanged;

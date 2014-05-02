@@ -6,7 +6,7 @@ namespace Pragmatic
 {
     internal class ArgumentCheck
     {
-        internal static void EntityTypeRepresentsEntityType(Type entityType, Option<string> parameterName) // TODO-IG: Does the Entity type has to be concrete type or it can be abstract base type?
+        internal static void EntityTypeRepresentsEntityType(Type entityType, Option<string> parameterName) // TODO-IG: Does the Entity type has to be concrete type or it can be an abstract base type?
         {
             Argument.IsNotNull(entityType, parameterName);
             Argument.IsValid(typeof(Entity) != entityType,

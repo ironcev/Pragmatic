@@ -1,4 +1,4 @@
-﻿// TODO-iG: This is really ugly how we transfer data here! Find some time to prittify the example.
+﻿// TODO-iG: This is really ugly how we transfer data here! Find some time to prettify the example.
 
 using System.Windows;
 using Pragmatic.Example.Model.Users;

@@ -84,16 +84,16 @@ namespace Pragmatic
             if (--_counter != 0) return;
 
             
-            // Mark the registered changes in the underlying persistance.
+            // Mark the registered changes in the underlying persistence.
             foreach (var registration in _registrations)
             {
                 switch (registration.RegistrationType)
                 {
                     case RegistrationType.Add:
                         MarkEntityAsAdded(registration.Entity);
-                        // Below this point, entites will be persisted.
-                        // The persistancy has to store the information that the entity is not a new entity any more.
-                        // Of course, we have concurency issues here, but we completely ignore thread safety so far.
+                        // Below this point, entities will be persisted.
+                        // The persistence has to store the information that the entity is not a new entity any more.
+                        // Of course, we have concurrency issues here, but we completely ignore thread safety so far.
                         registration.Entity.IsNewEntity = false;
                         break;
                     case RegistrationType.Update:

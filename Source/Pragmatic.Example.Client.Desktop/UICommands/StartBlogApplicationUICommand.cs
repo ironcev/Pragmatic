@@ -4,7 +4,7 @@ using Pragmatic.Interaction;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands
 {
-    class StartBlogApplicationUICommand: BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
+    class StartBlogApplicationUICommand: BaseUICommand, ICommand // TODO-IG: Replace with appropriate classes from SwissKnife, once they are implemented.
     {
         public StartBlogApplicationUICommand(CommandExecutor commandExecutor, QueryExecutor queryExecutor, RequestExecutor requestExecutor)
             : base(commandExecutor, queryExecutor, requestExecutor)

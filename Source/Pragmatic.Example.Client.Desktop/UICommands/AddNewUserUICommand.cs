@@ -11,7 +11,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands
 {
-    class AddNewUserUICommand : BaseUICommand, ICommand // TODO-IG: Replace with apporipriate classes from SwissKnife, once they are implemented.
+    class AddNewUserUICommand : BaseUICommand, ICommand // TODO-IG: Replace with appropriate classes from SwissKnife, once they are implemented.
     {
         private readonly MainWindowViewModel _mainWindowViewModel;
 
@@ -33,7 +33,7 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             var userProfileDialog = new UserProfileDialog
                {
                    Title = "Edit Profile",
-                   Buttons = new Button[] { } //TODO-VKY: This will be removed when NuGet fix "ModernDialog ShowDialog always return false"
+                   Buttons = new Button[] { } //TODO-VKY: This will be removed when NuGet fix "ModernDialog ShowDialog always return false".
                };
            
             if (_mainWindowViewModel.SelectedUser != null)

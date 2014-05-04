@@ -86,7 +86,7 @@ namespace Pragmatic.Interaction
 
         public Response AddSuccess(string message)
         {
-            AddInformation(message, string.Empty);
+            AddSuccess(message, string.Empty);
 
             return this;
         }

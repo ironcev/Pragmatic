@@ -7,6 +7,7 @@ using Pragmatic.Example.Client.Desktop.NHibernateMappings;
 using Pragmatic.Example.Model;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.EntityDeletion;
+using Pragmatic.Interaction.StandardQueries;
 using Pragmatic.Raven.Interaction.StandardQueries;
 using Pragmatic.StructureMap;
 using Raven.Client;
@@ -14,6 +15,7 @@ using Raven.Client.Document;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
+using SwissKnife;
 
 namespace Pragmatic.Example.Client.Desktop
 {
@@ -46,6 +48,7 @@ namespace Pragmatic.Example.Client.Desktop
             StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions;
             if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Raven.UnitOfWork))
             {
+                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<GetByIdQueryHandler>();
                 standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                     (
                     typeof(GetByIdQueryHandler<>),
@@ -56,6 +59,7 @@ namespace Pragmatic.Example.Client.Desktop
             }
             else
             {
+                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<NHibernate.Interaction.StandardQueries.GetByIdQueryHandler>();
                 standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                 (
                     typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),

@@ -1,9 +1,12 @@
 ﻿// TODO-IG: Add Intentionally Bad Code warning!
 
 using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Pragmatic.Example.Model;
 using Pragmatic.Interaction;
+using SwissKnife;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands
@@ -33,6 +36,14 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             // This query returns paginated result. The first page is returned with maximum 10 users. The users are sorted by their first name and then by email.
             //var users = QueryExecutor.GetAll(new OrderBy<User>(user => user.FirstName).ThenBy(user => user.Email, OrderByDirection.Descending), new Paging(1, 10));
 
+            // This query is (unfortunately) here because so far there are neither unit tests nor integration tests in Pragmatic and this is the only way to "test"
+            // if non-generic version of the GetByIdQuery works.
+            //if (users.Any())
+            //{
+            //    Option<object> firstUser = QueryExecutor.GetById(typeof (User), users.First().Id);
+            //    MessageBox.Show(((User) firstUser.Value).FullName);
+            //}
+                
             _mainWindowViewModel.SetUsers(users);
         }
 

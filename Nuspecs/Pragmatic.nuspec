@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Pragmatic</id>
-        <version>0.6.6.27350</version>
+        <version>0.6.6.32602</version>
         <title>Pragmatic</title>
         <authors>Igor Rončević</authors>
         <projectUrl>http://github.com/ironcev/pragmatic</projectUrl>

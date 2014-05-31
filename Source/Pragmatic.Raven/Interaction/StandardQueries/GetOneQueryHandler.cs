@@ -15,7 +15,7 @@ namespace Pragmatic.Raven.Interaction.StandardQueries
         {
             Argument.IsNotNull(query, "query");
 
-            return DocumentSession.Query<T>().OrderBy(query.OrderBy).FirstOrDefault(query.Criteria);
+            return DocumentSession.Query<T>().OrderBy(query.OrderBy).FirstOrDefault(query.Criteria); // TODO-IG: What if Criteria is null? Check all standard queries, commands and requests and use the same logic (where to check for consistency etc.).
         }
     }
 }

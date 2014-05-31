@@ -72,7 +72,7 @@ namespace Pragmatic.Interaction
             }
             catch (Exception e)
             {
-                string additionalMessage = string.Format("An exception occured while executing the query handler of type '{0}'.", queryHandler.GetType());
+                string additionalMessage = string.Format("An exception occurred while executing the query handler of type '{0}'.", queryHandler.GetType());
 
                 throw new QueryExecutionException(additionalMessage, e);
             }
@@ -89,7 +89,7 @@ namespace Pragmatic.Interaction
             }
             catch (Exception e)
             {
-                string message = string.Format("An exception occured while resolving query handlers for the queries of type '{0}' and query results of type '{1}'.", queryType, typeof(TResult));
+                string message = string.Format("An exception occurred while resolving query handlers for the queries of type '{0}' and query results of type '{1}'.", queryType, typeof(TResult));
 
                 throw new QueryExecutionException(message, e);
             }

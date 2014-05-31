@@ -15,6 +15,14 @@ namespace Pragmatic.Interaction
             return queryExecutor.Execute(new GetByIdQuery<T> { Id = id });
         }
 
+        public static Option<object> GetById(this QueryExecutor queryExecutor, Type entityType, Guid id)
+        {
+            Argument.IsNotNull(queryExecutor, "queryExecutor");
+            ArgumentCheck.EntityTypeRepresentsEntityType(entityType, "entityType");
+
+            return queryExecutor.Execute(new GetByIdQuery { EntityType = entityType, EntityId = id });
+        }
+
         public static Option<T> GetOne<T>(this QueryExecutor queryExecutor, Expression<Func<T, bool>> criteria) where T : class
         {
             Argument.IsNotNull(queryExecutor, "queryExecutor");

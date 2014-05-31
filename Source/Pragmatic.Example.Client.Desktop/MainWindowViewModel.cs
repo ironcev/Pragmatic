@@ -21,11 +21,11 @@ namespace Pragmatic.Example.Client.Desktop
         private readonly ObservableCollection<UserViewModel> _users = new ObservableCollection<UserViewModel>();
         public ICollectionView Users { get; private set; }
 
-        private UserViewModel selectedUser;
+        private UserViewModel _selectedUser;
         public UserViewModel SelectedUser
         {
-            get { return selectedUser; }
-            set { selectedUser = value; OnPropertyChanged("SelectedUser"); }
+            get { return _selectedUser; }
+            set { _selectedUser = value; OnPropertyChanged("SelectedUser"); }
         }
 
         internal MainWindowViewModel()

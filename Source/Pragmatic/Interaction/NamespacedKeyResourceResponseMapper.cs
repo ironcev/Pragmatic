@@ -75,7 +75,7 @@ namespace Pragmatic.Interaction
                 if (indexOfTheLastDot == responseMessage.Key.Length - 1)
                     throw new InvalidOperationException(string.Format("Invalid name-spaced key. A name-spaced key cannot end with a dot (.).{0}" +
                                                                       "The name-spaced key is: {1}",
-                                                                      Environment.NewLine,
+                                                                      System.Environment.NewLine,
                                                                       responseMessage.Key));
                 keyWithoutNamespace = responseMessage.Key.Substring(indexOfTheLastDot + 1);
             }

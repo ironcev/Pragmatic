@@ -34,10 +34,10 @@ namespace Pragmatic.Interaction
                     throw new NotSupportedException(string.Format("There are {1} command handlers defined for the commands of type '{2}'.{0}" +
                                                                   "Having more than one command handler per command type is not supported.{0}" +
                                                                   "The defined command handlers are:{0}{3}",
-                                                                  Environment.NewLine,
+                                                                  System.Environment.NewLine,
                                                                   commandHandlers.Length,
                                                                   command.GetType(),                                                              
-                                                                  commandHandlers.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + Environment.NewLine)));
+                                                                  commandHandlers.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + System.Environment.NewLine)));
 
                 return ExecuteCommandHandler(commandHandlers[0], command);
             }

@@ -31,10 +31,10 @@ namespace Pragmatic.Interaction.EntityDeletion
                 throw new NotSupportedException(string.Format("There are {1} entity deleter types defined for the entity of type '{2}'.{0}" +
                                               "Having more than one entity deleter per entity type is not supported.{0}" +
                                               "The defined entity deleter types are:{0}{3}",
-                                              Environment.NewLine,
+                                              System.Environment.NewLine,
                                               entityDeleters.Length,
                                               entityType,
-                                              entityDeleters.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + Environment.NewLine)));
+                                              entityDeleters.Aggregate(string.Empty, (output, commandHandler) => output + commandHandler.GetType() + System.Environment.NewLine)));
 
             return entityDeleters.Length > 0 ? Option<IEntityDeleter>.Some((IEntityDeleter)entityDeleters[0]) : Option<IEntityDeleter>.None; // TODO-IG: Do we want to leave it like this? This potentially throws InvalidCastException.
         }

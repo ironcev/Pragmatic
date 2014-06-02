@@ -56,6 +56,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Environment\EntityAssembly.cs" />
+    <Compile Include="Environment\EntityAssemblyCollection.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleterProvider.cs" />
     <Compile Include="Interaction\CommandExecutorExtensions.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Interaction\Paging.cs" />
     <Compile Include="Interaction\StandardRequests\CanDeleteEntityRequest.cs" />
     <Compile Include="Interaction\StandardRequests\CanDeleteEntityRequestHandler.cs" />
+    <Compile Include="Environment\PragmaticEnvironment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
+using Pragmatic.Environment;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.StandardCommands;
 using Pragmatic.Interaction.StandardQueries;
@@ -13,18 +12,12 @@ namespace Pragmatic.StructureMap
 {
     public static class StandardInteractionHandlerRegistration
     {
-        public static void RegisterStandardInteractionHandlersForEntities(Registry registry, StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions, params Assembly[] assembliesContainingEntities)
+        public static void RegisterStandardInteractionHandlersForEntities(Registry registry, StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions)
         {
             Argument.IsNotNull(registry, "registry");
             Argument.IsNotNull(standardInteractionHandlerGenericTypeDefinitions, "standardInteractionHandlerGenericTypeDefinitions");
-            Argument.IsNotNull(assembliesContainingEntities, "assembliesContainingEntities");
-            Argument.IsValid(assembliesContainingEntities.Length > 0,
-                             "The array of assemblies that contain entities is empty. The array must have at least one assembly specified.",
-                             "assembliesContainingEntities");
 
-            var entityTypes = assembliesContainingEntities.SelectMany(assembly => assembly.GetTypes().Where(type => type != typeof(Entity) && typeof(Entity).IsAssignableFrom(type)));
-
-            foreach (var entityType in entityTypes) // E.g. User.
+            foreach (var entityType in PragmaticEnvironment.EntityAssemblies.EntityTypes) // E.g. User.
             {
                 // E.g. IQueryHandler<GetByIdQuery<User>, Option<User>>.
                 ConnectInteractionHandlerToStandardInteractionForEntityType(registry, typeof(IQueryHandler<,>), typeof(GetByIdQuery<>), typeof(Option<>).MakeGenericType(entityType), standardInteractionHandlerGenericTypeDefinitions.GetByIdQueryHandler, entityType);

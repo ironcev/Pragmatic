@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using SwissKnife.Diagnostics.Contracts;
+using Pragmatic.Environment;
 
 namespace Pragmatic
 {
@@ -10,26 +9,6 @@ namespace Pragmatic
     [Serializable]
     public abstract class Entity
     {
-        private static Func<Type, Guid> _idGenerator;
-
-        public static Func<Type, Guid> IdGenerator
-        {
-            [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return _idGenerator; }
-
-            [MethodImpl(MethodImplOptions.Synchronized)] set
-            {
-                Argument.IsNotNull(value, "value");
-
-                _idGenerator = value;
-            }
-        }
-
-        static Entity()
-        {
-            _idGenerator = type => Guid.NewGuid();
-        }
-
         /// <summary>
         /// The key of the <see cref="Entity"/>.
         /// If it is <see cref="Guid.Empty"/>, the <see cref="Entity"/> is not yet persisted.
@@ -54,7 +33,7 @@ namespace Pragmatic
 
         protected Entity()
         {
-            Id = IdGenerator(GetType());
+            Id = PragmaticEnvironment.IdGenerator(GetType());
             IsNewEntity = true;
         }
     }

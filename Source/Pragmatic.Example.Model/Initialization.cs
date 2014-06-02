@@ -1,4 +1,5 @@
-﻿using Pragmatic.Interaction;
+﻿using Pragmatic.Environment;
+using Pragmatic.Interaction;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
@@ -11,7 +12,7 @@ namespace Pragmatic.Example.Model
         {
             ObjectFactory.Configure(x => x.AddRegistry(new ExampleRegistry()));
 
-            Entity.IdGenerator = EntityIdGenerator.GenerateId;
+            PragmaticEnvironment.IdGenerator = EntityIdGenerator.GenerateId;
         }
 
         internal static void Initialize()

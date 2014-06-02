@@ -6,6 +6,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Environment
 {
+    // Immutable.
     public class EntityAssembly // TODO-IG: Implement equality. Maybe implement as struct?
     {
         private static readonly Assembly _thisAssembly = Assembly.GetExecutingAssembly();

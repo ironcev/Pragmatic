@@ -11,10 +11,10 @@ namespace Pragmatic.Example.Client.Desktop
         internal static void ShowError(string message, Response response)
         {
             MessageBox.Show(string.Format("{1}{0}{2}",
-                                Environment.NewLine,
+                                System.Environment.NewLine,
                                 message,
                                 response.Errors.Aggregate(string.Empty,
-                                    (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message))),
+                                    (result, error) => string.Format("{1}{2}{0}", System.Environment.NewLine, result, error.Message))),
                              "Error",
                              MessageBoxButton.OK,
                              MessageBoxImage.Error);
@@ -57,11 +57,11 @@ namespace Pragmatic.Example.Client.Desktop
                 caption = "Information";
             }
 
-            string responseMessage = (response.Errors.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message)) + Environment.NewLine +
-                                      response.Warnings.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message)) + Environment.NewLine +
-                                      response.Information.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", Environment.NewLine, result, error.Message))).Trim();
+            string responseMessage = (response.Errors.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", System.Environment.NewLine, result, error.Message)) + System.Environment.NewLine +
+                                      response.Warnings.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", System.Environment.NewLine, result, error.Message)) + System.Environment.NewLine +
+                                      response.Information.Aggregate(string.Empty, (result, error) => string.Format("{1}{2}{0}", System.Environment.NewLine, result, error.Message))).Trim();
 
-            return MessageBox.Show((message + Environment.NewLine + responseMessage).Trim(), caption, messageBoxButton, messageBoxImage);
+            return MessageBox.Show((message + System.Environment.NewLine + responseMessage).Trim(), caption, messageBoxButton, messageBoxImage);
         }
     }
 }

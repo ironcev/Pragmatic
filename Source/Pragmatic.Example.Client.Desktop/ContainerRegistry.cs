@@ -69,7 +69,7 @@ namespace Pragmatic.Example.Client.Desktop
                 );
             }
 
-            StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions, typeof(User).Assembly);
+            StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
 
             For<UnitOfWork>()
                 .LifecycleIs(new InteractionScopeLifecycle())

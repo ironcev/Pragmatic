@@ -34,10 +34,10 @@ namespace Pragmatic.Interaction
                     throw new NotSupportedException(string.Format("There are {1} request handlers defined for the requests of type '{2}'.{0}" +
                                                                   "Having more than one request handler per request type is not supported.{0}" +
                                                                   "The defined request handlers are:{0}{3}",
-                                                                  Environment.NewLine,
+                                                                  System.Environment.NewLine,
                                                                   requestHandlers.Length,
-                                                                  request.GetType(),                                                              
-                                                                  requestHandlers.Aggregate(string.Empty, (output, requestHandler) => output + requestHandler.GetType() + Environment.NewLine)));
+                                                                  request.GetType(),
+                                                                  requestHandlers.Aggregate(string.Empty, (output, requestHandler) => output + requestHandler.GetType() + System.Environment.NewLine)));
 
                 return ExecuteRequestHandler(requestHandlers[0], request);
             }

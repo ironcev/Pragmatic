@@ -45,11 +45,11 @@ namespace Pragmatic.Interaction
                     throw new NotSupportedException(string.Format("There are {1} query handlers defined for the queries of type '{2}' and results of type '{3}'.{0}" +
                                                                   "Having more than one query handler per query type and result type is not supported.{0}" +
                                                                   "The defined query handlers are:{0}{4}",
-                                                                  Environment.NewLine,
+                                                                  System.Environment.NewLine,
                                                                   queryHandlers.Length,
                                                                   query.GetType(),
                                                                   typeof(TResult),
-                                                                  queryHandlers.Aggregate(string.Empty, (output, queryHandler) => output + queryHandler.GetType() + Environment.NewLine)));
+                                                                  queryHandlers.Aggregate(string.Empty, (output, queryHandler) => output + queryHandler.GetType() + System.Environment.NewLine)));
 
                 return ExecuteQueryHandler<TResult>(queryHandlers[0], query);
             }

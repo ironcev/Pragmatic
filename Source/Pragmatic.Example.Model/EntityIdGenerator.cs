@@ -12,9 +12,9 @@ namespace Pragmatic.Example.Model
             GenerateId = type =>
             {
                 if (type == typeof (BlogPost))
-                    return GuidUtility.NewSequentialGuid();
+                    return Guid.NewGuid();
 
-                return Guid.NewGuid();
+                return GuidUtility.NewSequentialGuid();
             };
         }
     }

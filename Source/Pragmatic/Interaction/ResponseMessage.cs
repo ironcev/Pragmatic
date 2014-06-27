@@ -1,4 +1,5 @@
-﻿using SwissKnife.Diagnostics.Contracts;
+﻿using System;
+using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction
 {
@@ -10,6 +11,7 @@ namespace Pragmatic.Interaction
         Error
     }
 
+    [Serializable]
     public class ResponseMessage // TODO-IG: Mark it as DeepImmutable once when this attribute is available in SwissKnife.
     {
         public MessageType MessageType { get; private set; }

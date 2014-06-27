@@ -7,6 +7,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Interaction
 {
+    [Serializable]
     public class Response<T> : Response
     {
         public T Result { get; private set; }
@@ -41,6 +42,7 @@ namespace Pragmatic.Interaction
         }
     }
 
+    [Serializable]
     public class Response
     {
         private readonly IList<ResponseMessage> _responseMessages = new List<ResponseMessage>();

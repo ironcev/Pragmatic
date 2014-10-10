@@ -7,6 +7,12 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Raven.Interaction.StandardQueries
 {
+    // Remark.
+    // When retrieving an item by its Id, you are required to use the DocumentSession.Load(id) method.
+    // DocumentSession.Load() is an ACID compliant operation. It retrieves documents directly from the document store.
+    // It doesn't go against an index.
+    // For more information see: http://stackoverflow.com/a/17841520
+
     public sealed class GetByIdQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetByIdQuery<T>, Option<T>> where T : class
     {
         public GetByIdQueryHandler(IDocumentSession documentSession) : base(documentSession) { }

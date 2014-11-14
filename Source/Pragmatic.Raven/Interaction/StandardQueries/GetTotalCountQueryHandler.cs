@@ -2,6 +2,7 @@
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.StandardQueries;
 using Raven.Client;
+using Raven.Client.Linq;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Raven.Interaction.StandardQueries
@@ -14,7 +15,15 @@ namespace Pragmatic.Raven.Interaction.StandardQueries
         {
             Argument.IsNotNull(query, "query");
 
-            return query.Criteria.IsSome ? DocumentSession.Query<T>().Where(query.Criteria.Value).Count() : DocumentSession.Query<T>().Count();
+            RavenQueryStatistics statistics;
+
+            IRavenQueryable<T> ravenQuery = DocumentSession.Query<T>().Statistics(out statistics);
+
+            if (query.Criteria.IsSome) ravenQuery = ravenQuery.Where(query.Criteria.Value);
+
+            var dummyResult = ravenQuery.Take(0).ToArray();
+
+            return statistics.TotalResults;
         }
     }
 }

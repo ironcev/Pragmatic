@@ -40,8 +40,7 @@
     <Reference Include="StructureMap.Net4">
       <HintPath>..\..\dependencies\packages\structuremap.3.0.0.108\lib\net40\StructureMap.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="SwissKnife, Version=0.5.5.19567, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SwissKnife">
       <HintPath>..\..\dependencies\packages\SwissKnife.0.5.5.19567\lib\net40\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />

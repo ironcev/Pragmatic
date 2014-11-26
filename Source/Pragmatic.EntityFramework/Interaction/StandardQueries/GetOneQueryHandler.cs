@@ -19,6 +19,7 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
 
             IQueryable<T> queryable = DbContext.Set<T>();
 
+            //todo: Single or First here? What if there's a several entities by this criteria?
             return queryable.OrderBy(query.OrderBy).Where(query.Criteria).SingleOrDefault();
         }
     }

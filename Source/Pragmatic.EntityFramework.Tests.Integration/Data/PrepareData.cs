@@ -10,20 +10,20 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         [SetUp]
         public void Setup()
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<PeopleContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<PeopleContext>());
 
-            var peopleContext = new PeopleContext();
+            //var peopleContext = new PeopleContext();
 
-            for (int i = 0; i < 100; i++)
-            {
-                peopleContext.Persons.Add(new Person()
-                {
-                    Name = "User " + i,
-                    Age = i
-                });
-            }
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    peopleContext.Persons.Add(new Person()
+            //    {
+            //        Name = "User " + i,
+            //        Age = i
+            //    });
+            //}
 
-            peopleContext.SaveChanges();
+            //peopleContext.SaveChanges();
         }
     }
 }

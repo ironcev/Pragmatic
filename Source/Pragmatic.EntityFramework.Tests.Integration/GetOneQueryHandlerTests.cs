@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using System;
 using NUnit.Framework;
 using Pragmatic.EntityFramework.Interaction.StandardQueries;
 using Pragmatic.EntityFramework.Tests.Integration.Data;
@@ -13,7 +13,11 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         [Test]
         public void Returns_person_by_name()
         {
-            string name = "User 5";
+            string name = Guid.NewGuid().ToString();
+
+            var context = new PeopleContext();
+            context.Persons.Add(new Person() {Name = name});
+            context.SaveChanges();
 
             Option<Person> personsMaybe = new GetOneQueryHandler<Person>(new PeopleContext())
                 .Execute(new GetOneQuery<Person>()

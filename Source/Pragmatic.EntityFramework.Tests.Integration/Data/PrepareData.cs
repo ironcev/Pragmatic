@@ -1,8 +1,7 @@
 ﻿using System.Data.Entity;
 using NUnit.Framework;
-using Pragmatic.EntityFramework.Tests.Integration.Data;
 
-namespace Pragmatic.EntityFramework.Tests.Integration
+namespace Pragmatic.EntityFramework.Tests.Integration.Data
 {
     [SetUpFixture]
     public class PrepareData
@@ -10,20 +9,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         [SetUp]
         public void Setup()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<PeopleContext>());
-
-            //var peopleContext = new PeopleContext();
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    peopleContext.Persons.Add(new Person()
-            //    {
-            //        Name = "User " + i,
-            //        Age = i
-            //    });
-            //}
-
-            //peopleContext.SaveChanges();
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<PersonsContext>());
         }
     }
 }

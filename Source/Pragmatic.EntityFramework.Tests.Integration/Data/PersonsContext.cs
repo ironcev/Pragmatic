@@ -2,7 +2,7 @@ using System.Data.Entity;
 
 namespace Pragmatic.EntityFramework.Tests.Integration.Data
 {
-    public class PeopleContext : DbContext
+    public class PersonsContext : DbContext
     {
         public IDbSet<Person> Persons { get; set; }
 

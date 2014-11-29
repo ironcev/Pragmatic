@@ -26,15 +26,14 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
                 queryable = queryable.Where(query.Criteria.Value);
             }
 
-            // todo: should we always get total count, or just when we want to page?
-            int total = queryable.Count();
+            int totalCount = queryable.Count();
 
             if (query.Paging.IsSome && !query.Paging.Value.IsNone)
             {
                 queryable = queryable.Skip(query.Paging.Value.Skip).Take(query.Paging.Value.PageSize);
             }
             
-            return new PagedList<T>(queryable, 0, Int32.MaxValue, total);
+            return new PagedList<T>(queryable, 0, Int32.MaxValue, totalCount);
         }
     }
 }

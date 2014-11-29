@@ -7,28 +7,29 @@ using SwissKnife;
 
 namespace Pragmatic.EntityFramework.Tests.Integration
 {
+    // ReSharper disable InconsistentNaming
     [TestFixture]
-    public class GetByIdQueryHandlerTests : BaseTest
+    public class GetByIdQueryHandlerTests
     {
         [Test]
         public void Insert_and_return_by_id()
         {
             Guid id;
-            using (var db = new PeopleContext())
+            using (var db = new PersonsContext())
             {
-                var person = new Person();
-                person.Name = "abc";
-                id = person.Id;
+                var newPerson = new Person { Name = "Han Solo"};
+                id = newPerson.Id;
 
-                db.Persons.Add(person);
+                db.Persons.Add(newPerson);
                 db.SaveChanges();
             }
 
-            Option<Person> personsMaybe = new GetByIdQueryHandler<Person>(new PeopleContext())
+            Option<Person> person = new GetByIdQueryHandler<Person>(new PersonsContext())
                 .Execute(new GetByIdQuery<Person> { Id = id });
 
-            Assert.IsTrue(personsMaybe.IsSome);
-            Assert.AreEqual("abc", personsMaybe.Value.Name);
+            Assert.IsTrue(person.IsSome);
+            Assert.AreEqual("Han Solo", person.Value.Name);
         }
     }
+    // ReSharper restore InconsistentNaming
 }

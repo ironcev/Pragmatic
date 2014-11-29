@@ -56,13 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\PeopleContext.cs" />
+    <Compile Include="Data\PersonsContext.cs" />
     <Compile Include="GetByIdQueryHandlerTests.cs" />
     <Compile Include="GetOneQueryHandlerTests.cs" />
     <Compile Include="Data\Person.cs" />
     <Compile Include="Data\PrepareData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -11,7 +11,7 @@ namespace Pragmatic.EntityFramework.Interaction
         {
             Argument.IsNotNull(dbContext, "dbContext");
 
-            this.DbContext = dbContext;
+            DbContext = dbContext;
         }
     }
 }

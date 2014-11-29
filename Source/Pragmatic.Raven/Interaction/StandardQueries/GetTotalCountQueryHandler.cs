@@ -21,7 +21,10 @@ namespace Pragmatic.Raven.Interaction.StandardQueries
 
             if (query.Criteria.IsSome) ravenQuery = ravenQuery.Where(query.Criteria.Value);
 
-            var dummyResult = ravenQuery.Take(0).ToArray();
+            // We have to execute the query to get back the statistics. ToArray() will trigger execution.
+            // ReSharper disable ReturnValueOfPureMethodIsNotUsed
+            ravenQuery.Take(0).ToArray();
+            // ReSharper restore ReturnValueOfPureMethodIsNotUsed
 
             return statistics.TotalResults;
         }

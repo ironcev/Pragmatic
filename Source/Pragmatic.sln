@@ -1,20 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic", "Pragmatic\Pragmatic.csproj", "{E56289EF-F2E9-4A5B-8FB5-ABCAD1D658E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Tests.Unit", "Pragmatic.Tests.Unit\Pragmatic.Tests.Unit.csproj", "{24561E22-62B9-492A-999F-EAA7D6112A32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.StructureMap", "Pragmatic.StructureMap\Pragmatic.StructureMap.csproj", "{32788E01-C373-4D56-B620-B13799A47AB5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A3ED95FC-7E75-43ED-ABAB-B46DD75DB86B}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Raven", "Pragmatic.Raven\Pragmatic.Raven.csproj", "{DCBA8EB9-EBF1-4B6E-B38A-5B35BCE4D4B1}"
 EndProject

@@ -1,7 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
 internal static partial class AssemblyDescription
 {
-    public const string Title = Product + " RavenDB Dependent Abstractions";
-    public const string Description = Product + " RavenDB dependent abstractions.";
+    public const string Title = "RavenDB provider for " + Product + ".";
+    public const string Description = Title;
 }
 // ReSharper restore CheckNamespace

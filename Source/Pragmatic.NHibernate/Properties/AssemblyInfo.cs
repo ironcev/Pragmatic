@@ -1,7 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
 internal static partial class AssemblyDescription
 {
-    public const string Title = Product + " NHibernate Dependent Abstractions";
-    public const string Description = Product + " NHibernate dependent abstractions.";
+    public const string Title = "NHibernate provider for " + Product + ".";
+    public const string Description = Title;
 }
 // ReSharper restore CheckNamespace

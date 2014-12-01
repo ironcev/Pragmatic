@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle(AssemblyDescription.Title)]
 [assembly: AssemblyProduct(AssemblyDescription.Product)]
-[assembly: AssemblyDescription(AssemblyDescription.Product)]
+[assembly: AssemblyDescription(AssemblyDescription.Description)]
 
 [assembly: AssemblyVersion(AssemblyDescription.Version)]
 // We will not set the AssemblyFileVersion explicitly. This will automatically make it same as the AssemblyVersion.
@@ -24,12 +24,12 @@ using System.Runtime.InteropServices;
 
 internal static partial class AssemblyDescription
 {
-    public const string Company = "Pragmatic";
+    public const string Company = "Igor Rončević";
     public const string Trademark = "";
     public const string Copyright = "Copyright \u00a9 2014 " + Company + ". All rights reserved.";
     public const string Product = "Pragmatic";
 
-    public const string Version = "0.6.7.*";
+    public const string Version = "0.7.0.0";
 
     public const string Culture = "";
 

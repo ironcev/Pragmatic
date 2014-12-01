@@ -4,10 +4,6 @@ Source/packages/
 # Raven embedded database
 Source/Ui/Web/Data/
 
-# Tool Directory
-Tools/**
-!ReadMe.txt
-
 # Vendors Directory
 #Dependencies/Vendors/**
 #!ReadMe.txt

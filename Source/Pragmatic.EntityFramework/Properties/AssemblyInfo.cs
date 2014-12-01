@@ -1,7 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
 internal static partial class AssemblyDescription
 {
-    public const string Title = Product + " Entity Framework Dependent Abstractions";
-    public const string Description = Product + " Entity Framework dependent abstractions.";
+    public const string Title = "Entity Framework provider for " + Product + ".";
+    public const string Description = Title;
 }
 // ReSharper restore CheckNamespace

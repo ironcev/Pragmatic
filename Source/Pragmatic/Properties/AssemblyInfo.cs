@@ -1,7 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
 internal static partial class AssemblyDescription
 {
-    public const string Title = Product + " Core Abstractions";
-    public const string Description = Product + " core abstractions.";
+    public const string Title = Product + " core abstractions.";
+    public const string Description = Title;
 }
 // ReSharper restore CheckNamespace

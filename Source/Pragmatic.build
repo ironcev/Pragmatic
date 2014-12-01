@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Binaries;NuGetPackages" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Properties>
+      Platform=Any CPU
+    </Properties>
+    <NuGetExe>..\Tools\NuGet.exe</NuGetExe>
+    <NuGetPackageOutputDirectory>Artifacts\Nupkg\$(Configuration)</NuGetPackageOutputDirectory>
+    <BinOutputDirectory>Artifacts\Bin\$(Configuration)</BinOutputDirectory>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Solution Include="Pragmatic.sln" />
+    
+    <ProjectFile Include="Pragmatic"/>
+    <ProjectFile Include="Pragmatic.StructureMap"/>
+    <ProjectFile Include="Pragmatic.FluentValidation"/>
+    <ProjectFile Include="Pragmatic.EntityFramework"/>
+    <ProjectFile Include="Pragmatic.NHibernate"/>
+    <ProjectFile Include="Pragmatic.Raven"/>
+  </ItemGroup>
+  
+  <Target Name="Binaries">
+    <RemoveDir Directories="$(BinOutputDirectory)" />
+    <Exec WorkingDirectory="$(BaseDir)"
+          Command="$(NuGetExe) restore @(Solution)" />
+    <MSBuild Projects="@(Solution)" Properties="$(Properties)" />
+  </Target>
+  
+  <Target Name="NuGetPackages">
+    <RemoveDir Directories="$(NuGetPackageOutputDirectory)" />
+    <MakeDir Directories="$(NuGetPackageOutputDirectory)" />
+    <Exec WorkingDirectory="$(BaseDir)"
+          Command="$(NuGetExe) pack %(ProjectFile.Identity)\%(ProjectFile.Identity).csproj -Prop Configuration=$(Configuration) -IncludeReferencedProjects -Symbols -OutputDirectory $(NuGetPackageOutputDirectory)" />
+  </Target>
+  
+</Project>

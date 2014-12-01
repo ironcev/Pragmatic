@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
 using Pragmatic.Example.Model;
 
-namespace Pragmatic.Example.Client.Desktop.NHibernateMappings
+namespace Pragmatic.Example.Client.Desktop.Persistency.NHibernate
 {
     public class UserMap : ClassMap<User>
     {

@@ -57,7 +57,6 @@
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
     <Compile Include="Interaction\BaseQueryHandler.cs" />
-    <Compile Include="Interaction\QueryableExtensions.cs" />
     <Compile Include="Interaction\StandardQueries\GetAllQueryHandler.cs" />
     <Compile Include="Interaction\StandardQueries\GetByIdQueryHandler.cs" />
     <Compile Include="Interaction\StandardQueries\GetOneQueryHandler.cs" />

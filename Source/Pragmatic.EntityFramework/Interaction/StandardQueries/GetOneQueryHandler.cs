@@ -9,9 +9,7 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
 {
     public sealed class GetOneQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetOneQuery<T>, Option<T>> where T : class
     {
-        public GetOneQueryHandler(DbContext dbContext) : base(dbContext)
-        {
-        }
+        public GetOneQueryHandler(DbContext dbContext) : base(dbContext) { }
 
         public Option<T> Execute(GetOneQuery<T> query)
         {

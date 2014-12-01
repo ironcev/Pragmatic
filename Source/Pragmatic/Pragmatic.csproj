@@ -72,7 +72,7 @@
     <Compile Include="Interaction\IPagedEnumerable.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interaction\OrderedQueryableExtensions.cs" />
+    <Compile Include="Interaction\QueryableExtensions.cs" />
     <Compile Include="Interaction\InteractionScope.cs" />
     <Compile Include="Interaction\OrderBy.cs" />
     <Compile Include="Interaction\OrderByDirection.cs" />

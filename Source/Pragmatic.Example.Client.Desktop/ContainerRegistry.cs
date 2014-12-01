@@ -1,14 +1,16 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System;
+using System.Data.Entity;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentValidation;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using Pragmatic.Example.Client.Desktop.NHibernateMappings;
+using Pragmatic.Example.Client.Desktop.Persistency.EntityFramework;
+using Pragmatic.Example.Client.Desktop.Persistency.NHibernate;
 using Pragmatic.Example.Model;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.EntityDeletion;
 using Pragmatic.Interaction.StandardQueries;
-using Pragmatic.Raven.Interaction.StandardQueries;
 using Pragmatic.StructureMap;
 using Raven.Client;
 using Raven.Client.Document;
@@ -16,6 +18,10 @@ using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 using SwissKnife;
+using RavenStandardQueries = Pragmatic.Raven.Interaction.StandardQueries;
+using NHibernateStandardQueries = Pragmatic.NHibernate.Interaction.StandardQueries;
+using EntityFrameworkStandardQueries = Pragmatic.EntityFramework.Interaction.StandardQueries;
+
 
 namespace Pragmatic.Example.Client.Desktop
 {
@@ -48,35 +54,51 @@ namespace Pragmatic.Example.Client.Desktop
             StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions;
             if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(Raven.UnitOfWork))
             {
-                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<GetByIdQueryHandler>();
+                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<RavenStandardQueries.GetByIdQueryHandler>();
                 standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                     (
-                    typeof(GetByIdQueryHandler<>),
-                    typeof(GetOneQueryHandler<>),
-                    typeof(GetAllQueryHandler<>),
-                    typeof(GetTotalCountQueryHandler<>)
+                    typeof(RavenStandardQueries.GetByIdQueryHandler<>),
+                    typeof(RavenStandardQueries.GetOneQueryHandler<>),
+                    typeof(RavenStandardQueries.GetAllQueryHandler<>),
+                    typeof(RavenStandardQueries.GetTotalCountQueryHandler<>)
                     );
+
+                IncludeRegistry<RavenContainerRegistry>();
             }
-            else
+            else if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(NHibernate.UnitOfWork))
             {
-                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<NHibernate.Interaction.StandardQueries.GetByIdQueryHandler>();
+                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<NHibernateStandardQueries.GetByIdQueryHandler>();
                 standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
                 (
-                    typeof(NHibernate.Interaction.StandardQueries.GetByIdQueryHandler<>),
-                    typeof(NHibernate.Interaction.StandardQueries.GetOneQueryHandler<>),
-                    typeof(NHibernate.Interaction.StandardQueries.GetAllQueryHandler<>),
-                    typeof(NHibernate.Interaction.StandardQueries.GetTotalCountQueryHandler<>)
+                    typeof(NHibernateStandardQueries.GetByIdQueryHandler<>),
+                    typeof(NHibernateStandardQueries.GetOneQueryHandler<>),
+                    typeof(NHibernateStandardQueries.GetAllQueryHandler<>),
+                    typeof(NHibernateStandardQueries.GetTotalCountQueryHandler<>)
                 );
+
+                IncludeRegistry<NHibernateContainerRegistry>();
             }
+            else if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof (EntityFramework.UnitOfWork))
+            {
+                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<EntityFrameworkStandardQueries.GetByIdQueryHandler>();
+                standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
+                (
+                    typeof(EntityFrameworkStandardQueries.GetByIdQueryHandler<>),
+                    typeof(EntityFrameworkStandardQueries.GetOneQueryHandler<>),
+                    typeof(EntityFrameworkStandardQueries.GetAllQueryHandler<>),
+                    typeof(EntityFrameworkStandardQueries.GetTotalCountQueryHandler<>)
+                );
+
+                IncludeRegistry<EntityFrameworkContainerRegistry>();
+            }
+            else throw new InvalidOperationException(string.Format("The type '{0}' is not supported as the default unit of work.", UnitOfWorkFactory.DefaultUnitOfWorkType));
+
 
             StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
 
             For<UnitOfWork>()
                 .LifecycleIs(new InteractionScopeLifecycle())
                 .Use(() => UnitOfWorkFactory.CreateUnitOfWork());
-
-            IncludeRegistry<RavenContainerRegistry>();
-            IncludeRegistry<NHibernateContainerRegistry>();
         }
 
         public static void Initialize()
@@ -98,7 +120,7 @@ namespace Pragmatic.Example.Client.Desktop
                 .LifecycleIs(new InteractionScopeLifecycle())
                 .Use(() => ObjectFactory.GetInstance<IDocumentStore>().OpenAsyncSession());
 
-            IDocumentStore documentStore = new DocumentStore {ConnectionStringName = "RavenConnStr"}.Initialize();
+            IDocumentStore documentStore = new DocumentStore { ConnectionStringName = "RavenConnectionString" }.Initialize();
             For<IDocumentStore>()
                 .Singleton()
                 .Use(documentStore);
@@ -125,6 +147,18 @@ namespace Pragmatic.Example.Client.Desktop
             For<ISessionFactory>()
                 .Singleton()
                 .Use(sessionFactory);
+        }
+    }
+
+    public class EntityFrameworkContainerRegistry : Registry
+    {
+        public EntityFrameworkContainerRegistry()
+        {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ExampleDbContext>());
+
+            For<DbContext>()
+                .LifecycleIs(new InteractionScopeLifecycle())
+                .Use<ExampleDbContext>();
         }
     }
 }

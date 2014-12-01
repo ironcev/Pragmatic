@@ -37,11 +37,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\dependencies\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\dependencies\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dependencies\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="FirstFloor.ModernUI, Version=1.0.5.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,7 +114,8 @@
     <Compile Include="Dialogs\UserProfileDialog.xaml.cs">
       <DependentUpon>UserProfileDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NHibernateMappings\UserMap.cs" />
+    <Compile Include="Persistency\EntityFramework\ExampleDbContext.cs" />
+    <Compile Include="Persistency\NHibernate\UserMap.cs" />
     <Compile Include="Pages\BlogApplicationControl.xaml.cs">
       <DependentUpon>BlogApplicationControl.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pragmatic.EntityFramework\Pragmatic.EntityFramework.csproj">
+      <Project>{855cff01-5a30-490a-a419-7b713d1ddb9f}</Project>
+      <Name>Pragmatic.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pragmatic.Example.Model\Pragmatic.Example.Model.csproj">
       <Project>{b8e749a3-cfa4-4b72-b642-bfcfd1435f39}</Project>
       <Name>Pragmatic.Example.Model</Name>

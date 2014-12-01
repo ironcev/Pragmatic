@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.StandardQueries;
@@ -7,11 +6,9 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.EntityFramework.Interaction.StandardQueries
 {
-    public sealed class GetAllQueryHandlerHandler<T> : BaseQueryHandler, IQueryHandler<GetAllQuery<T>, IPagedEnumerable<T>> where T : class
+    public sealed class GetAllQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetAllQuery<T>, IPagedEnumerable<T>> where T : class
     {
-        public GetAllQueryHandlerHandler(DbContext dbContext) : base(dbContext)
-        {
-        }
+        public GetAllQueryHandler(DbContext dbContext) : base(dbContext) { }
 
         public IPagedEnumerable<T> Execute(GetAllQuery<T> query)
         {
@@ -26,14 +23,12 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
                 queryable = queryable.Where(query.Criteria.Value);
             }
 
-            int totalCount = queryable.Count();
-
             if (query.Paging.IsSome && !query.Paging.Value.IsNone)
             {
                 queryable = queryable.Skip(query.Paging.Value.Skip).Take(query.Paging.Value.PageSize);
             }
-            
-            return new PagedList<T>(queryable, 0, Int32.MaxValue, totalCount);
+
+            return queryable.ToPagedEnumerable(query.Paging);
         }
     }
 }

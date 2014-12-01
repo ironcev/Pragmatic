@@ -8,9 +8,7 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
 {
     public sealed class GetTotalCountQueryHandler<T> : BaseQueryHandler, IQueryHandler<GetTotalCountQuery<T>, int> where T : class
     {
-        public GetTotalCountQueryHandler(DbContext dbContext) : base(dbContext)
-        {
-        }
+        public GetTotalCountQueryHandler(DbContext dbContext) : base(dbContext) { }
 
         public int Execute(GetTotalCountQuery<T> query)
         {

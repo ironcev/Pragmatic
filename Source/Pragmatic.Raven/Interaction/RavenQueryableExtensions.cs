@@ -9,15 +9,20 @@ namespace Pragmatic.Raven.Interaction
 {
     public static class RavenQueryableExtensions
     {
-        public static IPagedEnumerable<T> ToPagedEnumerable<T>(this IQueryable<T> queryable, Option<Paging> paging) where T : class
+        public static IRavenQueryable<T> OrderBy<T>(this IRavenQueryable<T> queryable, Option<OrderBy<T>> orderBy) where T : class
+        {
+            return (IRavenQueryable<T>)((IQueryable<T>)queryable).OrderBy(orderBy);
+        }
+
+
+        public static IPagedEnumerable<T> ToPagedEnumerable<T>(this IRavenQueryable<T> queryable, Option<Paging> paging) where T : class
         {
             Argument.IsNotNull(queryable, "queryable");
-            Argument.Is<IRavenQueryable<T>>((object)queryable, "queryable");
 
             Paging pagingValue = paging.ValueOr(Paging.None);
 
             RavenQueryStatistics stats;
-            var results = ((IRavenQueryable<T>)queryable)
+            var results = queryable
                 .Statistics(out stats)
                 .Skip(pagingValue.Skip)
                 .Take(pagingValue.PageSize)

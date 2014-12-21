@@ -14,7 +14,9 @@ namespace Pragmatic.Raven.Interaction.StandardQueries
         {
             Argument.IsNotNull(query, "query");
 
-            return query.Criteria.IsSome ? DocumentSession.Query<T>().OrderBy(query.OrderBy).Where(query.Criteria.Value).ToPagedEnumerable(query.Paging) : DocumentSession.Query<T>().OrderBy(query.OrderBy).ToPagedEnumerable(query.Paging);
+            return query.Criteria.IsSome ? 
+                   DocumentSession.Query<T>().OrderBy(query.OrderBy).Where(query.Criteria.Value).ToPagedEnumerable(query.Paging) : 
+                   DocumentSession.Query<T>().OrderBy(query.OrderBy).ToPagedEnumerable(query.Paging);
         }
     }
 }

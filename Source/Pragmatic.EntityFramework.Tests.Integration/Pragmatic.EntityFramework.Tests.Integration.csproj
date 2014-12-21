@@ -56,10 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\PersonsContext.cs" />
+    <Compile Include="GetAllQueryHandlerTests.cs" />
     <Compile Include="GetByIdQueryHandlerTests.cs" />
     <Compile Include="GetOneQueryHandlerTests.cs" />
     <Compile Include="Data\Person.cs" />
-    <Compile Include="Data\PrepareData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

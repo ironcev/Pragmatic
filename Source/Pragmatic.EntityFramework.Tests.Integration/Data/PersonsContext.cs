@@ -8,7 +8,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>().Ignore(x => x.IsNewEntity);
+            // TODO-IG: Find a way not to map the IsNewEntity property but to ensure that is always set to false.
 
             base.OnModelCreating(modelBuilder);
         }

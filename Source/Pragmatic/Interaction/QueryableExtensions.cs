@@ -27,7 +27,7 @@ namespace Pragmatic.Interaction
         {
             Paging pagingValue = paging.ValueOr(Paging.None);
 
-            var result = queryable.Skip(pagingValue.Skip).Take(pagingValue.PageSize);
+            var result = paging.IsNone ? queryable : queryable.Skip(pagingValue.Skip).Take(pagingValue.PageSize);
             var totalResults = queryable.Count();
 
             return new PagedList<T>(result, pagingValue.Page, pagingValue.PageSize, totalResults);

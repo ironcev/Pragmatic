@@ -57,6 +57,142 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         }
 
         [Test]
+        public void Get_all_persons_orderd_by_id()
+        {
+            var ids = new List<Guid>();
+            using (var db = new PersonsContext())
+            {
+                Person[] persons =
+                {
+                    new Person { Name = "Han Solo" },
+                    new Person { Name = "Peter Pan" },
+                    new Person { Name = "Tom Sawyer" }
+                };
+
+                ids.AddRange(persons.Select(person => person.Id));
+
+                foreach (var person in persons)
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Id))
+                             });
+
+            Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
+            Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
+            Assert.That(result.TotalCount, Is.EqualTo(ids.Count));
+            CollectionAssert.AreNotEqual(ids, result.Select(x => x.Id)); // SQL Server and .NET have different strategies for sorting GUIDs.
+        }
+
+        [Test]
+        public void Get_all_persons_orderd_by_id_descending()
+        {
+            var ids = new List<Guid>();
+            using (var db = new PersonsContext())
+            {
+                Person[] persons =
+                {
+                    new Person { Name = "Han Solo" },
+                    new Person { Name = "Peter Pan" },
+                    new Person { Name = "Tom Sawyer" }
+                };
+
+                ids.AddRange(persons.Select(person => person.Id));
+
+                foreach (var person in persons)
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Id, OrderByDirection.Descending))
+                             });
+
+            Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
+            Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
+            Assert.That(result.TotalCount, Is.EqualTo(ids.Count));
+            CollectionAssert.AreNotEqual(ids, result.Select(x => x.Id)); // SQL Server and .NET have different strategies for sorting GUIDs.
+        }
+
+        [Test]
+        public void Get_all_persons_orderd_by_name()
+        {
+            var names = new List<string>();
+            using (var db = new PersonsContext())
+            {
+                Person[] persons =
+                {
+                    new Person { Name = "Han Solo" },
+                    new Person { Name = "Peter Pan" },
+                    new Person { Name = "Tom Sawyer" }
+                };
+
+                names.AddRange(persons.Select(person => person.Name));
+
+                foreach (var person in persons)
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Name))
+                             });
+
+            Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
+            Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
+            Assert.That(result.TotalCount, Is.EqualTo(names.Count));
+            CollectionAssert.AreEqual(names.OrderBy(x => x), result.Select(x => x.Name));
+        }
+
+        [Test]
+        public void Get_all_persons_orderd_by_name_descending()
+        {
+            var names = new List<string>();
+            using (var db = new PersonsContext())
+            {
+                Person[] persons =
+                {
+                    new Person { Name = "Han Solo" },
+                    new Person { Name = "Peter Pan" },
+                    new Person { Name = "Tom Sawyer" }
+                };
+
+                names.AddRange(persons.Select(person => person.Name));
+
+                foreach (var person in persons)
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Name, OrderByDirection.Descending))
+                             });
+
+            Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
+            Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
+            Assert.That(result.TotalCount, Is.EqualTo(names.Count));
+            CollectionAssert.AreEqual(names.OrderByDescending(x => x), result.Select(x => x.Name));
+        }
+
+        [Test]
         public void Get_all_persons_with_pagination()
         {
             var ids = new List<Guid>();

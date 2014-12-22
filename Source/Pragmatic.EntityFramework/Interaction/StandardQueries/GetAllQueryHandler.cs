@@ -25,7 +25,7 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
 
             IQueryable<T> queryable = DbContext.Set<T>();
 
-            queryable = queryable.OrderBy(query.OrderBy);
+            queryable = queryable.OrderByWithExpressionTransform(query.OrderBy);
 
             if (query.Criteria.IsSome)
             {

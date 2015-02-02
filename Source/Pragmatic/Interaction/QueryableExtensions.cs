@@ -43,21 +43,29 @@ namespace Pragmatic.Interaction
             if (orderBy.IsNone || !orderBy.Value.OrderByItems.Any()) return queryable;
 
             var firstOrderBy = orderBy.Value.OrderByItems.First();
-            IOrderedQueryable<T> orderedQueryable = GetOrderedQueryableWithTransformedExpression(queryable, firstOrderBy);
+            IOrderedQueryable<T> orderedQueryable = GetOrderedQueryableWithTransformedExpression(queryable, firstOrderBy, false);
 
             if (orderBy.Value.OrderByItems.Count() > 1)
             {
                 orderedQueryable = orderBy.Value.OrderByItems.Skip(1)
-                                          .Aggregate(orderedQueryable, (current, orderByItem) => GetOrderedQueryableWithTransformedExpression(queryable, orderByItem));
+                                          .Aggregate(orderedQueryable, (current, orderByItem) => GetOrderedQueryableWithTransformedExpression(orderedQueryable, orderByItem, true));
             }
 
             return orderedQueryable;
         }
 
-        private static IOrderedQueryable<T> GetOrderedQueryableWithTransformedExpression<T>(IQueryable<T> queryable, OrderByItem<T> orderByItem) where T: class
+        private static IOrderedQueryable<T> GetOrderedQueryableWithTransformedExpression<T>(IQueryable<T> queryable, OrderByItem<T> orderByItem, bool useThenByExpression) where T: class
         {
+            System.Diagnostics.Debug.Assert((useThenByExpression && queryable is IOrderedQueryable) || !useThenByExpression, "If useThenByExpression is true, the queryable must already be an ordered queryable.");
+            IOrderedQueryable<T> orderedQueryable = useThenByExpression ? (IOrderedQueryable<T>)queryable : null;
+
+            // Well, ReSharper is not smart enough to see that orderedQueryable will never be null.
+            // ReSharper disable AssignNullToNotNullAttribute
             var unaryExpression = orderByItem.Criteria.Body as UnaryExpression;
-            if (unaryExpression == null) return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(orderByItem.Criteria) : queryable.OrderByDescending(orderByItem.Criteria);
+            if (unaryExpression == null)
+                return useThenByExpression
+                    ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(orderByItem.Criteria) : orderedQueryable.ThenByDescending(orderByItem.Criteria)
+                    : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(orderByItem.Criteria) : queryable.OrderByDescending(orderByItem.Criteria);
 
             var propertyExpression = (MemberExpression)unaryExpression.Operand;
             var parameters = orderByItem.Criteria.Parameters;
@@ -65,50 +73,67 @@ namespace Pragmatic.Interaction
             if (propertyExpression.Type == typeof(Guid))
             {
                 var newExpression = Expression.Lambda<Func<T, Guid>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(int))
             {
                 var newExpression = Expression.Lambda<Func<T, int>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(long))
             {
-                var newExpression = Expression.Lambda<Func<T, int>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                var newExpression = Expression.Lambda<Func<T, long>>(propertyExpression, parameters);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(double))
             {
                 var newExpression = Expression.Lambda<Func<T, double>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(float))
             {
                 var newExpression = Expression.Lambda<Func<T, float>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(decimal))
             {
-                var newExpression = Expression.Lambda<Func<T, float>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                var newExpression = Expression.Lambda<Func<T, decimal>>(propertyExpression, parameters);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(DateTime))
             {
                 var newExpression = Expression.Lambda<Func<T, DateTime>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
 
             if (propertyExpression.Type == typeof(DateTimeOffset))
             {
                 var newExpression = Expression.Lambda<Func<T, DateTimeOffset>>(propertyExpression, parameters);
-                return orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
+            // ReSharper restore AssignNullToNotNullAttribute
 
             throw new NotSupportedException(string.Format("Expression of the type 'Expression<Func<{0}, System.Object>>' cannot be transformed to " +
                                                           "an expression of the type 'Expression<Func<{0}, {1}>>'. " +

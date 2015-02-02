@@ -9,6 +9,7 @@ using Pragmatic.EntityFramework.Tests.Integration.Data;
 using Pragmatic.Interaction;
 using Pragmatic.Interaction.StandardQueries;
 using SwissKnife;
+using SwissKnife.Collections;
 
 namespace Pragmatic.EntityFramework.Tests.Integration
 {
@@ -57,21 +58,22 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         }
 
         [Test]
-        public void Get_all_persons_orderd_by_id()
+        public void Get_all_persons_orderd_by_age()
         {
-            var ids = new List<Guid>();
+            var ages = new List<int>();
             using (var db = new PersonsContext())
             {
                 Person[] persons =
                 {
-                    new Person { Name = "Han Solo" },
-                    new Person { Name = "Peter Pan" },
-                    new Person { Name = "Tom Sawyer" }
+                    new Person { Name = "Han Solo", Age = 30 },
+                    new Person { Name = "Peter Pan", Age = 40 },
+                    new Person { Name = "Tom Sawyer", Age = 50 }
                 };
 
-                ids.AddRange(persons.Select(person => person.Id));
+                ages.AddRange(persons.Select(person => person.Age));
 
-                foreach (var person in persons)
+                // Let's create persons in some random order.
+                foreach (var person in persons.Randomize())
                 {
                     db.Persons.Add(person);
                 }
@@ -81,31 +83,32 @@ namespace Pragmatic.EntityFramework.Tests.Integration
             var result = new GetAllQueryHandler<Person>(new PersonsContext())
                              .Execute(new GetAllQuery<Person>
                              {
-                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Id))
+                                 OrderBy = new OrderBy<Person>(x => x.Age)
                              });
 
             Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
             Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
-            Assert.That(result.TotalCount, Is.EqualTo(ids.Count));
-            CollectionAssert.AreNotEqual(ids, result.Select(x => x.Id)); // SQL Server and .NET have different strategies for sorting GUIDs.
+            Assert.That(result.TotalCount, Is.EqualTo(ages.Count));
+            CollectionAssert.AreEqual(ages, result.Select(x => x.Age));
         }
 
         [Test]
-        public void Get_all_persons_orderd_by_id_descending()
+        public void Get_all_persons_orderd_by_age_descending()
         {
-            var ids = new List<Guid>();
+            var ages = new List<int>();
             using (var db = new PersonsContext())
             {
                 Person[] persons =
                 {
-                    new Person { Name = "Han Solo" },
-                    new Person { Name = "Peter Pan" },
-                    new Person { Name = "Tom Sawyer" }
+                    new Person { Name = "Han Solo", Age = 30 },
+                    new Person { Name = "Peter Pan", Age = 40 },
+                    new Person { Name = "Tom Sawyer", Age = 50 }
                 };
 
-                ids.AddRange(persons.Select(person => person.Id));
+                ages.AddRange(persons.Select(person => person.Age));
 
-                foreach (var person in persons)
+                // Let's create persons in some random order.
+                foreach (var person in persons.Randomize())
                 {
                     db.Persons.Add(person);
                 }
@@ -115,13 +118,13 @@ namespace Pragmatic.EntityFramework.Tests.Integration
             var result = new GetAllQueryHandler<Person>(new PersonsContext())
                              .Execute(new GetAllQuery<Person>
                              {
-                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Id, OrderByDirection.Descending))
+                                 OrderBy = new OrderBy<Person>(x => x.Age, OrderByDirection.Descending)
                              });
 
             Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
             Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
-            Assert.That(result.TotalCount, Is.EqualTo(ids.Count));
-            CollectionAssert.AreNotEqual(ids, result.Select(x => x.Id)); // SQL Server and .NET have different strategies for sorting GUIDs.
+            Assert.That(result.TotalCount, Is.EqualTo(ages.Count));
+            CollectionAssert.AreEqual(ages.OrderByDescending(x => x), result.Select(x => x.Age));
         }
 
         [Test]
@@ -295,6 +298,53 @@ namespace Pragmatic.EntityFramework.Tests.Integration
             Assert.That(result.TotalCount, Is.EqualTo(2));
             Assert.That(result.Count(), Is.EqualTo(2));
             Assert.That(result.All(x => x.Name.StartsWith("Han")));
+        }
+
+        [Test]
+        public void Get_all_persons_ordered_by_name_and_age()
+        {
+            var namesAndAges = new[]
+            {
+                new { Name = "Anne", Age = 50 },
+                new { Name = "Anne", Age = 60 },
+                new { Name = "Bob", Age = 30 },
+                new { Name = "Bob", Age = 40 },
+                new { Name = "Clark", Age = 10 },
+                new { Name = "Clark", Age = 20 }
+            };
+
+            // Let's add persons into the database in a random order.
+            using (var db = new PersonsContext())
+            {
+                foreach (var person in namesAndAges.Select(x => new Person { Name = x.Name, Age = x.Age }).Randomize())
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = new OrderBy<Person>(person => person.Name).ThenBy(person => person.Age)
+                             });
+
+            var expectedNamesAndAges = namesAndAges;
+            var actualNamesAndAges = result.Select(person => new { person.Name, person.Age });
+
+            CollectionAssert.AreEqual(expectedNamesAndAges, actualNamesAndAges);
+
+
+            result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = new OrderBy<Person>(person => person.Age).ThenBy(person => person.Name)
+                             });
+
+            expectedNamesAndAges = namesAndAges.OrderBy(x => x.Age).ThenBy(x => x.Name).ToArray();
+            actualNamesAndAges = result.Select(person => new { person.Name, person.Age });
+
+            CollectionAssert.AreEqual(expectedNamesAndAges, actualNamesAndAges);
         }
     }
     // ReSharper restore InconsistentNaming

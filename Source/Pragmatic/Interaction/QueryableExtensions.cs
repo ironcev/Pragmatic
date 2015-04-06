@@ -133,6 +133,14 @@ namespace Pragmatic.Interaction
                         ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
                         : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
             }
+
+            if (propertyExpression.Type == typeof(bool))
+            {
+                var newExpression = Expression.Lambda<Func<T, bool>>(propertyExpression, parameters);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+            }
             // ReSharper restore AssignNullToNotNullAttribute
 
             throw new NotSupportedException(string.Format("Expression of the type 'Expression<Func<{0}, System.Object>>' cannot be transformed to " +

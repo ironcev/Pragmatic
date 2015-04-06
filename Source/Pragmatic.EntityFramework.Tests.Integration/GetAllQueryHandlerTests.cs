@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using Pragmatic.EntityFramework.Interaction.StandardQueries;
 using Pragmatic.EntityFramework.Tests.Integration.Data;
 using Pragmatic.Interaction;
@@ -193,6 +194,74 @@ namespace Pragmatic.EntityFramework.Tests.Integration
             Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
             Assert.That(result.TotalCount, Is.EqualTo(names.Count));
             CollectionAssert.AreEqual(names.OrderByDescending(x => x), result.Select(x => x.Name));
+        }
+
+        [Test]
+        public void Get_all_persons_orderd_by_is_administrator()
+        {
+            var isAdministratorValues = new List<bool>();
+            using (var db = new PersonsContext())
+            {
+                Person[] persons =
+                {
+                    new Person { Name = "Han Solo", IsAdministrator = false },
+                    new Person { Name = "Peter Pan", IsAdministrator = false },
+                    new Person { Name = "Tom Sawyer", IsAdministrator = true }
+                };
+
+                isAdministratorValues.AddRange(persons.Select(person => person.IsAdministrator));
+
+                foreach (var person in persons)
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.IsAdministrator))
+                             });
+
+            Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
+            Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
+            Assert.That(result.TotalCount, Is.EqualTo(isAdministratorValues.Count));
+            CollectionAssert.AreEqual(isAdministratorValues.OrderBy(x => x), result.Select(x => x.IsAdministrator));
+        }
+
+        [Test]
+        public void Get_all_persons_orderd_by_is_administrator_descending()
+        {
+            var isAdministratorValues = new List<bool>();
+            using (var db = new PersonsContext())
+            {
+                Person[] persons =
+                {
+                    new Person { Name = "Han Solo", IsAdministrator = false },
+                    new Person { Name = "Peter Pan", IsAdministrator = false },
+                    new Person { Name = "Tom Sawyer", IsAdministrator = true }
+                };
+
+                isAdministratorValues.AddRange(persons.Select(person => person.IsAdministrator));
+
+                foreach (var person in persons)
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.IsAdministrator, OrderByDirection.Descending))
+                             });
+
+            Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
+            Assert.That(result.PageSize, Is.EqualTo(Paging.None.PageSize));
+            Assert.That(result.TotalCount, Is.EqualTo(isAdministratorValues.Count));
+            CollectionAssert.AreEqual(isAdministratorValues.OrderByDescending(x => x), result.Select(x => x.IsAdministrator));
         }
 
         [Test]

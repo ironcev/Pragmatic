@@ -10,7 +10,14 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added support for Entity Framework.</releaseNotes>
+    <releaseNotes>Version 0.7.1
+Enhancements:
+ * QueryableExtensions.OrderByWithExpressionTransform&lt;T&gt;() supports parameters of type System.Boolean.
+
+Version 0.7.0.2
+Enhancements:
+ * Added support for Entity Framework.
+    </releaseNotes>
     <copyright>$copyright$</copyright>
   </metadata>
 </package>

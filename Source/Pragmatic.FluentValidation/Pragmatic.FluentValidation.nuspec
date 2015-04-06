@@ -12,5 +12,8 @@
     <description>$description$</description>
     <releaseNotes>Added support for Entity Framework.</releaseNotes>
     <copyright>$copyright$</copyright>
+    <dependencies>
+        <dependency id="Pragmatic" version="[0.7.1, 1)" />
+    </dependencies>
   </metadata>
 </package>

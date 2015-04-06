@@ -18,6 +18,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion(AssemblyDescription.Version)]
 // We will not set the AssemblyFileVersion explicitly. This will automatically make it same as the AssemblyVersion.
+[assembly: AssemblyInformationalVersion(AssemblyDescription.InformationalVersion)]
 
 [assembly: AssemblyCulture(AssemblyDescription.Culture)]
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
@@ -28,8 +29,6 @@ internal static partial class AssemblyDescription
     public const string Trademark = "";
     public const string Copyright = "Copyright \u00a9 2014 " + Company + ". All rights reserved.";
     public const string Product = "Pragmatic";
-
-    public const string Version = "0.7.0.2";
 
     public const string Culture = "";
 

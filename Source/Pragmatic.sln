@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.EntityFramework",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.EntityFramework.Tests.Integration", "Pragmatic.EntityFramework.Tests.Integration\Pragmatic.EntityFramework.Tests.Integration.csproj", "{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pragmatic.Example.EntityFramework", "Pragmatic.Example.EntityFramework\Pragmatic.Example.EntityFramework.csproj", "{569ED973-7261-45C9-9DF6-4E9232091827}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EE059CC-A6F8-44B4-922D-E1089D4A51A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{569ED973-7261-45C9-9DF6-4E9232091827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569ED973-7261-45C9-9DF6-4E9232091827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569ED973-7261-45C9-9DF6-4E9232091827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569ED973-7261-45C9-9DF6-4E9232091827}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

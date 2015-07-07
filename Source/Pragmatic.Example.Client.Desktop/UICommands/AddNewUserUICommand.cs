@@ -1,4 +1,4 @@
-﻿// TODO-IG: Add Intentionally Bad Code warning!
+﻿// WARNING: 
 
 using System;
 using System.Windows.Controls;
@@ -7,6 +7,8 @@ using Pragmatic.Example.Client.Desktop.Dialogs;
 using Pragmatic.Example.Model;
 using Pragmatic.Example.Model.Users;
 using Pragmatic.Interaction;
+using Pragmatic.Interaction.Caching;
+using StructureMap;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands
@@ -55,6 +57,10 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
                 UserInteraction.ShowError("New user cannot be added.", response);
             else
             {
+                var cache = ObjectFactory.Container.GetInstance<IQueryResultCache<GetUsersQuery, User[]>>();
+                cache.InvalidateCacheFor(query => true); // Just a "test" since we don't have any other real tests :-(
+                cache.InvalidatCacheForAllQueries();
+
                 _mainWindowViewModel.GetAllUsersCommand.Execute(true);
                 _mainWindowViewModel.SetSelectedUser();
             }

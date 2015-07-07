@@ -39,8 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="SwissKnife">
-      <HintPath>..\..\dependencies\packages\SwissKnife.0.5.5.19567\lib\net40\SwissKnife.dll</HintPath>
+    <Reference Include="SwissKnife, Version=0.5.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Packages\SwissKnife.0.5.7\lib\net40\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

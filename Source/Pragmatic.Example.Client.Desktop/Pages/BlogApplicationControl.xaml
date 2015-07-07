@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:desktop="clr-namespace:Pragmatic.Example.Client.Desktop"
+             xmlns:viewModels="clr-namespace:Pragmatic.Example.Client.Desktop.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
@@ -25,7 +26,7 @@
                 <Grid Column="1">
                     <ListBox ItemsSource="{Binding Users}" IsSynchronizedWithCurrentItem="True">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="desktop:BlogApplicationControlViewModel">
+                            <DataTemplate DataType="viewModels:BlogApplicationControlViewModel">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Title}"/>
                                     <TextBlock Text="{Binding Content }"/>

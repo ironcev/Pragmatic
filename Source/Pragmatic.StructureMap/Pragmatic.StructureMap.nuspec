@@ -10,10 +10,13 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added support for Entity Framework.</releaseNotes>
+    <releaseNotes>Version 0.8.0
+Enhancements:
+ * Caching of query results (StructureMapInteractionObjectResolver implements IQueryResultCacheResolver).
+</releaseNotes>
     <copyright>$copyright$</copyright>
     <dependencies>
-        <dependency id="Pragmatic" version="[0.7.1, 1)" />
+        <dependency id="Pragmatic" version="[0.8.0, 1)" />
     </dependencies>
   </metadata>
 </package>

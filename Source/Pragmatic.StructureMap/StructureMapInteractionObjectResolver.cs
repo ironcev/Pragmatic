@@ -8,7 +8,7 @@ using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.StructureMap
 {
-    public class StructureMapInteractionObjectResolver : IInteractionHandlerResolver, IEntityDeleterResolver
+    public class StructureMapInteractionObjectResolver : IInteractionHandlerResolver, IEntityDeleterResolver, IQueryResultCacheResolver
     {
         public IEnumerable<object> ResolveInteractionHandler(Type interactionHandlerType)
         {
@@ -22,6 +22,13 @@ namespace Pragmatic.StructureMap
             Argument.IsNotNull(entityDeleterType, "entityDeleterType");
 
             return ObjectFactory.GetAllInstances(entityDeleterType).Cast<object>();
+        }
+
+        public IEnumerable<object> ResolveQueryResultCache(Type queryHandlerType)
+        {
+            Argument.IsNotNull(queryHandlerType, "queryHandlerType");
+
+            return ObjectFactory.GetAllInstances(queryHandlerType).Cast<object>();
         }
     }
 }

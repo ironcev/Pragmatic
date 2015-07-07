@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Data.Entity;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentValidation;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using Pragmatic.Example.Client.Desktop.Persistency.EntityFramework;
 using Pragmatic.Example.Client.Desktop.Persistency.NHibernate;
 using Pragmatic.Example.Model;
+using Pragmatic.Example.Model.Users;
 using Pragmatic.Interaction;
+using Pragmatic.Interaction.Caching;
 using Pragmatic.Interaction.EntityDeletion;
 using Pragmatic.Interaction.StandardQueries;
 using Pragmatic.StructureMap;
@@ -49,6 +49,7 @@ namespace Pragmatic.Example.Client.Desktop
             var structureMapInteractionObjectResolver = new StructureMapInteractionObjectResolver();
             For<IInteractionHandlerResolver>().Use(structureMapInteractionObjectResolver);
             For<IEntityDeleterResolver>().Use(structureMapInteractionObjectResolver);
+            For<IQueryResultCacheResolver>().Use(structureMapInteractionObjectResolver);
 
             // Register query handlers for standard queries. WARNING: Intentionally Bad Code!
             StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions;
@@ -64,6 +65,12 @@ namespace Pragmatic.Example.Client.Desktop
                     );
 
                 IncludeRegistry<RavenContainerRegistry>();
+
+                StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
+
+                For<UnitOfWork>()
+                    .LifecycleIs(new InteractionScopeLifecycle())
+                    .Use(() => UnitOfWorkFactory.CreateUnitOfWork());
             }
             else if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof(NHibernate.UnitOfWork))
             {
@@ -77,28 +84,21 @@ namespace Pragmatic.Example.Client.Desktop
                 );
 
                 IncludeRegistry<NHibernateContainerRegistry>();
-            }
-            else if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof (EntityFramework.UnitOfWork))
-            {
-                For<IQueryHandler<GetByIdQuery, Option<object>>>().Singleton().Use<EntityFrameworkStandardQueries.GetByIdQueryHandler>();
-                standardInteractionHandlerGenericTypeDefinitions = new StandardInteractionHandlerGenericTypeDefinitions
-                (
-                    typeof(EntityFrameworkStandardQueries.GetByIdQueryHandler<>),
-                    typeof(EntityFrameworkStandardQueries.GetOneQueryHandler<>),
-                    typeof(EntityFrameworkStandardQueries.GetAllQueryHandler<>),
-                    typeof(EntityFrameworkStandardQueries.GetTotalCountQueryHandler<>)
-                );
 
-                IncludeRegistry<EntityFrameworkContainerRegistry>();
+                StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
+
+                For<UnitOfWork>()
+                    .LifecycleIs(new InteractionScopeLifecycle())
+                    .Use(() => UnitOfWorkFactory.CreateUnitOfWork());
+            }
+            else if (UnitOfWorkFactory.DefaultUnitOfWorkType == typeof (Pragmatic.EntityFramework.UnitOfWork))
+            {
+                IncludeRegistry<EntityFramework.ContainerRegistry>();
             }
             else throw new InvalidOperationException(string.Format("The type '{0}' is not supported as the default unit of work.", UnitOfWorkFactory.DefaultUnitOfWorkType));
 
-
-            StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
-
-            For<UnitOfWork>()
-                .LifecycleIs(new InteractionScopeLifecycle())
-                .Use(() => UnitOfWorkFactory.CreateUnitOfWork());
+            For<IQueryResultCache<GetUsersQuery, User[]>>()
+                .Use(new InMemoryEquatableQueryResultCache<GetUsersQuery, User[]>());
         }
 
         public static void Initialize()
@@ -147,18 +147,6 @@ namespace Pragmatic.Example.Client.Desktop
             For<ISessionFactory>()
                 .Singleton()
                 .Use(sessionFactory);
-        }
-    }
-
-    public class EntityFrameworkContainerRegistry : Registry
-    {
-        public EntityFrameworkContainerRegistry()
-        {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ExampleDbContext>());
-
-            For<DbContext>()
-                .LifecycleIs(new InteractionScopeLifecycle())
-                .Use<ExampleDbContext>();
         }
     }
 }

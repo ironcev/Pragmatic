@@ -75,9 +75,9 @@
     <Reference Include="StructureMap.Net4">
       <HintPath>..\..\dependencies\packages\structuremap.3.0.0.108\lib\net40\StructureMap.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="SwissKnife, Version=0.5.5.19567, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SwissKnife, Version=0.5.7.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dependencies\packages\SwissKnife.0.5.5.19567\lib\net40\SwissKnife.dll</HintPath>
+      <HintPath>..\..\Dependencies\Packages\SwissKnife.0.5.7\lib\net40\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -113,7 +113,6 @@
     <Compile Include="Dialogs\UserProfileDialog.xaml.cs">
       <DependentUpon>UserProfileDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Persistency\EntityFramework\ExampleDbContext.cs" />
     <Compile Include="Persistency\NHibernate\UserMap.cs" />
     <Compile Include="Pages\BlogApplicationControl.xaml.cs">
       <DependentUpon>BlogApplicationControl.xaml</DependentUpon>
@@ -131,6 +130,7 @@
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
     <Compile Include="UICommands\DeleteUserUICommand.cs" />
+    <Compile Include="UICommands\GetUsersUICommand.cs" />
     <Compile Include="UICommands\StartBlogApplicationUICommand.cs" />
     <Compile Include="UICommands\GetAllUsersUICommand.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
@@ -211,6 +211,10 @@
     <ProjectReference Include="..\Pragmatic.EntityFramework\Pragmatic.EntityFramework.csproj">
       <Project>{855cff01-5a30-490a-a419-7b713d1ddb9f}</Project>
       <Name>Pragmatic.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pragmatic.Example.EntityFramework\Pragmatic.Example.EntityFramework.csproj">
+      <Project>{569ed973-7261-45c9-9df6-4e9232091827}</Project>
+      <Name>Pragmatic.Example.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pragmatic.Example.Model\Pragmatic.Example.Model.csproj">
       <Project>{b8e749a3-cfa4-4b72-b642-bfcfd1435f39}</Project>

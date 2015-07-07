@@ -10,12 +10,22 @@
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
             <Button Content="Delete Selected User" Command="{Binding DeleteUserCommand}"/>
         </StackPanel>
-        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox Name="_txtSearchTerm" Grid.Column="0" Text="{Binding SearchTerm}"/>
+            <Button Grid.Column="1" Content="Search" Command="{Binding GetUsersCommand}" CommandParameter="{Binding ElementName=_txtSearchTerm, Path=Text}"/>
+        </Grid>
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Black">
             <ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser,Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" >
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="desktop:UserViewModel">

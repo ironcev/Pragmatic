@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using Pragmatic.Example.Model;
 
-namespace Pragmatic.Example.Client.Desktop.Persistency.EntityFramework
+namespace Pragmatic.Example.EntityFramework
 {
     public class ExampleDbContext : DbContext
     {

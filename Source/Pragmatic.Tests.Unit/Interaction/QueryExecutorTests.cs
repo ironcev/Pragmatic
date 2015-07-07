@@ -13,7 +13,7 @@ namespace Pragmatic.Tests.Unit.Interaction
         [Test]
         public void Execute_MoreThanOneQueryHandlerDefined_ThrowsException()
         {
-            var queryExecutor = new QueryExecutor(new InteractionHandlerResolverWithMoreThanOneQueryHandlerDefined());
+            var queryExecutor = new QueryExecutor(new InteractionHandlerResolverWithMoreThanOneQueryHandlerDefined(), new Mock<IQueryResultCacheResolver>().Object);
             var exception = Assert.Throws<NotSupportedException>(() => queryExecutor.Execute(new TestQuery()));
             Console.WriteLine(exception.Message);
             Assert.That(exception.Message.StartsWith("There are 2 query handlers defined for the queries of type"));
@@ -32,7 +32,7 @@ namespace Pragmatic.Tests.Unit.Interaction
         [Test]
         public void Execute_QueryHandlerRegistered_ResultReturned()
         {
-            var response = new QueryExecutor(new InteractionHandlerResolverWithQueryHandlerRegistered()).Execute(new TestResultQuery());
+            var response = new QueryExecutor(new InteractionHandlerResolverWithQueryHandlerRegistered(), new Mock<IQueryResultCacheResolver>().Object).Execute(new TestResultQuery());
             Assert.That(response, Is.InstanceOf<TestResult>());
         }
         public class TestResult { } // This class must be public in order to use it in Moq mocks.

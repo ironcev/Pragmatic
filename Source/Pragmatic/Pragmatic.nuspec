@@ -10,7 +10,11 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Version 0.7.2
+    <releaseNotes>Version 0.8.0
+Enhancements:
+ * Caching of query results.
+
+Version 0.7.2
 Bug fixes:
  * QueryableExtensions.OrderByWithExpressionTransform&lt;T&gt;() works properly when more than two order by parameters are provided.
  * QueryableExtensions.OrderByWithExpressionTransform&lt;T&gt;() works properly when order by parameter of the type System.String is casted to object.

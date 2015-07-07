@@ -1,12 +1,9 @@
-﻿// TODO-IG: Add Intentionally Bad Code warning!
+﻿// !!! WARNING: Intentionally Bad Code !!!
 
 using System;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using Pragmatic.Example.Model;
 using Pragmatic.Interaction;
-using SwissKnife;
 using SwissKnife.Diagnostics.Contracts;
 
 namespace Pragmatic.Example.Client.Desktop.UICommands

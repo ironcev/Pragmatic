@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SwissKnife, Version=0.5.5.19567, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SwissKnife, Version=0.5.7.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dependencies\packages\SwissKnife.0.5.5.19567\lib\net40\SwissKnife.dll</HintPath>
+      <HintPath>..\..\Dependencies\Packages\SwissKnife.0.5.7\lib\net40\SwissKnife.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,11 +57,15 @@
     </Compile>
     <Compile Include="Environment\EntityAssembly.cs" />
     <Compile Include="Environment\EntityAssemblyCollection.cs" />
+    <Compile Include="Interaction\Caching\InMemoryEquatableQueryResultCache.cs" />
+    <Compile Include="Interaction\Caching\IQueryResultCache.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleterProvider.cs" />
     <Compile Include="Interaction\CommandExecutorExtensions.cs" />
     <Compile Include="Interaction\EntityDeletion\IEntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\IEntityDeleterResolver.cs" />
+    <Compile Include="Interaction\IEquatableQuery.cs" />
+    <Compile Include="Interaction\IQueryResultCacheResolver.cs" />
     <Compile Include="Interaction\RequestExecutorExtensions.cs" />
     <Compile Include="Interaction\RequestExecutor.cs" />
     <Compile Include="Interaction\RequestExecutionException.cs" />

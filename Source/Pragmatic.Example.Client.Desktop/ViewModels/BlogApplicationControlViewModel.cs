@@ -1,8 +1,7 @@
-﻿using System;
-using Pragmatic.Example.Model;
+﻿using Pragmatic.Example.Model;
 using SwissKnife.Diagnostics.Contracts;
 
-namespace Pragmatic.Example.Client.Desktop
+namespace Pragmatic.Example.Client.Desktop.ViewModels
 {
     internal class BlogApplicationControlViewModel
     {

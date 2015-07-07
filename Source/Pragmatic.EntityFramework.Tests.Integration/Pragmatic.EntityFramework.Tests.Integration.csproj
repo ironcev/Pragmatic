@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\PersonsContext.cs" />
+    <Compile Include="Data\PragmaticDbContext.cs" />
     <Compile Include="GetAllQueryHandlerTests.cs" />
     <Compile Include="GetByIdQueryHandlerTests.cs" />
     <Compile Include="GetOneQueryHandlerTests.cs" />

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using Pragmatic.EntityFramework.Interaction.StandardQueries;
 using Pragmatic.EntityFramework.Tests.Integration.Data;
 using Pragmatic.Interaction;
@@ -21,7 +20,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         [SetUp]
         public void Setup()
         {
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 db.Database.ExecuteSqlCommand("DELETE FROM People");
             }
@@ -31,7 +30,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons()
         {
             var ids = new List<Guid>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -49,7 +48,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();                
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>());
 
             Assert.That(result.CurrentPage, Is.EqualTo(Paging.None.Page));
@@ -62,7 +61,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_orderd_by_age()
         {
             var ages = new List<int>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -81,7 +80,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = new OrderBy<Person>(x => x.Age)
@@ -97,7 +96,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_orderd_by_age_descending()
         {
             var ages = new List<int>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -116,7 +115,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = new OrderBy<Person>(x => x.Age, OrderByDirection.Descending)
@@ -132,7 +131,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_orderd_by_name()
         {
             var names = new List<string>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -150,7 +149,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Name))
@@ -166,7 +165,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_orderd_by_name_descending()
         {
             var names = new List<string>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -184,7 +183,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Name, OrderByDirection.Descending))
@@ -200,7 +199,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_orderd_by_is_administrator()
         {
             var isAdministratorValues = new List<bool>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -218,7 +217,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.IsAdministrator))
@@ -234,7 +233,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_orderd_by_is_administrator_descending()
         {
             var isAdministratorValues = new List<bool>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -252,7 +251,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.IsAdministrator, OrderByDirection.Descending))
@@ -268,7 +267,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_with_pagination()
         {
             var ids = new List<Guid>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -286,7 +285,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = Option<OrderBy<Person>>.From(new OrderBy<Person>(x => x.Name)),
@@ -303,7 +302,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_all_persons_with_pagination_without_order_by_throws_exception()
         {
             var ids = new List<Guid>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -321,7 +320,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var exception = Assert.Throws<ArgumentException>(() => new GetAllQueryHandler<Person>(new PersonsContext())
+            var exception = Assert.Throws<ArgumentException>(() => new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  Paging = Option<Paging>.From(new Paging(1, 1))
@@ -337,7 +336,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Get_persons_with_certain_name()
         {
             var ids = new List<Guid>();
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 Person[] persons =
                 {
@@ -356,7 +355,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  Criteria = Option<Expression<Func<Person, bool>>>.From(x => x.Name.StartsWith("Han")) 
@@ -383,7 +382,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
             };
 
             // Let's add persons into the database in a random order.
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 foreach (var person in namesAndAges.Select(x => new Person { Name = x.Name, Age = x.Age }).Randomize())
                 {
@@ -392,7 +391,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            var result = new GetAllQueryHandler<Person>(new PersonsContext())
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = new OrderBy<Person>(person => person.Name).ThenBy(person => person.Age)
@@ -404,7 +403,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
             CollectionAssert.AreEqual(expectedNamesAndAges, actualNamesAndAges);
 
 
-            result = new GetAllQueryHandler<Person>(new PersonsContext())
+            result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
                              .Execute(new GetAllQuery<Person>
                              {
                                  OrderBy = new OrderBy<Person>(person => person.Age).ThenBy(person => person.Name)
@@ -412,6 +411,69 @@ namespace Pragmatic.EntityFramework.Tests.Integration
 
             expectedNamesAndAges = namesAndAges.OrderBy(x => x.Age).ThenBy(x => x.Name).ToArray();
             actualNamesAndAges = result.Select(person => new { person.Name, person.Age });
+
+            CollectionAssert.AreEqual(expectedNamesAndAges, actualNamesAndAges);
+        }
+
+        /// <summary>
+        /// Covers the buggy behavior that we had in the QueryableExtensions.OrderByWithExpressionTransform()
+        /// method, that in case when more than two order by properties were specified,
+        /// only the first and the last were actually taken.
+        /// So we are testing here if sorting works for more than two properties.
+        /// </summary>
+        [Test]
+        public void Get_all_persons_ordered_by_name_and_age_and_date_of_birth()
+        {
+            var namesAgesAndDatesOfBirth = new[]
+            {
+                new { Name = "Anne", Age = 50, DateOfBirth = new DateTime(2000, 12, 1) },
+                new { Name = "Anne", Age = 50, DateOfBirth = new DateTime(2000, 12, 2) },
+                new { Name = "Anne", Age = 60, DateOfBirth = new DateTime(2000, 12, 3) },
+                new { Name = "Anne", Age = 60, DateOfBirth = new DateTime(2000, 12, 4) },
+                new { Name = "Bob", Age = 30, DateOfBirth = new DateTime(2000, 12, 1) },
+                new { Name = "Bob", Age = 30, DateOfBirth = new DateTime(2000, 12, 2) },
+                new { Name = "Bob", Age = 40, DateOfBirth = new DateTime(2000, 12, 3) },
+                new { Name = "Bob", Age = 40, DateOfBirth = new DateTime(2000, 12, 4) },
+                new { Name = "Clark", Age = 10, DateOfBirth = new DateTime(2000, 12, 1) },
+                new { Name = "Clark", Age = 10, DateOfBirth = new DateTime(2000, 12, 2) },
+                new { Name = "Clark", Age = 20, DateOfBirth = new DateTime(2000, 12, 3) },
+                new { Name = "Clark", Age = 20, DateOfBirth = new DateTime(2000, 12, 4) }
+            };
+
+            // Let's add persons into the database in a random order.
+            using (var db = new PragmaticDbContext())
+            {
+                foreach (var person in namesAgesAndDatesOfBirth.Select(x => new Person { Name = x.Name, Age = x.Age, DateOfBirth = x.DateOfBirth }).Randomize())
+                {
+                    db.Persons.Add(person);
+                }
+                db.SaveChanges();
+            }
+
+            var result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = new OrderBy<Person>(person => person.Name)
+                                     .ThenBy(person => person.Age)
+                                     .ThenBy(person => person.DateOfBirth)
+                             });
+
+            var expectedNamesAndAges = namesAgesAndDatesOfBirth;
+            var actualNamesAndAges = result.Select(person => new { person.Name, person.Age, person.DateOfBirth });
+
+            CollectionAssert.AreEqual(expectedNamesAndAges, actualNamesAndAges);
+
+
+            result = new GetAllQueryHandler<Person>(new PragmaticDbContext())
+                             .Execute(new GetAllQuery<Person>
+                             {
+                                 OrderBy = new OrderBy<Person>(person => person.DateOfBirth)
+                                    .ThenBy(person => person.Age)
+                                    .ThenBy(person => person.Name)
+                             });
+
+            expectedNamesAndAges = namesAgesAndDatesOfBirth.OrderBy(x => x.DateOfBirth).ThenBy(x => x.Age).ThenBy(x => x.Name).ToArray();
+            actualNamesAndAges = result.Select(person => new { person.Name, person.Age, person.DateOfBirth });
 
             CollectionAssert.AreEqual(expectedNamesAndAges, actualNamesAndAges);
         }

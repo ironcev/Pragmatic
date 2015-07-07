@@ -16,11 +16,11 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         {
             string name = Guid.NewGuid().ToString();
 
-            var context = new PersonsContext();
+            var context = new PragmaticDbContext();
             context.Persons.Add(new Person() {Name = name});
             context.SaveChanges();
 
-            Option<Person> person = new GetOneQueryHandler<Person>(new PersonsContext())
+            Option<Person> person = new GetOneQueryHandler<Person>(new PragmaticDbContext())
                 .Execute(new GetOneQuery<Person>()
                 {
                     Criteria = persons => persons.Name == name

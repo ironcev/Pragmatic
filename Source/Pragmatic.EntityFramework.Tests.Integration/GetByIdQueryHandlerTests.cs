@@ -15,7 +15,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
         public void Insert_and_return_by_id()
         {
             Guid id;
-            using (var db = new PersonsContext())
+            using (var db = new PragmaticDbContext())
             {
                 var newPerson = new Person { Name = "Han Solo"};
                 id = newPerson.Id;
@@ -24,7 +24,7 @@ namespace Pragmatic.EntityFramework.Tests.Integration
                 db.SaveChanges();
             }
 
-            Option<Person> person = new GetByIdQueryHandler<Person>(new PersonsContext())
+            Option<Person> person = new GetByIdQueryHandler<Person>(new PragmaticDbContext())
                 .Execute(new GetByIdQuery<Person> { Id = id });
 
             Assert.IsTrue(person.IsSome);

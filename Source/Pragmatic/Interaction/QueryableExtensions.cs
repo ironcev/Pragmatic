@@ -48,7 +48,7 @@ namespace Pragmatic.Interaction
             if (orderBy.Value.OrderByItems.Count() > 1)
             {
                 orderedQueryable = orderBy.Value.OrderByItems.Skip(1)
-                                          .Aggregate(orderedQueryable, (current, orderByItem) => GetOrderedQueryableWithTransformedExpression(orderedQueryable, orderByItem, true));
+                                          .Aggregate(orderedQueryable, (current, orderByItem) => GetOrderedQueryableWithTransformedExpression(current, orderByItem, true));
             }
 
             return orderedQueryable;
@@ -61,11 +61,18 @@ namespace Pragmatic.Interaction
 
             // Well, ReSharper is not smart enough to see that orderedQueryable will never be null.
             // ReSharper disable AssignNullToNotNullAttribute
+
+            // We will have unary expressions for the order by properties of a reference type like e.g. string.
+            // For example x => x.Name.
             var unaryExpression = orderByItem.Criteria.Body as UnaryExpression;
             if (unaryExpression == null)
                 return useThenByExpression
                     ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(orderByItem.Criteria) : orderedQueryable.ThenByDescending(orderByItem.Criteria)
                     : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(orderByItem.Criteria) : queryable.OrderByDescending(orderByItem.Criteria);
+
+            // Otherwise, for value types we will have boxing involved.
+            // E.g. the order by defined like x => x.Age will be represented as x => Convert(x.Age).
+            // So, the real value that we need is actually the operand, x.Age in this case.
 
             var propertyExpression = (MemberExpression)unaryExpression.Operand;
             var parameters = orderByItem.Criteria.Parameters;
@@ -137,6 +144,18 @@ namespace Pragmatic.Interaction
             if (propertyExpression.Type == typeof(bool))
             {
                 var newExpression = Expression.Lambda<Func<T, bool>>(propertyExpression, parameters);
+                return useThenByExpression
+                        ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
+                        : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);
+            }
+
+            // As discussed above, for expressions like x => x.Name the first check "if (unaryExpression == null)" will
+            // cover the case, we can still have a situation that we have a cast e.g. from string to object.
+            // In that case, the "if (unaryExpression == null)" check will be false and the method will continue looking
+            // for the expression transformation for the string type. That's why we have to cover that type explicitly.
+            if (propertyExpression.Type == typeof(string))
+            {
+                var newExpression = Expression.Lambda<Func<T, string>>(propertyExpression, parameters);
                 return useThenByExpression
                         ? orderByItem.Direction == OrderByDirection.Ascending ? orderedQueryable.ThenBy(newExpression) : orderedQueryable.ThenByDescending(newExpression)
                         : orderByItem.Direction == OrderByDirection.Ascending ? queryable.OrderBy(newExpression) : queryable.OrderByDescending(newExpression);

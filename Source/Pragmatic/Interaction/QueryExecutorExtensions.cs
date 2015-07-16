@@ -31,6 +31,14 @@ namespace Pragmatic.Interaction
             return queryExecutor.Execute(new GetOneQuery<T> { Criteria = criteria });
         }
 
+        public static Option<T> GetOne<T>(this QueryExecutor queryExecutor, Expression<Func<T, bool>> criteria, OrderBy<T> orderBy) where T : class
+        {
+            Argument.IsNotNull(queryExecutor, "queryExecutor");
+            Argument.IsNotNull(criteria, "criteria");
+
+            return queryExecutor.Execute(new GetOneQuery<T> { Criteria = criteria, OrderBy = orderBy });
+        }
+
         public static IPagedEnumerable<T> GetAll<T>(this QueryExecutor queryExecutor) where T : class
         {
             Argument.IsNotNull(queryExecutor, "queryExecutor");

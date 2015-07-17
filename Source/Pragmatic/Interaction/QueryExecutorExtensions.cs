@@ -35,6 +35,7 @@ namespace Pragmatic.Interaction
         {
             Argument.IsNotNull(queryExecutor, "queryExecutor");
             Argument.IsNotNull(criteria, "criteria");
+            Argument.IsNotNull(orderBy, "orderBy");
 
             return queryExecutor.Execute(new GetOneQuery<T> { Criteria = criteria, OrderBy = orderBy });
         }

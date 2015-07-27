@@ -21,7 +21,7 @@ namespace Pragmatic.EntityFramework.Interaction.StandardQueries
             // TODO-IG: Good point. Current semantic is to return the first one! Therefore the query should be renamed to GetFirst.
             //          GetOne can remain, but it should throw exception if there are more than one. Or we can remove it completely.
             //return queryable.OrderBy(query.OrderBy).Where(query.Criteria).SingleOrDefault();
-            return queryable.OrderBy(query.OrderBy).Where(query.Criteria).FirstOrDefault();
+            return queryable.OrderByWithExpressionTransform(query.OrderBy).Where(query.Criteria).FirstOrDefault();
         }
     }
 }

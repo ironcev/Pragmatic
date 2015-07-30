@@ -39,6 +39,7 @@ namespace Pragmatic.Example.EntityFramework
                 );
 
             StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
+            StandardInteractionHandlerRegistration.RegisterStandardNonGenericGetByIdQueryHandler(this, typeof(GetByIdQueryHandler));
 
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ExampleDbContext>());
         }

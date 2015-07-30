@@ -1,4 +1,4 @@
-﻿// WARNING: 
+﻿// !!! WARNING: Intentionally bad code. !!!
 
 using System;
 using System.Windows.Controls;

@@ -67,6 +67,7 @@ namespace Pragmatic.Example.Client.Desktop
                 IncludeRegistry<RavenContainerRegistry>();
 
                 StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
+                StandardInteractionHandlerRegistration.RegisterStandardNonGenericGetByIdQueryHandler(this, typeof(RavenStandardQueries.GetByIdQueryHandler));
 
                 For<UnitOfWork>()
                     .LifecycleIs(new InteractionScopeLifecycle())
@@ -86,6 +87,7 @@ namespace Pragmatic.Example.Client.Desktop
                 IncludeRegistry<NHibernateContainerRegistry>();
 
                 StandardInteractionHandlerRegistration.RegisterStandardInteractionHandlersForEntities(this, standardInteractionHandlerGenericTypeDefinitions);
+                StandardInteractionHandlerRegistration.RegisterStandardNonGenericGetByIdQueryHandler(this, typeof(NHibernateStandardQueries.GetByIdQueryHandler));
 
                 For<UnitOfWork>()
                     .LifecycleIs(new InteractionScopeLifecycle())

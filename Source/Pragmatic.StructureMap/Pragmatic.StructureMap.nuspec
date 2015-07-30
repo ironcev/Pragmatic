@@ -10,10 +10,14 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Version 0.8.0
+    <releaseNotes>Version 0.8.1
+Bug fixes:
+ * Fixed issue #19: Missing handler registration for GetByIdQuery : IQuery&lt;Option&lt;object&gt;&gt; standard query (https://github.com/ironcev/Pragmatic/issues/19)
+
+Version 0.8.0
 Enhancements:
  * Caching of query results (StructureMapInteractionObjectResolver implements IQueryResultCacheResolver).
-</releaseNotes>
+    </releaseNotes>
     <copyright>$copyright$</copyright>
     <dependencies>
         <dependency id="Pragmatic" version="[0.8.0, 1)" />

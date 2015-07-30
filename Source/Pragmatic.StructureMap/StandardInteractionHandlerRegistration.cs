@@ -12,6 +12,17 @@ namespace Pragmatic.StructureMap
 {
     public static class StandardInteractionHandlerRegistration
     {
+        public static void RegisterStandardNonGenericGetByIdQueryHandler(Registry registry, Type queryHandlerType)
+        {
+            Argument.IsNotNull(registry, "registry");
+            Argument.IsNotNull(queryHandlerType, "queryHandlerType");
+            Argument.IsValid(typeof(IQueryHandler<GetByIdQuery, Option<object>>).IsAssignableFrom(queryHandlerType),
+                             string.Format("The query handler type must implement the IQueryHandler<GetByIdQuery, Option<object>> interface."),
+                             "queryHandlerType");
+
+            registry.For(typeof(IQueryHandler<GetByIdQuery, Option<object>>)).Use(queryHandlerType);
+        }
+
         public static void RegisterStandardInteractionHandlersForEntities(Registry registry, StandardInteractionHandlerGenericTypeDefinitions standardInteractionHandlerGenericTypeDefinitions)
         {
             Argument.IsNotNull(registry, "registry");

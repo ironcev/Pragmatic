@@ -10,7 +10,16 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Version 0.8.0
+    <releaseNotes>Version 0.9.0
+Enhancements:
+ * Auto invalidating in-memory result cache (AutoInvalidatingInMemoryResultCache).
+
+Breaking changes:
+ * InMemoryEquatableQueryResultCache renamed to InMemoryResultCache.
+ * IQueryResultCache.HasCachedResultFor() and IQueryResultCache.GetCachedResultFor() replaced by IQueryResultCache.TryGetCachedResultFor().
+ * IQueryResultCache.InvalidatCacheForAllQueries() replaced by IQueryResultCache.InvalidateCacheForAllQueries().
+
+Version 0.8.0
 Enhancements:
  * Caching of query results.
 

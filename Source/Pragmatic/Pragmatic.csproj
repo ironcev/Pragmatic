@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,7 +58,8 @@
     </Compile>
     <Compile Include="Environment\EntityAssembly.cs" />
     <Compile Include="Environment\EntityAssemblyCollection.cs" />
-    <Compile Include="Interaction\Caching\InMemoryEquatableQueryResultCache.cs" />
+    <Compile Include="Interaction\Caching\AutoInvalidatingInMemoryResultCache.cs" />
+    <Compile Include="Interaction\Caching\InMemoryResultCache.cs" />
     <Compile Include="Interaction\Caching\IQueryResultCache.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleter.cs" />
     <Compile Include="Interaction\EntityDeletion\EntityDeleterProvider.cs" />

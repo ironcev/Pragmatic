@@ -100,7 +100,7 @@ namespace Pragmatic.Example.Client.Desktop
             else throw new InvalidOperationException(string.Format("The type '{0}' is not supported as the default unit of work.", UnitOfWorkFactory.DefaultUnitOfWorkType));
 
             For<IQueryResultCache<GetUsersQuery, User[]>>()
-                .Use(new InMemoryEquatableQueryResultCache<GetUsersQuery, User[]>());
+                .Use(new InMemoryResultCache<GetUsersQuery, User[]>());
         }
 
         public static void Initialize()

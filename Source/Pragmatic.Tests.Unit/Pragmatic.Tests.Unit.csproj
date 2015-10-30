@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interaction\Caching\AutoInvalidatingInMemoryResultCacheTests.cs" />
     <Compile Include="Interaction\ClientResource\TestEntityResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

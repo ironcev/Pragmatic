@@ -55,8 +55,9 @@ namespace Pragmatic.Interaction
                 var queryResultCache = (IQueryResultCache<TResult>)queryResultCashes.FirstOrDefault();
 
                 // If yes and there are values, return the values from the cache.
-                if (queryResultCache != null && queryResultCache.HasCachedResultFor(query))
-                    return GetCachedResultFor(queryResultCache, query);
+                TResult cachedResult;
+                if (TryGetCachedResultFor(queryResultCache, query, out cachedResult))
+                    return cachedResult;
 
                 // If no, execute the query.
                 var queryHandlers = GetQueryHandlers<TResult>(query.GetType()).ToArray();
@@ -107,18 +108,25 @@ namespace Pragmatic.Interaction
             }
         }
 
-        private static TResult GetCachedResultFor<TResult>(IQueryResultCache<TResult> queryResultCache, IQuery query)
+        private static bool TryGetCachedResultFor<TResult>(IQueryResultCache<TResult> queryResultCache, IQuery query, out TResult result)
         {
-            try
+            if (queryResultCache != null)
             {
-                return queryResultCache.GetCachedResultFor(query);
-            }
-            catch (Exception e)
-            {
-                string additionalMessage = string.Format("An exception occurred while getting the cashed query result from the query result cache of type '{0}'.", queryResultCache.GetType());
+                try
+                {
+                    return queryResultCache.TryGetCachedResultFor(query, out result);
+                }
+                catch (Exception e)
+                {
+                    string additionalMessage = string.Format("An exception occurred while trying to get the cashed query result from the query result cache of type '{0}'.",
+                                                             queryResultCache.GetType());
 
-                throw new QueryExecutionException(additionalMessage, e);
+                    throw new QueryExecutionException(additionalMessage, e);
+                }                
             }
+
+            result = default(TResult);
+            return false;
         }
 
         private static void CacheResultFor<TResult>(IQueryResultCache<TResult> queryResultCache, IQuery query, TResult result)

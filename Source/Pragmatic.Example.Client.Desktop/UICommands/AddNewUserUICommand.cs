@@ -59,7 +59,7 @@ namespace Pragmatic.Example.Client.Desktop.UICommands
             {
                 var cache = ObjectFactory.Container.GetInstance<IQueryResultCache<GetUsersQuery, User[]>>();
                 cache.InvalidateCacheFor(query => true); // Just a "test" since we don't have any other real tests :-(
-                cache.InvalidatCacheForAllQueries();
+                cache.InvalidateCacheForAllQueries();
 
                 _mainWindowViewModel.GetAllUsersCommand.Execute(true);
                 _mainWindowViewModel.SetSelectedUser();

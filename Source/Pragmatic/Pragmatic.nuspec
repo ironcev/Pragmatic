@@ -10,7 +10,11 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Version 0.9.0
+    <releaseNotes>Version 0.10.0
+Enhancements:
+ * Response.Add(IEnumerable&lt;ResponseMessage&gt; responseMessages) added.
+
+Version 0.9.0
 Enhancements:
  * Auto invalidating in-memory result cache (AutoInvalidatingInMemoryResultCache).
 

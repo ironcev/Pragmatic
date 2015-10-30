@@ -22,6 +22,16 @@ namespace Pragmatic.Interaction
 
         public bool HasKey { get { return !string.IsNullOrWhiteSpace(Key); } }
 
+        public ResponseMessage(ResponseMessage originalResponseMessage, string newMessageText)
+        {
+            Argument.IsNotNull(originalResponseMessage, "originalResponseMessage");
+            Argument.IsNotNullOrWhitespace(newMessageText, "newMessageText");
+
+            MessageType = originalResponseMessage.MessageType;
+            Key = originalResponseMessage.Key;
+            Message = newMessageText;
+        }
+
         public ResponseMessage(MessageType messageType, string message) : this(messageType, message, string.Empty) { }
 
         public ResponseMessage(MessageType messageType, string message, string key)

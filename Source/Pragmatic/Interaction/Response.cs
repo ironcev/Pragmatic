@@ -76,6 +76,15 @@ namespace Pragmatic.Interaction
             return this;
         }
 
+        public Response Add(IEnumerable<ResponseMessage> responseMessages)
+        {
+            Argument.IsNotNull(responseMessages, "responseMessages");
+
+            _responseMessages.AddMany(responseMessages);
+
+            return this;
+        }
+
         public Response Add(Response response)
         {
             Argument.IsNotNull(response, "response");
@@ -187,6 +196,9 @@ namespace Pragmatic.Interaction
             return this;
         }
 
+        /// <summary>
+        /// Inserts an <see cref="MessageType.Error"/> at the top of all messages.
+        /// </summary>
         public Response InsertError(string message, string key)
         {
             _responseMessages.Insert(0, new ResponseMessage(MessageType.Error, message, key));

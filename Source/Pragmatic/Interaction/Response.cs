@@ -76,6 +76,10 @@ namespace Pragmatic.Interaction
             return this;
         }
 
+        // This method and the one below do not share the implementation,
+        // because we don't want to create new objects without need.
+        // The same is with the Add(Response response) and Add(Response response, Func<ResponseMessage, string> messageTransformer).
+
         public Response Add(IEnumerable<ResponseMessage> responseMessages)
         {
             Argument.IsNotNull(responseMessages, "responseMessages");
@@ -85,12 +89,35 @@ namespace Pragmatic.Interaction
             return this;
         }
 
+        public Response Add(IEnumerable<ResponseMessage> responseMessages, Func<ResponseMessage, string> messageTransformer)
+        {
+            Argument.IsNotNull(responseMessages, "responseMessages");
+            Argument.IsNotNull(messageTransformer, "messageTransformer");
+
+            _responseMessages.AddMany(responseMessages.Select(message => new ResponseMessage(message, messageTransformer(message))));
+
+            return this;
+        }
+
+        // This method and the one below do not share the implementation.
+        // See the comment above.
         public Response Add(Response response)
         {
             Argument.IsNotNull(response, "response");
             Argument.IsValid(response != this, string.Format("{0} can not be added to itself.", typeof(Response)), "response");
 
             _responseMessages.AddMany(response._responseMessages);
+
+            return this;
+        }
+
+        public Response Add(Response response, Func<ResponseMessage, string> messageTransformer)
+        {
+            Argument.IsNotNull(response, "response");
+            Argument.IsValid(response != this, string.Format("{0} can not be added to itself.", typeof(Response)), "response");
+            Argument.IsNotNull(messageTransformer, "messageTransformer");
+
+            _responseMessages.AddMany(response._responseMessages.Select(message => new ResponseMessage(message, messageTransformer(message))));
 
             return this;
         }

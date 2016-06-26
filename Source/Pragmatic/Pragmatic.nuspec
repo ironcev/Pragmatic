@@ -10,7 +10,11 @@
     <projectUrl>https://github.com/ironcev/pragmatic</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Version 0.10.0
+    <releaseNotes>Version 0.11.0
+Enhancements:
+ * Response.Add() methods enhanced with message transformers.
+
+Version 0.10.0
 Enhancements:
  * Response.Add(IEnumerable&lt;ResponseMessage&gt; responseMessages) added.
 

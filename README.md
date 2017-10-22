@@ -1,4 +1,3 @@
-Pragmatic
-=========
+# Pragmatic
 
-[The description is still to come.]
+[The description is yet to come.]
